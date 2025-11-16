@@ -27,3 +27,11 @@ model User {
   notelp   String @default("081234567890") @db.VarChar(15)
   role     Role   @default(USER)
 }
+
+model LostReport {
+  id           Int          @id @default(autoincrement())
+  namaBarang   String       @db.VarChar(25)
+  deskripsi    String       @db.VarChar(255)
+  lokasiHilang String       @db.VarChar(50)
+  createdAt    DateTime     @default(now())
+}
