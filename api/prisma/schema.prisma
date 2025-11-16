@@ -32,12 +32,14 @@ enum StatusReport {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(50)
-  email    String @unique
-  password String @db.VarChar(25)
-  notelp   String @default("081234567890") @db.VarChar(15)
-  role     Role   @default(USER)
+  id           Int           @id @default(autoincrement())
+  name         String        @db.VarChar(50)
+  email        String        @unique
+  password     String        @db.VarChar(25)
+  notelp       String        @default("081234567890") @db.VarChar(15)
+  role         Role          @default(USER)
+  lostReports  LostReport[]
+  foundReports FoundReport[]
 }
 
 model LostReport {
@@ -48,6 +50,9 @@ model LostReport {
   status       LostStatus   @default(PENDING)
   statusReport StatusReport @default(OnProgress)
   createdAt    DateTime     @default(now())
+  user         User         @relation(fields: [userId], references: [id])
+  userId       Int
+  foundReport  FoundReport? @relation("LostFoundRelation")
 }
 
 model FoundReport {
@@ -57,4 +62,8 @@ model FoundReport {
   lokasiTemu   String       @db.VarChar(50)
   statusReport StatusReport @default(OnProgress)
   createdAt    DateTime     @default(now())
+  admin        User         @relation(fields: [adminId], references: [id])
+  adminId      Int
+  lostReport   LostReport?  @relation("LostFoundRelation", fields: [lostReportId], references: [id])
+  lostReportId Int?         @unique
 }
