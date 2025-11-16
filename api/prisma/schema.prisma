@@ -35,3 +35,11 @@ model LostReport {
   lokasiHilang String       @db.VarChar(50)
   createdAt    DateTime     @default(now())
 }
+
+model FoundReport {
+  id           Int          @id @default(autoincrement())
+  namaBarang   String       @db.VarChar(25)
+  deskripsi    String       @db.VarChar(255)
+  lokasiTemu   String       @db.VarChar(50)
+  createdAt    DateTime     @default(now())
+}
