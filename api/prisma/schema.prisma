@@ -19,6 +19,18 @@ enum Role {
   ADMIN
 }
 
+enum LostStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum StatusReport {
+  Done
+  OnProgress
+  Closed
+}
+
 model User {
   id       Int    @id @default(autoincrement())
   name     String @db.VarChar(50)
@@ -33,5 +45,16 @@ model LostReport {
   namaBarang   String       @db.VarChar(25)
   deskripsi    String       @db.VarChar(255)
   lokasiHilang String       @db.VarChar(50)
+  status       LostStatus   @default(PENDING)
+  statusReport StatusReport @default(OnProgress)
+  createdAt    DateTime     @default(now())
+}
+
+model FoundReport {
+  id           Int          @id @default(autoincrement())
+  namaBarang   String       @db.VarChar(25)
+  deskripsi    String       @db.VarChar(255)
+  lokasiTemu   String       @db.VarChar(50)
+  statusReport StatusReport @default(OnProgress)
   createdAt    DateTime     @default(now())
 }
