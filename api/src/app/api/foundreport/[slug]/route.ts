@@ -248,11 +248,12 @@ export async function PUT(
     });
     // response error
   } catch (error) {
-    console.error(error);
+    console.error("Error updating found report:", error);
     return NextResponse.json(
       {
         success: false,
-        message: "Terjadi kesalahan saat mengubah data barang temuan",
+        message: "Gagal mengubah data barang temuan",
+        error: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );
