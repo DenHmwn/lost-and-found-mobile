@@ -238,4 +238,10 @@ export async function PUT(
       },
     },
   });
+// response success
+  return NextResponse.json({
+    success: true,
+    message: "Data barang temuan berhasil diubah",
+    data: updatedReport,
+  });
 }
