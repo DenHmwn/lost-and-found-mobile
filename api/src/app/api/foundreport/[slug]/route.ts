@@ -23,6 +23,7 @@ export async function GET(
     const report = await prisma.foundReport.findUnique({
       where: { id },
       include: {
+        // include sama data admin
         admin: {
           select: {
             id: true,
@@ -34,6 +35,7 @@ export async function GET(
         },
         lostReport: {
           include: {
+            // include sama data user yang kehilangan barang
             user: {
               select: {
                 id: true,
@@ -46,4 +48,15 @@ export async function GET(
         },
       },
     });
+
+    // cek jika data tidak ditemukan
+    if (!report) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Data barang temuan tidak ditemukan",
+        },
+        { status: 404 }
+      );
+    }
 }
