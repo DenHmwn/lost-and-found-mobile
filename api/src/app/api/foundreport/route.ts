@@ -56,6 +56,7 @@ export async function GET() {
 }
 // BUat fungsi POST
 export async function POST(req: Request) {
+    try {
   const data = await req.json();
   const { namaBarang, deskripsi, lokasiTemu, adminId, lostReportId } = data;
 
@@ -170,4 +171,16 @@ export async function POST(req: Request) {
       },
       { status: 201 }
     );
+    // response error
+  } catch (error) {
+    console.error("Error creating found report:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Gagal membuat laporan barang temuan",
+        error: error instanceof Error ? error.message : "Unknown error"
+      },
+      { status: 500 }
+    );
+  }
 }
