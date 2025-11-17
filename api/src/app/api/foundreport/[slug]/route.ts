@@ -59,4 +59,10 @@ export async function GET(
         { status: 404 }
       );
     }
+    // response jika data ditemukan
+     return NextResponse.json({
+      success: true,
+      message: "Berhasil mengambil data barang temuan",
+      data: report,
+    });
 }
