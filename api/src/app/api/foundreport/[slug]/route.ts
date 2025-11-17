@@ -259,3 +259,11 @@ export async function PUT(
     );
   }
 }
+
+// DELETE found report
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+}
