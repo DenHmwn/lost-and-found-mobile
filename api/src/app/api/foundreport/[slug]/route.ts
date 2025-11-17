@@ -167,4 +167,20 @@ export async function PUT(
         { status: 400 }
       );
     }
+    // Validasi lostReportId jika ada dan berubah
+    if (data.lostReportId !== undefined && data.lostReportId !== null) {
+      const lostReportExists = await prisma.lostReport.findUnique({
+        where: { id: Number(data.lostReportId) },
+      });
+
+      if (!lostReportExists) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Laporan barang hilang tidak ditemukan",
+          },
+          { status: 404 }
+        );
+      }
+    }
   }
