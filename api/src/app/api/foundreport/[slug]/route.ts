@@ -153,4 +153,18 @@ export async function PUT(
         { status: 403 }
       );
     }
+    // Validasi statusReport jika dikirim
+    if (
+      data.statusReport &&
+      !Object.values(StatusReport).includes(data.statusReport)
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Status report tidak valid. Gunakan: Done, OnProgress, Closed",
+        },
+        { status: 400 }
+      );
+    }
   }
