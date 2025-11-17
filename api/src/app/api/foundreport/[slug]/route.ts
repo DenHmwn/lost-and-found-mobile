@@ -295,4 +295,9 @@ export async function DELETE(
     await prisma.foundReport.delete({
       where: { id },
     });
+    // response success
+    return NextResponse.json({
+      success: true,
+      message: "Data barang temuan berhasil dihapus",
+    });
 }
