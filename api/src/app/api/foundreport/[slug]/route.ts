@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { StatusReport } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 // buat Fungsi GET
@@ -141,6 +142,15 @@ export async function PUT(
           message: "Admin tidak ditemukan",
         },
         { status: 404 }
+      );
+    }
+    if (adminExists.role !== "ADMIN") {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "User bukan admin",
+        },
+        { status: 403 }
       );
     }
   }
