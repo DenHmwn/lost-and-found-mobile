@@ -5,7 +5,8 @@ import { NextResponse } from "next/server";
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
-) {const { slug } = await params;
+) {
+    try {const { slug } = await params;
 
     // Validasi ID
     const id = Number(slug);
@@ -65,4 +66,16 @@ export async function GET(
       message: "Berhasil mengambil data barang temuan",
       data: report,
     });
+    // response error
+    } catch (error) {
+    console.error("Error fetching found report:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Gagal mengambil data barang temuan",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
 }
