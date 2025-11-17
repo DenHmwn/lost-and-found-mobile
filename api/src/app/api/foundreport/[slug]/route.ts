@@ -87,161 +87,174 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = await params;
-  const data = await request.json();
+  try {
+    const { slug } = await params;
+    const data = await request.json();
 
-  // Validasi ID
-  const id = Number(slug);
-  if (isNaN(id)) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "ID tidak valid",
-      },
-      { status: 400 }
-    );
-  }
-
-  // Validasi input required
-  if (
-    !data.namaBarang ||
-    !data.deskripsi ||
-    !data.lokasiTemu ||
-    !data.adminId
-  ) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Data tidak lengkap. Pastikan semua field terisi.",
-      },
-      { status: 400 }
-    );
-  }
-  // Cek apakah record ada
-  const existingRecord = await prisma.foundReport.findUnique({
-    where: { id },
-  });
-
-  if (!existingRecord) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Data barang temuan tidak ditemukan",
-      },
-      { status: 404 }
-    );
-  }
-
-  // Validasi admin ada atau tidaknya dan adalah ADMIN role
-  const adminExists = await prisma.user.findUnique({
-    where: { id: Number(data.adminId) },
-  });
-  if (!adminExists) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Admin tidak ditemukan",
-      },
-      { status: 404 }
-    );
-  }
-  if (adminExists.role !== "ADMIN") {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "User bukan admin",
-      },
-      { status: 403 }
-    );
-  }
-  // Validasi statusReport jika dikirim
-  if (
-    data.statusReport &&
-    !Object.values(StatusReport).includes(data.statusReport)
-  ) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Status report tidak valid. Gunakan: Done, OnProgress, Closed",
-      },
-      { status: 400 }
-    );
-  }
-  // Validasi lostReportId jika ada dan berubah
-  if (data.lostReportId !== undefined && data.lostReportId !== null) {
-    const lostReportExists = await prisma.lostReport.findUnique({
-      where: { id: Number(data.lostReportId) },
-    });
-
-    if (!lostReportExists) {
+    // Validasi ID
+    const id = Number(slug);
+    if (isNaN(id)) {
       return NextResponse.json(
         {
           success: false,
-          message: "Laporan barang hilang tidak ditemukan",
+          message: "ID tidak valid",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Validasi input required
+    if (
+      !data.namaBarang ||
+      !data.deskripsi ||
+      !data.lokasiTemu ||
+      !data.adminId
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Data tidak lengkap. Pastikan semua field terisi.",
+        },
+        { status: 400 }
+      );
+    }
+    // Cek apakah record ada
+    const existingRecord = await prisma.foundReport.findUnique({
+      where: { id },
+    });
+
+    if (!existingRecord) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Data barang temuan tidak ditemukan",
         },
         { status: 404 }
       );
     }
-    // Cek apakah lostReport sudah memiliki foundReport lain
-    if (existingRecord.lostReportId !== Number(data.lostReportId)) {
-      const alreadyMatched = await prisma.foundReport.findUnique({
-        where: { lostReportId: Number(data.lostReportId) },
+
+    // Validasi admin ada atau tidaknya dan adalah ADMIN role
+    const adminExists = await prisma.user.findUnique({
+      where: { id: Number(data.adminId) },
+    });
+    if (!adminExists) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Admin tidak ditemukan",
+        },
+        { status: 404 }
+      );
+    }
+    if (adminExists.role !== "ADMIN") {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "User bukan admin",
+        },
+        { status: 403 }
+      );
+    }
+    // Validasi statusReport jika dikirim
+    if (
+      data.statusReport &&
+      !Object.values(StatusReport).includes(data.statusReport)
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Status report tidak valid. Gunakan: Done, OnProgress, Closed",
+        },
+        { status: 400 }
+      );
+    }
+    // Validasi lostReportId jika ada dan berubah
+    if (data.lostReportId !== undefined && data.lostReportId !== null) {
+      const lostReportExists = await prisma.lostReport.findUnique({
+        where: { id: Number(data.lostReportId) },
       });
 
-      if (alreadyMatched) {
+      if (!lostReportExists) {
         return NextResponse.json(
           {
             success: false,
-            message:
-              "Laporan barang hilang ini sudah memiliki pasangan barang temuan",
+            message: "Laporan barang hilang tidak ditemukan",
           },
-          { status: 409 }
+          { status: 404 }
         );
       }
+      // Cek apakah lostReport sudah memiliki foundReport lain
+      if (existingRecord.lostReportId !== Number(data.lostReportId)) {
+        const alreadyMatched = await prisma.foundReport.findUnique({
+          where: { lostReportId: Number(data.lostReportId) },
+        });
+
+        if (alreadyMatched) {
+          return NextResponse.json(
+            {
+              success: false,
+              message:
+                "Laporan barang hilang ini sudah memiliki pasangan barang temuan",
+            },
+            { status: 409 }
+          );
+        }
+      }
     }
-  }
-  // Update data
-  const updatedReport = await prisma.foundReport.update({
-    where: { id },
-    data: {
-      namaBarang: data.namaBarang.trim(),
-      deskripsi: data.deskripsi.trim(),
-      lokasiTemu: data.lokasiTemu.trim(),
-      adminId: Number(data.adminId),
-      // Update lostReportId (bisa null jika ingin unlink)
-      lostReportId: data.lostReportId ? Number(data.lostReportId) : null,
-      // Update statusReport jika dikirim, jika tidak pakai yang lama
-      statusReport: data.statusReport || existingRecord.statusReport,
-    },
-    include: {
-        // Return data admin (tanpa password)
-      admin: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          notelp: true,
-        },
+    // Update data
+    const updatedReport = await prisma.foundReport.update({
+      where: { id },
+      data: {
+        namaBarang: data.namaBarang.trim(),
+        deskripsi: data.deskripsi.trim(),
+        lokasiTemu: data.lokasiTemu.trim(),
+        adminId: Number(data.adminId),
+        // Update lostReportId (bisa null jika ingin unlink)
+        lostReportId: data.lostReportId ? Number(data.lostReportId) : null,
+        // Update statusReport jika dikirim, jika tidak pakai yang lama
+        statusReport: data.statusReport || existingRecord.statusReport,
       },
-       // Return data lostReport jika ada
-      lostReport: {
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              notelp: true,
+      include: {
+        // Return data admin (tanpa password)
+        admin: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            notelp: true,
+          },
+        },
+        // Return data lostReport jika ada
+        lostReport: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                notelp: true,
+              },
             },
           },
         },
       },
-    },
-  });
-// response success
-  return NextResponse.json({
-    success: true,
-    message: "Data barang temuan berhasil diubah",
-    data: updatedReport,
-  });
+    });
+    // response success
+    return NextResponse.json({
+      success: true,
+      message: "Data barang temuan berhasil diubah",
+      data: updatedReport,
+    });
+    // response error
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Terjadi kesalahan saat mengubah data barang temuan",
+      },
+      { status: 500 }
+    );
+  }
 }
