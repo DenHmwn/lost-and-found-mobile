@@ -79,3 +79,9 @@ export async function GET(
     );
   }
 }
+
+// Fungsi PUT di foundreport
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {}
