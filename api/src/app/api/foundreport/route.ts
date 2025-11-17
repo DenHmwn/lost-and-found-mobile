@@ -161,4 +161,13 @@ export async function POST(req: Request) {
         }
       }
     });
+    // Response Success
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Laporan barang temuan berhasil dibuat",
+        data: report
+      },
+      { status: 201 }
+    );
 }
