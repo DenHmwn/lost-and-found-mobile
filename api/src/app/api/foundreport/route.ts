@@ -57,7 +57,7 @@ export async function GET() {
 // BUat fungsi POST
 export async function POST(req: Request) {
   const data = await req.json();
-  const { namaBarang, deskripsi, lokasiTemu, adminId } = data;
+  const { namaBarang, deskripsi, lokasiTemu, adminId, lostReportId } = data;
 
   // validasi input data
   if (!namaBarang || !deskripsi || !lokasiTemu || !adminId) {
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
     );
   }
 
-//   validasi admin ada atau tidak
+  //   validasi admin ada atau tidak
   const adminExists = await prisma.user.findUnique({
     where: { id: Number(adminId) },
   });
@@ -86,13 +86,31 @@ export async function POST(req: Request) {
     );
   }
 
-  if (adminExists.role !== 'ADMIN') {
+  if (adminExists.role !== "ADMIN") {
+    return NextResponse.json(
+      {
+        success: false,
+        message:
+          "Pengguna ini bukan admin. Hanya admin yang dapat membuat laporan barang temuan.",
+      },
+      { status: 403 }
+    );
+  }
+
+  // Validasi lostReportId jika ada
+  if (lostReportId) {
+    const lostReportExists = await prisma.lostReport.findUnique({
+      where: { id: Number(lostReportId) },
+    });
+
+    if (!lostReportExists) {
       return NextResponse.json(
         {
           success: false,
-          message: "Pengguna ini bukan admin. Hanya admin yang dapat membuat laporan barang temuan."
+          message: "Laporan barang hilang tidak ditemukan",
         },
-        { status: 403 }
+        { status: 404 }
       );
     }
+  }
 }
