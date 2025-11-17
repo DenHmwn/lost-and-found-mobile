@@ -112,19 +112,53 @@ export async function POST(req: Request) {
         { status: 404 }
       );
     }
-     // Cek apakah lostReport sudah memiliki foundReport
-      const alreadyMatched = await prisma.foundReport.findUnique({
-        where: { lostReportId: Number(lostReportId) }
-      });
+    // Cek apakah lostReport sudah memiliki foundReport
+    const alreadyMatched = await prisma.foundReport.findUnique({
+      where: { lostReportId: Number(lostReportId) },
+    });
 
-      if (alreadyMatched) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: "Laporan barang hilang ini sudah memiliki pasangan barang temuan"
-          },
-          { status: 409 }
-        );
-      }
+    if (alreadyMatched) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Laporan barang hilang ini sudah memiliki pasangan barang temuan",
+        },
+        { status: 409 }
+      );
+    }
   }
+
+  //   create report
+  const report = await prisma.foundReport.create({
+      data: {
+        namaBarang: namaBarang.trim(),
+        deskripsi: deskripsi.trim(),
+        lokasiTemu: lokasiTemu.trim(),
+        adminId: Number(adminId),
+        lostReportId: lostReportId ? Number(lostReportId) : null
+      },
+      include: {
+        admin: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            notelp: true
+          }
+        },
+        lostReport: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                notelp: true
+              }
+            }
+          }
+        }
+      }
+    });
 }
