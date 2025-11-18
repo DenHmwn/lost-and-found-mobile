@@ -37,4 +37,14 @@ export async function GET(
         foundReport: true,
       },
     });
+    // jika laporan tidak ditemukan
+    if (!report) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Data laporan tidak ditemukan",
+        },
+        { status: 404 }
+      );
+    }
 }
