@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 // buat fungsi GET by id
@@ -18,4 +19,22 @@ export async function GET(
       { status: 400 }
     );
   }
+  // laporan by id
+    const report = await prisma.lostReport.findUnique({
+      where: { id },
+      include: {
+        // include yang melaporkan
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            notelp: true,
+            role: true,
+          },
+        },
+        // include barang temuan jika sudah dicocokkan
+        foundReport: true,
+      },
+    });
 }
