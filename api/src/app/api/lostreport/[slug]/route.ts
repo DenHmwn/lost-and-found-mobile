@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { LostStatus } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 // buat fungsi GET by id
@@ -98,6 +99,17 @@ export async function PUT(
         {
           success: false,
           message: "Data tidak lengkap. Pastikan semua field terisi.",
+        },
+        { status: 400 }
+      );
+    }
+    // Validasi status jika ada
+    if (data.status && !Object.values(LostStatus).includes(data.status)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Status tidak valid. Gunakan: PENDING, APPROVED, atau REJECTED",
         },
         { status: 400 }
       );
