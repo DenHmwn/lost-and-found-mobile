@@ -58,4 +58,19 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
+
+  // Validasi userId ada atau tidak
+    const userExists = await prisma.user.findUnique({
+      where: { id: Number(userId) },
+    });
+
+    if (!userExists) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "User tidak ditemukan",
+        },
+        { status: 404 }
+      );
+    }
 }
