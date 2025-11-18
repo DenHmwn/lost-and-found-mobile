@@ -67,7 +67,7 @@ export async function GET(
   }
 }
 
-// PUT lostreport
+// PUT lostreport by id
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
@@ -83,6 +83,21 @@ export async function PUT(
         {
           success: false,
           message: "ID tidak valid",
+        },
+        { status: 400 }
+      );
+    }
+    // Validasi input
+    if (
+      !data.namaBarang ||
+      !data.deskripsi ||
+      !data.lokasiHilang ||
+      !data.userId
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Data tidak lengkap. Pastikan semua field terisi.",
         },
         { status: 400 }
       );
