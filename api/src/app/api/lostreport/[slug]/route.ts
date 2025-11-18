@@ -66,3 +66,25 @@ export async function GET(
     );
   }
 }
+
+// PUT lostreport
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+
+    const { slug } = await params;
+    const data = await request.json();
+
+    // Validasi ID
+    const id = Number(slug);
+    if (isNaN(id)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "ID tidak valid",
+        },
+        { status: 400 }
+      );
+    }
+}
