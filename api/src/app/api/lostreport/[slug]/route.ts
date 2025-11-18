@@ -73,7 +73,7 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-
+  try {
     const { slug } = await params;
     const data = await request.json();
 
@@ -179,4 +179,21 @@ export async function PUT(
         },
       },
     });
+    // response success
+    return NextResponse.json({
+      success: true,
+      message: "Data laporan berhasil diubah",
+      data: updatedReport,
+    });
+  } catch (error) {
+    console.error("Error updating lost report:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Gagal mengubah data laporan",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
 }
