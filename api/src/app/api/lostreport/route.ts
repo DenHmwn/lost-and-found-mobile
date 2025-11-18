@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { NextResponse } from "next/server";
 
 // GET semua laporan lost
 export async function GET() {
@@ -20,5 +21,11 @@ export async function GET() {
       orderBy: {
         createdAt: "desc",
       },
+    });
+    // response success
+    return NextResponse.json({
+      success: true,
+      message: "Berhasil mengambil data laporan",
+      data: reports,
     });
 }
