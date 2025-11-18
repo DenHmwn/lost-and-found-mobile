@@ -95,4 +95,13 @@ export async function POST(req: Request) {
         },
       },
     });
+    // response success
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Laporan barang hilang berhasil dibuat",
+        data: report,
+      },
+      { status: 201 }
+    );
 }
