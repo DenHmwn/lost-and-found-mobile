@@ -46,21 +46,22 @@ export async function GET() {
 
 // POST pada lost report
 export async function POST(req: Request) {
-  const data = await req.json();
-  const { namaBarang, deskripsi, lokasiHilang, userId } = data;
+  try {
+    const data = await req.json();
+    const { namaBarang, deskripsi, lokasiHilang, userId } = data;
 
-  // Validasi input
-  if (!namaBarang || !deskripsi || !lokasiHilang || !userId) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Data tidak lengkap. Pastikan semua field terisi.",
-      },
-      { status: 400 }
-    );
-  }
+    // Validasi input
+    if (!namaBarang || !deskripsi || !lokasiHilang || !userId) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Data tidak lengkap. Pastikan semua field terisi.",
+        },
+        { status: 400 }
+      );
+    }
 
-  // Validasi userId ada atau tidak
+    // Validasi userId ada atau tidak
     const userExists = await prisma.user.findUnique({
       where: { id: Number(userId) },
     });
@@ -104,4 +105,16 @@ export async function POST(req: Request) {
       },
       { status: 201 }
     );
+    // response error
+  } catch (error) {
+    console.error("Error creating lost report:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Gagal membuat laporan",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
 }
