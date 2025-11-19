@@ -88,7 +88,7 @@ export const PUT = async (
         success: false,
       });
     }
-    // Update user langsung di sini
+    // Update user by id
     const updatedUser = await prisma.user.update({
       where: { id: userId },
       data,
@@ -137,7 +137,7 @@ export async function GET(
         role: true,
       },
     });
-    // jika laporan tidak ditemukan
+    // jika data tidak ditemukan
     if (!report) {
       return NextResponse.json(
         {
