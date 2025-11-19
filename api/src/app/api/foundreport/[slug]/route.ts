@@ -22,7 +22,7 @@ export async function GET(
       );
     }
 
-    // buat laporan by id
+    //  laporan by id
     const report = await prisma.foundReport.findUnique({
       where: { id },
       include: {
