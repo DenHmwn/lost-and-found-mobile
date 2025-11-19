@@ -112,6 +112,7 @@ export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+    try {
     const { slug } = await params;
 
     // Validasi ID
@@ -146,4 +147,21 @@ export async function GET(
         { status: 404 }
       );
     }
+    // response success
+    return NextResponse.json({
+      success: true,
+      message: "Berhasil mengambil data user",
+      data: report,
+    });
+  } catch (error) {
+    console.error("Error fetching lost report:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Gagal mengambil data user",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
 }
