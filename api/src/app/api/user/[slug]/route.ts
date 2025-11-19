@@ -61,6 +61,7 @@ export const PUT = async (
   request: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) => {
+  try {
     const { slug } = await context.params;
     const userId = Number(slug);
 
@@ -87,4 +88,21 @@ export const PUT = async (
         success: false,
       });
     }
-}
+    // Update user langsung di sini
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data,
+    });
+    // response success
+    return NextResponse.json({
+      message: "data berhasil diubah",
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error: unknown) {
+    return NextResponse.json({
+      message: (error as Error).message || "Terjadi kesalahan",
+      success: false,
+    });
+  }
+};
