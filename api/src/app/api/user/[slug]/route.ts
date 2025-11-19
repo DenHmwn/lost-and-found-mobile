@@ -41,7 +41,7 @@ export async function DELETE(
     // response success
     return NextResponse.json({
       success: true,
-      message: "Data laporan berhasil dihapus",
+      message: "Data user berhasil dihapus",
     });
   } catch (error) {
     console.error("Error deleting lost report:", error);
