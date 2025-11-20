@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { BottomNavigation, PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import LostItemPage from '../lostitems';
 
 // Halaman HomePage
 const HomeRoute = () => (
@@ -17,11 +18,11 @@ const HomeRoute = () => (
 );
 
 // Halaman barang hilang
-const LostRoute = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Halaman Barang Hilang</Text>
-  </View>
-);
+// const LostRoute = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Halaman Barang Hilang</Text>
+//   </View>
+// );
 
 // Halaman akun
 const AccountRoute = () => (
@@ -44,7 +45,7 @@ export default function HomePageUser() {
   // Mapping tampilan berdasarkan key rute
   const renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
-    lost: LostRoute,
+    lost: LostItemPage,
     account: AccountRoute,
   });
 
