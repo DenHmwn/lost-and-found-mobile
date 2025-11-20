@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { BottomNavigation, PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LostItemPage from '../lostitems';
+import FoundItemPage from '../founditems';
 
 // Halaman HomePage
 const HomeRoute = () => (
@@ -39,6 +40,7 @@ export default function HomePageUser() {
   const [routes] = useState([
     { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
     { key: 'lost', title: 'lost', focusedIcon: 'help-box', unfocusedIcon: 'box-variant' },
+    { key: 'found', title: 'found', focusedIcon: 'briefcase-check', unfocusedIcon: 'briefcase-check-outline' },
     { key: 'account', title: 'Account', focusedIcon: 'account', unfocusedIcon: 'account-outline' },
   ]);
 
@@ -46,6 +48,7 @@ export default function HomePageUser() {
   const renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
     lost: LostItemPage,
+    found: FoundItemPage,
     account: AccountRoute,
   });
 
