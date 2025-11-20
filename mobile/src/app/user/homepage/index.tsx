@@ -4,6 +4,7 @@ import { BottomNavigation, PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LostItemPage from '../lostitems';
 import FoundItemPage from '../founditems';
+import AccountPageUser from '../account';
 
 // Halaman HomePage
 const HomeRoute = () => (
@@ -26,11 +27,11 @@ const HomeRoute = () => (
 // );
 
 // Halaman akun
-const AccountRoute = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Halaman Akun</Text>
-  </View>
-);
+// const AccountRoute = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Halaman Akun</Text>
+//   </View>
+// );
 
 export default function HomePageUser() {
   // State untuk menyimpan tab
@@ -49,7 +50,7 @@ export default function HomePageUser() {
     home: HomeRoute,
     lost: LostItemPage,
     found: FoundItemPage,
-    account: AccountRoute,
+    account: AccountPageUser,
   });
 
   return (
