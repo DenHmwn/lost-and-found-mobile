@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { BottomNavigation, PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import LostItemPage from '../lostitems';
+import FoundItemPage from '../founditems';
+import AccountPageUser from '../account';
 
 // Halaman HomePage
 const HomeRoute = () => (
@@ -17,18 +20,18 @@ const HomeRoute = () => (
 );
 
 // Halaman barang hilang
-const LostRoute = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Halaman Barang Hilang</Text>
-  </View>
-);
+// const LostRoute = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Halaman Barang Hilang</Text>
+//   </View>
+// );
 
 // Halaman akun
-const AccountRoute = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Halaman Akun</Text>
-  </View>
-);
+// const AccountRoute = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Halaman Akun</Text>
+//   </View>
+// );
 
 export default function HomePageUser() {
   // State untuk menyimpan tab
@@ -37,15 +40,17 @@ export default function HomePageUser() {
   // Definisi rute/tab
   const [routes] = useState([
     { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
-    { key: 'lost', title: 'lost', focusedIcon: 'help-box', unfocusedIcon: 'help-box' },
+    { key: 'lost', title: 'lost', focusedIcon: 'help-box', unfocusedIcon: 'box-variant' },
+    { key: 'found', title: 'found', focusedIcon: 'briefcase-check', unfocusedIcon: 'briefcase-check-outline' },
     { key: 'account', title: 'Account', focusedIcon: 'account', unfocusedIcon: 'account-outline' },
   ]);
 
   // Mapping tampilan berdasarkan key rute
   const renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
-    lost: LostRoute,
-    account: AccountRoute,
+    lost: LostItemPage,
+    found: FoundItemPage,
+    account: AccountPageUser,
   });
 
   return (
@@ -67,7 +72,7 @@ const styles = StyleSheet.create({
   warna_bg: {
     backgroundColor: "gray",
     paddingBottom: 10,
-    paddingTop: 50,
+    paddingTop: 20,
     paddingHorizontal: 20,
     color: 'white',
     fontWeight: 'bold'
