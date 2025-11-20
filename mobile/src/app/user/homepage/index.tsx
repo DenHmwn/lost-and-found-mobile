@@ -37,7 +37,7 @@ export default function HomePageUser() {
   // Definisi rute/tab
   const [routes] = useState([
     { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
-    { key: 'lost', title: 'lost', focusedIcon: 'help-box', unfocusedIcon: 'help-box' },
+    { key: 'lost', title: 'lost', focusedIcon: 'help-box', unfocusedIcon: 'box-variant' },
     { key: 'account', title: 'Account', focusedIcon: 'account', unfocusedIcon: 'account-outline' },
   ]);
 
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   warna_bg: {
     backgroundColor: "gray",
     paddingBottom: 10,
-    paddingTop: 50,
+    paddingTop: 20,
     paddingHorizontal: 20,
     color: 'white',
     fontWeight: 'bold'
