@@ -14,7 +14,7 @@ const HomeRoute = () => (
       Lost and Found
     </Text>
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Ini Halaman Home </Text>
+      <Text>Halaman Home</Text>
     </View>
   </View>
 );
