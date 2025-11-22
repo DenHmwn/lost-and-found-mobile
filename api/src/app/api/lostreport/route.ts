@@ -25,11 +25,16 @@ export async function GET() {
       },
     });
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Berhasil mengambil data laporan",
-      data: reports,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Berhasil mengambil data laporan",
+        data: reports,
+      },
+      {
+        status: 200,
+      }
+    );
     // response error
   } catch (error) {
     console.error("Error fetching lost reports:", error);

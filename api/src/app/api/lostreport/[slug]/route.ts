@@ -50,11 +50,16 @@ export async function GET(
       );
     }
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Berhasil mengambil data laporan",
-      data: report,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Berhasil mengambil data laporan",
+        data: report,
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     console.error("Error fetching lost report:", error);
     return NextResponse.json(
@@ -180,11 +185,16 @@ export async function PUT(
       },
     });
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Data laporan berhasil diubah",
-      data: updatedReport,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Data laporan berhasil diubah",
+        data: updatedReport,
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     console.error("Error updating lost report:", error);
     return NextResponse.json(
@@ -198,7 +208,7 @@ export async function PUT(
   }
 }
 
-// Delete LostReport
+// Delete LostReport by id
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
@@ -236,10 +246,15 @@ export async function DELETE(
       where: { id },
     });
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Data laporan berhasil dihapus",
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Data laporan berhasil dihapus",
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     console.error("Error deleting lost report:", error);
     return NextResponse.json(

@@ -40,7 +40,10 @@ export async function GET() {
       success: true,
       message: "Berhasil mengambil data barang temuan",
       data: reports,
-    });
+    },
+  {
+      status: 200
+  });
     // Response Error
   } catch (error) {
     console.error("Error fetching found reports:", error);

@@ -34,15 +34,18 @@ export async function DELETE(
         { status: 404 }
       );
     }
-     // Delete data
+    // Delete data
     await prisma.user.delete({
       where: { id },
     });
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Data user berhasil dihapus",
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Data user berhasil dihapus",
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error deleting lost report:", error);
     return NextResponse.json(
@@ -69,7 +72,10 @@ export const PUT = async (
       return NextResponse.json({
         message: "id tidak valid",
         success: false,
-      });
+      },
+    {
+        status: 400,
+    });
     }
 
     const data = await request.json();
@@ -83,10 +89,15 @@ export const PUT = async (
     });
 
     if (existingUser) {
-      return NextResponse.json({
-        message: "email sudah digunakan user lain",
-        success: false,
-      });
+      return NextResponse.json(
+        {
+          message: "email sudah digunakan user lain",
+          success: false,
+        },
+        {
+          status: 409,
+        }
+      );
     }
     // Update user by id
     const updatedUser = await prisma.user.update({
@@ -94,16 +105,24 @@ export const PUT = async (
       data,
     });
     // response success
-    return NextResponse.json({
-      message: "data berhasil diubah",
-      success: true,
-      data: updatedUser,
-    });
+    return NextResponse.json(
+      {
+        message: "data berhasil diubah",
+        success: true,
+        data: updatedUser,
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (error: unknown) {
     return NextResponse.json({
       message: (error as Error).message || "Terjadi kesalahan",
       success: false,
-    });
+    },
+  {
+      status: 500,
+  });
   }
 };
 
@@ -112,7 +131,7 @@ export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-    try {
+  try {
     const { slug } = await params;
 
     // Validasi ID
@@ -148,11 +167,16 @@ export async function GET(
       );
     }
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Berhasil mengambil data user",
-      data: report,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Berhasil mengambil data user",
+        data: report,
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     console.error("Error fetching lost report:", error);
     return NextResponse.json(
