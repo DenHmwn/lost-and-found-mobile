@@ -63,11 +63,14 @@ export async function GET(
       );
     }
     // response jika data ditemukan
-    return NextResponse.json({
-      success: true,
-      message: "Berhasil mengambil data barang temuan",
-      data: report,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Berhasil mengambil data barang temuan",
+        data: report,
+      },
+      { status: 200 }
+    );
     // response error
   } catch (error) {
     console.error("Error fetching found report:", error);
@@ -241,11 +244,16 @@ export async function PUT(
       },
     });
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Data barang temuan berhasil diubah",
-      data: updatedReport,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Data barang temuan berhasil diubah",
+        data: updatedReport,
+      },
+      {
+        status: 200,
+      }
+    );
     // response error
   } catch (error) {
     console.error("Error updating found report:", error);
@@ -297,10 +305,15 @@ export async function DELETE(
       where: { id },
     });
     // response success
-    return NextResponse.json({
-      success: true,
-      message: "Data barang temuan berhasil dihapus",
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Data barang temuan berhasil dihapus",
+      },
+      {
+        status: 200,
+      }
+    );
     // response error
   } catch (error) {
     console.error("Error deleting found report:", error);
