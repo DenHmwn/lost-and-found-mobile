@@ -11,6 +11,23 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+    
+    // Validasi format email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { success: false, message: "Format email tidak valid" },
+        { status: 400 }
+      );
+    }
+
+    // Validasi panjang password
+    if (password.length < 6) {
+      return NextResponse.json(
+        { success: false, message: "Password minimal 6 karakter" },
+        { status: 400 }
+      );
+    }
 
   } catch (error) {
     console.error("Register error:", error);
