@@ -1,3 +1,4 @@
+import { AccessToken } from "@/lib/accessToken";
 import { RefreshPayload } from "@/lib/interface";
 import { SECRET } from "@/lib/secret";
 import { jwtVerify } from "jose";
@@ -28,6 +29,21 @@ export async function GET(req: NextRequest) {
         { status: 403 }
       );
     }
+
+    // Buat access token baru
+    const newAccessToken = await AccessToken({
+      id: decoded.id,
+      name: decoded.name,
+      role: decoded.role,
+    });
+
+    // Kirim response
+    const res = NextResponse.json({
+      success: true,
+      message: "Access token diperbarui",
+      accessToken: newAccessToken,
+    });
+
   } catch (error) {
     console.error("Refresh token error:", error);
     return NextResponse.json(
