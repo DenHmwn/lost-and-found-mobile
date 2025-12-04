@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { AccessToken } from "@/lib/accessToken";
 
 export async function POST(req: Request) {
   try {
@@ -43,6 +44,26 @@ export async function POST(req: Request) {
         { status: 401 }
       );
     }
+
+    // Buat acces token
+    const accessToken = await AccessToken({
+      id: String(user.id),
+      name: user.name,
+      role: user.role,
+    });
+
+    const response = NextResponse.json({
+      success: true,
+      message: "Login berhasil",
+      accessToken,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        notelp: user.notelp,
+      },
+    });
 
   } catch (error) {
     console.error("Login error:", error);
