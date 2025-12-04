@@ -85,6 +85,18 @@ export async function POST(req: Request) {
       // Proteksi CSRF
       sameSite: "lax",
     });
+    
+    response.cookies.set("refreshToken", refreshToken, {
+      // Tidak bisa diakses JavaScript
+      httpOnly: true,
+      // HTTPS only di production
+      secure: process.env.NODE_ENV === "production",
+      // set waktu kedaluwarsa
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/",
+      // Proteksi CSRF
+      sameSite: "lax",
+    });
 
     return response;
 
