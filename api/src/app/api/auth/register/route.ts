@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import bcrypt from 'bcrypt';
 
 export async function POST(req: Request) {
   try {
@@ -40,6 +41,8 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+     // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
   } catch (error) {
     console.error("Register error:", error);
