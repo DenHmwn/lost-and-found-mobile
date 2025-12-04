@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
   try {
@@ -25,6 +26,24 @@ export async function POST(req: Request) {
         notelp: true,
       },
     });
+
+    // cek email
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: "Email tidak ditemukan" },
+        { status: 404 }
+      );
+    }
+
+    // cek password
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+      return NextResponse.json(
+        { success: false, message: "Password salah" },
+        { status: 401 }
+      );
+    }
+
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
