@@ -65,6 +65,21 @@ export async function POST(req: Request) {
       },
     });
 
+    // Set token HTTP-only cookie untuk keamanan
+    response.cookies.set("accessToken", accessToken, {
+      // Tidak bisa diakses JavaScript
+      httpOnly: true,
+      // HTTPS only di production
+      secure: process.env.NODE_ENV === "production",
+      // set waktu kedaluwarsa
+      maxAge: 60 * 15, //15 mnt
+      path: "/",
+      // Proteksi CSRF
+      sameSite: "lax",
+    });
+
+    return response;
+
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
