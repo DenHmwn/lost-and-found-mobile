@@ -1,8 +1,8 @@
-import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 import { AccessToken } from "@/lib/accessToken";
+import prisma from "@/lib/prisma";
 import { RefreshToken } from "@/lib/refreshToken";
+import bcrypt from "bcryptjs";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
@@ -73,7 +73,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // Set token HTTP-only cookie untuk keamanan
+    // Set access token HTTP-only cookie untuk keamanan
     response.cookies.set("accessToken", accessToken, {
       // Tidak bisa diakses JavaScript
       httpOnly: true,
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
       // Proteksi CSRF
       sameSite: "lax",
     });
-    
+    // Set refresh token HTTP-only cookie untuk keamanan
     response.cookies.set("refreshToken", refreshToken, {
       // Tidak bisa diakses JavaScript
       httpOnly: true,
@@ -97,9 +97,8 @@ export async function POST(req: Request) {
       // Proteksi CSRF
       sameSite: "lax",
     });
-
-    return response;
-
+    // tampilkan response
+     return response;
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
