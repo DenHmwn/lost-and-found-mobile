@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { AccessToken } from "@/lib/accessToken";
+import { RefreshToken } from "@/lib/refreshToken";
 
 export async function POST(req: Request) {
   try {
@@ -51,11 +52,18 @@ export async function POST(req: Request) {
       name: user.name,
       role: user.role,
     });
+    // Buat refresh token
+    const refreshToken = await RefreshToken({
+      id: String(user.id),
+      name: user.name,
+      role: user.role,
+    });
 
     const response = NextResponse.json({
       success: true,
       message: "Login berhasil",
       accessToken,
+      refreshToken,
       user: {
         id: user.id,
         email: user.email,
