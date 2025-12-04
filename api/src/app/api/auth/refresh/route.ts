@@ -53,6 +53,8 @@ export async function GET(req: NextRequest) {
       sameSite: "lax",
     });
 
+    return res;
+
   } catch (error) {
     console.error("Refresh token error:", error);
     return NextResponse.json(
