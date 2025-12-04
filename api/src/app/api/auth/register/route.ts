@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -11,7 +12,7 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-    
+
     // Validasi format email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -25,6 +26,17 @@ export async function POST(req: Request) {
     if (password.length < 6) {
       return NextResponse.json(
         { success: false, message: "Password minimal 6 karakter" },
+        { status: 400 }
+      );
+    }
+    // Cek apakah email sudah digunakan
+    const existingUser = await prisma.user.findUnique({ 
+      where: { email } 
+    });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { success: false, message: "Email sudah digunakan" },
         { status: 400 }
       );
     }
