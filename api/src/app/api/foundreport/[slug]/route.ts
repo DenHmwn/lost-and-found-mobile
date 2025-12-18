@@ -255,12 +255,27 @@ export async function PUT(
     const updatedReport = await prisma.foundReport.update({
       where: { id },
       data: {
-        namaBarang: data.namaBarang.trim(),
-        deskripsi: data.deskripsi.trim(),
-        lokasiTemu: data.lokasiTemu.trim(),
-        adminId: Number(data.adminId),
-        // Update lostReportId (bisa null jika ingin unlink)
-        lostReportId: data.lostReportId ? Number(data.lostReportId) : null,
+        namaBarang: data.namaBarang
+          ? data.namaBarang.trim()
+          : existingRecord.namaBarang,
+        deskripsi: data.deskripsi
+          ? data.deskripsi.trim()
+          : existingRecord.deskripsi,
+        lokasiTemu: data.lokasiTemu
+          ? data.lokasiTemu.trim()
+          : existingRecord.lokasiTemu,
+
+        // Update Admin ID (pakai baru jika ada, jika tidak pakai lama)
+        adminId: data.adminId ? Number(data.adminId) : existingRecord.adminId,
+
+        // Update lostReportId (bisa null jika ingin unlink, atau pakai lama jika undefined)
+        lostReportId:
+          data.lostReportId !== undefined
+            ? data.lostReportId
+              ? Number(data.lostReportId)
+              : null
+            : existingRecord.lostReportId,
+
         // Update statusReport jika dikirim, jika tidak pakai yang lama
         statusReport: data.statusReport || existingRecord.statusReport,
       },
