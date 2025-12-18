@@ -163,27 +163,47 @@ export async function PUT(
     }
 
     // Validasi admin ada atau tidaknya dan adalah ADMIN role
-    const adminExists = await prisma.user.findUnique({
-      where: { id: Number(data.adminId) },
-    });
-    if (!adminExists) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Admin tidak ditemukan",
-        },
-        { status: 404 }
-      );
+    // const adminExists = await prisma.user.findUnique({
+    //   where: { id: Number(data.adminId) },
+    // });
+    // if (!adminExists) {
+    //   return NextResponse.json(
+    //     {
+    //       success: false,
+    //       message: "Admin tidak ditemukan",
+    //     },
+    //     { status: 404 }
+    //   );
+    // }
+    // if (adminExists.role !== "ADMIN") {
+    //   return NextResponse.json(
+    //     {
+    //       success: false,
+    //       message: "User bukan admin",
+    //     },
+    //     { status: 403 }
+    //   );
+    // }
+
+    // Hanya cek admin jika data adminId dikirim oleh frontend
+    if (data.adminId) {
+      const adminExists = await prisma.user.findUnique({
+        where: { id: Number(data.adminId) },
+      });
+      if (!adminExists) {
+        return NextResponse.json(
+          { success: false, message: "Admin tidak ditemukan" },
+          { status: 404 }
+        );
+      }
+      if (adminExists.role !== "ADMIN") {
+        return NextResponse.json(
+          { success: false, message: "User bukan admin" },
+          { status: 403 }
+        );
+      }
     }
-    if (adminExists.role !== "ADMIN") {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "User bukan admin",
-        },
-        { status: 403 }
-      );
-    }
+
     // Validasi statusReport jika dikirim
     if (
       data.statusReport &&
