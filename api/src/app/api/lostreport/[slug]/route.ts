@@ -93,8 +93,9 @@ export async function PUT(
         { status: 400 }
       );
     }
-    // Validasi input
-    if (
+
+    // Validasi input 
+    /* if (
       !data.namaBarang ||
       !data.deskripsi ||
       !data.lokasiHilang ||
@@ -107,7 +108,34 @@ export async function PUT(
         },
         { status: 400 }
       );
+    } 
+    */
+
+    // Cek request
+    const isEditingItem =
+      data.namaBarang !== undefined ||
+      data.deskripsi !== undefined ||
+      data.lokasiHilang !== undefined;
+
+    // JIKA sedang edit item, cek semua field
+    if (isEditingItem) {
+      if (
+        !data.namaBarang ||
+        !data.deskripsi ||
+        !data.lokasiHilang
+        // userId cek nanti secara terpisah
+      ) {
+        return NextResponse.json(
+          {
+            success: false,
+            message:
+              "Data tidak lengkap. Pastikan semua field terisi saat mengedit barang.",
+          },
+          { status: 400 }
+        );
+      }
     }
+
     // Validasi status jika ada
     if (data.status && !Object.values(LostStatus).includes(data.status)) {
       return NextResponse.json(
