@@ -52,6 +52,7 @@ export async function POST(req: Request) {
       name: user.name,
       role: user.role,
     });
+
     // Buat refresh token
     const refreshToken = await RefreshToken({
       id: String(user.id),
@@ -59,6 +60,7 @@ export async function POST(req: Request) {
       role: user.role,
     });
 
+    // Buat response dengan user data
     const response = NextResponse.json({
       success: true,
       message: "Login berhasil",
@@ -73,32 +75,32 @@ export async function POST(req: Request) {
       },
     });
 
-    // Set access token HTTP-only cookie untuk keamanan
+    // Set token HTTP-only cookie untuk keamanan
     response.cookies.set("accessToken", accessToken, {
       // Tidak bisa diakses JavaScript
       httpOnly: true,
       // HTTPS only di production
       secure: process.env.NODE_ENV === "production",
       // set waktu kedaluwarsa
-      maxAge: 60 * 15, //15 mnt
+      maxAge: 20 * 60,
       path: "/",
       // Proteksi CSRF
       sameSite: "lax",
     });
-    // Set refresh token HTTP-only cookie untuk keamanan
+
     response.cookies.set("refreshToken", refreshToken, {
       // Tidak bisa diakses JavaScript
       httpOnly: true,
       // HTTPS only di production
       secure: process.env.NODE_ENV === "production",
       // set waktu kedaluwarsa
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 3 * 24 * 60 * 60,
       path: "/",
       // Proteksi CSRF
       sameSite: "lax",
     });
-    // tampilkan response
-     return response;
+
+    return response;
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
