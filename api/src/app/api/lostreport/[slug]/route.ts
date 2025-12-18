@@ -189,7 +189,21 @@ export async function PUT(
         { status: 404 }
       );
     }
-    // Update laporan
+    */
+    // Hanya cek user jika `data.userId` dikirim oleh frontend
+    if (data.userId) {
+      const userExists = await prisma.user.findUnique({
+        where: { id: Number(data.userId) },
+      });
+
+      if (!userExists) {
+        return NextResponse.json(
+          { success: false, message: "User tidak ditemukan" },
+          { status: 404 }
+        );
+      }
+    }
+    /*
     const updatedReport = await prisma.lostReport.update({
       where: { id },
       data: {
