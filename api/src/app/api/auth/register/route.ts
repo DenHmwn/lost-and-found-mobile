@@ -1,15 +1,18 @@
-import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import bcrypt from 'bcrypt';
+import prisma from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, password, notelp } = await req.json();
+    const { name, email, password, notelp, role } = await req.json();
 
     // Validasi input
     if (!name || !email || !password || !notelp) {
       return NextResponse.json(
-        { success: false, message: "Nama, email, password, dan notelp harus diisi" },
+        {
+          success: false,
+          message: "Nama, email, password, dan notelp harus diisi",
+        },
         { status: 400 }
       );
     }
@@ -30,9 +33,18 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    // Validasi panjang no telepon
+    if (notelp.length > 13) {
+      return NextResponse.json(
+        { success: false, message: "No telepon maksimal 15 karakter" },
+        { status: 400 }
+      );
+    }
+
     // Cek apakah email sudah digunakan
-    const existingUser = await prisma.user.findUnique({ 
-      where: { email } 
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
     });
 
     if (existingUser) {
@@ -41,17 +53,29 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-     // Hash password
+
+    // cek notelp
+    const existingNotelp = await prisma.user.findUnique({
+      where: { notelp },
+    });
+    if (existingNotelp) {
+      return NextResponse.json(
+        { success: false, message: "No telepon sudah digunakan" },
+        { status: 400 }
+      );
+    }
+
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Buat user baru
     const newUser = await prisma.user.create({
-      data: { 
-        name, 
-        email, 
-        password: hashedPassword, 
-        notelp: notelp || null,
-        role: "USER", // role default pas regis
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        notelp: notelp.trim(),
+        role: role || "USER", // role default pas regis
       },
       select: {
         id: true,
@@ -59,15 +83,17 @@ export async function POST(req: Request) {
         email: true,
         notelp: true,
         role: true,
-      }
+      },
     });
 
-    return NextResponse.json({ 
-      success: true, 
-      message: "Registrasi berhasil",
-      data: newUser 
-    }, { status: 201 });
-
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Registrasi berhasil",
+        data: newUser,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("Register error:", error);
     return NextResponse.json(

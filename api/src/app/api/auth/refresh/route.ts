@@ -1,8 +1,8 @@
-import { AccessToken } from "@/lib/accessToken";
-import { RefreshPayload } from "@/lib/interface";
-import { SECRET } from "@/lib/secret";
-import { jwtVerify } from "jose";
 import { NextRequest, NextResponse } from "next/server";
+import { jwtVerify } from "jose";
+import { AccessToken } from "@/lib/accessToken";
+import { SECRET } from "@/lib/secret";
+import { RefreshPayload } from "@/lib/interface";
 
 export async function GET(req: NextRequest) {
   try {
@@ -44,17 +44,7 @@ export async function GET(req: NextRequest) {
       accessToken: newAccessToken,
     });
 
-    // Set access token cookie baru
-    res.cookies.set("accessToken", newAccessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 15, // 15 menit
-      path: "/",
-      sameSite: "lax",
-    });
-
     return res;
-
   } catch (error) {
     console.error("Refresh token error:", error);
     return NextResponse.json(
