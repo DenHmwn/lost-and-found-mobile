@@ -107,20 +107,46 @@ export async function PUT(
     }
 
     // Validasi input required
-    if (
-      !data.namaBarang ||
-      !data.deskripsi ||
-      !data.lokasiTemu ||
-      !data.adminId
-    ) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Data tidak lengkap. Pastikan semua field terisi.",
-        },
-        { status: 400 }
-      );
+    // if (
+    //   !data.namaBarang ||
+    //   !data.deskripsi ||
+    //   !data.lokasiTemu ||
+    //   !data.adminId
+    // ) {
+    //   return NextResponse.json(
+    //     {
+    //       success: false,
+    //       message: "Data tidak lengkap. Pastikan semua field terisi.",
+    //     },
+    //     { status: 400 }
+    //   );
+    // }
+
+    // Cek request apakah bertujuan mengedit detail barang
+    const isEditingItem =
+      data.namaBarang !== undefined ||
+      data.deskripsi !== undefined ||
+      data.lokasiTemu !== undefined;
+
+    // jika sedang edit item, cek apakah semua field terisi
+    if (isEditingItem) {
+      if (
+        !data.namaBarang ||
+        !data.deskripsi ||
+        !data.lokasiTemu
+        // adminId cek secara terpisah
+      ) {
+        return NextResponse.json(
+          {
+            success: false,
+            message:
+              "Data tidak lengkap. Pastikan semua field terisi saat mengedit barang.",
+          },
+          { status: 400 }
+        );
+      }
     }
+
     // Cek apakah record ada
     const existingRecord = await prisma.foundReport.findUnique({
       where: { id },
