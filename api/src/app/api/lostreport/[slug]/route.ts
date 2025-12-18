@@ -147,7 +147,7 @@ export async function PUT(
         { status: 400 }
       );
     }
-    //  Validasi statusReport jika ada
+    // Validasi statusReport jika ada
     if (
       data.statusReport &&
       !Object.values(StatusReport).includes(data.statusReport)
@@ -175,7 +175,7 @@ export async function PUT(
         { status: 404 }
       );
     }
-    // Validasi userId ada atau tidak
+    /*
     const userExists = await prisma.user.findUnique({
       where: { id: Number(data.userId) },
     });
