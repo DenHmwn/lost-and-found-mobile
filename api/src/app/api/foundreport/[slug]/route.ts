@@ -251,7 +251,7 @@ export async function PUT(
         }
       }
     }
-    // Update data
+    // Update data pake ternary operator
     const updatedReport = await prisma.foundReport.update({
       where: { id },
       data: {
