@@ -215,6 +215,39 @@ export async function PUT(
         userId: Number(data.userId),
       },
       include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            notelp: true,
+          },
+        },
+      },
+    });
+    */
+    // Menggunakan ternary operator: Jika data baru dikirim -> Pakai data baru. Jika tidak -> Pakai data lama.
+    const updatedReport = await prisma.lostReport.update({
+      where: { id },
+      data: {
+        namaBarang: data.namaBarang
+          ? data.namaBarang.trim()
+          : existingRecord.namaBarang,
+        deskripsi: data.deskripsi
+          ? data.deskripsi.trim()
+          : existingRecord.deskripsi,
+        lokasiHilang: data.lokasiHilang
+          ? data.lokasiHilang.trim()
+          : existingRecord.lokasiHilang,
+
+        // Status & Report tetap logika lama (atau existing)
+        status: data.status || existingRecord.status,
+        statusReport: data.statusReport || existingRecord.statusReport,
+
+        // UserId update hanya jika ada, jika tidak pakai yang lama
+        userId: data.userId ? Number(data.userId) : existingRecord.userId,
+      },
+      include: {
         // include data user
         user: {
           select: {
