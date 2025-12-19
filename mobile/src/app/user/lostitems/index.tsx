@@ -43,12 +43,12 @@ export default function LostItemPage() {
 
   return (
     <View style={{ flex: 1, justifyContent: "flex-start" }}>
-      <Appbar.Header style={styles.header}>
-        <Appbar.Content title="Lost & Found" style={{ alignItems: "center" }} />
+      <Appbar.Header style={styles.background}>
+        <Appbar.Content title="Lost & Found" titleStyle={styles.PageTitle} style={ styles.PageTitle} />
       </Appbar.Header>
 
       <View style={styles.pageTitleContainer}>
-        <Text>Halaman List Kehilangan Barang</Text>
+        <Text style={styles.PageTitle}>Halaman List Kehilangan Barang</Text>
       </View>
 
       {/* pisah style */}
