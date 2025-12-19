@@ -1,4 +1,3 @@
-// File: LostItemPage.tsx
 import { styles } from "@/style/styles";
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, FlatList } from "react-native";
@@ -6,64 +5,60 @@ import { Appbar, Button, Card } from "react-native-paper";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import axios from "axios";
 import { strings } from "@/constans/strings";
+import { LostReport } from "@/types/interface";
 
 export default function LostItemPage() {
-  
-  // buat react hook
-  const [ListLost, setListLost] = useState<
-  {
-    id: number;
-    namaBarang: string;
-    deskripsi: string;
-    lokasiHilang: string;
-    status: string;
-    statusReport: string;
-  }[]
-  >([]);
-  
+  const [ListLost, setListLost] = useState<LostReport[]>([]);
+
   useEffect(() => {
     getBarangLost();
-  },[]);
+  }, []);
 
   // get data dari API
   const getBarangLost = async () => {
-    const response = await axios.get(strings.api_lost);
-    // console.log(response.data.barang);
-    setListLost(response.data.data);
+    try {
+      const response = await axios.get(strings.api_lost);
+      
+      // Cek apa isi response di Terminal Metro Bundler
+      // console.log("DATA DARI API:", JSON.stringify(response.data, null, 2));
+
+      // Cek struktur data sebelum set state
+      if (Array.isArray(response.data)) {
+        setListLost(response.data);
+      } else if (response.data.data) {
+        setListLost(response.data.data);
+      } else {
+        // console.log("Struktur data tidak dikenali, cek backend");
+      }
+    } catch (error) {
+      console.error("Error ambil data:", error);
+    }
   };
 
   const [visible, setVisible] = React.useState(false);
-
   const showDialog = () => setVisible(true);
-
   const hideDialog = () => setVisible(false);
-
-  // buat useRef untuk menampilkan pesan hapus data
   const message = useRef("");
-  // buat useRef untuk menampilkan pesan hapus data
-  const messageResponse = useRef("");
-
-  // state untuk simpan id barang
   const [id, setId] = useState(0);
 
   return (
     <View style={{ flex: 1, justifyContent: "flex-start" }}>
       <Appbar.Header style={styles.header}>
-        {/* <Appbar.BackAction onPress={_goBack} /> */}
         <Appbar.Content title="Lost & Found" style={{ alignItems: "center" }} />
-        {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
-        {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
       </Appbar.Header>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+
+      <View style={styles.pageTitleContainer}>
         <Text>Halaman List Kehilangan Barang</Text>
       </View>
 
+      {/* pisah style */}
       <FlatList
-        style={{ backgroundColor: "#a31c31" }}
+        style={{ flex: 1 }} 
+        contentContainerStyle={{ paddingBottom: 50 }}
         data={ListLost}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
-          <Card key={item.id} style={{ margin: 20 }}>
+          <Card key={item.id} style={ styles.card }>
             <Card.Title
               title={item.namaBarang}
               subtitle={item.lokasiHilang}
@@ -76,20 +71,12 @@ export default function LostItemPage() {
                   showDialog();
                   message.current = item.namaBarang;
                 }}
-                style={{ backgroundColor: "white" }}
+                style={{ backgroundColor: "#EF4444" }}
               >
-                <MaterialIcons
-                  name="delete"
-                  size={24}
-                  color="black"
-                ></MaterialIcons>
+                <MaterialIcons name="delete" size={24} color="black" />
               </Button>
-              <Button onPress={() => console.log("edit")}>
-                <MaterialIcons
-                  name="edit"
-                  size={24}
-                  color="black"
-                ></MaterialIcons>
+              <Button onPress={() => console.log("edit")} style={{ backgroundColor: "#5B7FFF" }}>
+                <MaterialIcons name="edit" size={24} color="black" />
               </Button>
             </Card.Actions>
           </Card>
