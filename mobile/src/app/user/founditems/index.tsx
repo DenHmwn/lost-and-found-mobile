@@ -1,8 +1,12 @@
 // File: LostItemPage.tsx
+import { strings } from "@/constans/strings";
 import { styles } from "@/style/styles";
-import React from "react";
-import { View, Text } from "react-native";
-import { Appbar } from "react-native-paper";
+import { FoundReport } from "@/types/interface";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { View, Text, FlatList } from "react-native";
+import { Appbar, Button, Card } from "react-native-paper";
 
 export default function FoundItemPage() {
   const [ListLost, setListLost] = useState<FoundReport[]>([]);
