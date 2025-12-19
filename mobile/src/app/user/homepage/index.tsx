@@ -11,9 +11,13 @@ import AccountPageUser from "../account";
 const HomeRoute = () => (
   <View>
     <Appbar.Header style={styles.background}>
-            <Appbar.Content title="Lost & Found" titleStyle={styles.PageTitle} style={ styles.PageTitle} />
-          </Appbar.Header>
-    <View style={{justifyContent: "center", alignItems: "center",}}>
+      <Appbar.Content
+        title="Lost & Found"
+        titleStyle={styles.PageTitle}
+        style={styles.PageTitle}
+      />
+    </Appbar.Header>
+    <View style={{ justifyContent: "center", alignItems: "center" }}>
       <Text>Halaman Home</Text>
     </View>
   </View>
