@@ -1,6 +1,8 @@
 // File: LostItemPage.tsx
+import { styles } from '@/style/styles';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Appbar } from 'react-native-paper';
 
 export default function AccountPageUser() {
   return (
