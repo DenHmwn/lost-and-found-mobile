@@ -48,8 +48,8 @@ export default function HomePageUser() {
     {
       key: "listadmin",
       title: "ListAdmin",
-      focusedIcon: "briefcase-check",
-      unfocusedIcon: "briefcase-check-outline",
+      focusedIcon: "account",
+      unfocusedIcon: "account-outline",
     },
     {
       key: "account",
