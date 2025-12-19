@@ -36,28 +36,18 @@ export default function LostItemPage() {
   };
 
   const [visible, setVisible] = React.useState(false);
-
   const showDialog = () => setVisible(true);
-
   const hideDialog = () => setVisible(false);
-
-  // buat useRef untuk menampilkan pesan hapus data
   const message = useRef("");
-  // buat useRef untuk menampilkan pesan hapus data
-  const messageResponse = useRef("");
-
-  // state untuk simpan id barang
   const [id, setId] = useState(0);
 
   return (
     <View style={{ flex: 1, justifyContent: "flex-start" }}>
       <Appbar.Header style={styles.header}>
-        {/* <Appbar.BackAction onPress={_goBack} /> */}
         <Appbar.Content title="Lost & Found" style={{ alignItems: "center" }} />
-        {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
-        {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
       </Appbar.Header>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+
+      <View style={{ justifyContent: "center", alignItems: "center", padding: 10 }}>
         <Text>Halaman List Kehilangan Barang</Text>
       </View>
 
