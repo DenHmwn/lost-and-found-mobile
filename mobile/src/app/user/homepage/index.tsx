@@ -6,6 +6,7 @@ import { styles } from "@/style/styles";
 import LostItemPage from "../lostitems";
 import FoundItemPage from "../founditems";
 import AccountPageUser from "../account";
+import ListAdminPage from "../list-admin";
 
 // Halaman HomePage
 const HomeRoute = () => (
@@ -17,8 +18,8 @@ const HomeRoute = () => (
         style={styles.PageTitle}
       />
     </Appbar.Header>
-    <View style={{ justifyContent: "center", alignItems: "center" }}>
-      <Text>Halaman Home</Text>
+    <View style={styles.pageTitleContainer}>
+      <Text style={styles.PageTitle}>Halaman Home</Text>
     </View>
   </View>
 );
@@ -34,21 +35,27 @@ export default function HomePageUser() {
     },
     {
       key: "lost",
-      title: "lost",
+      title: "Lost",
       focusedIcon: "help-box",
       unfocusedIcon: "box-variant",
     },
     {
       key: "found",
-      title: "found",
+      title: "Found",
       focusedIcon: "briefcase-check",
       unfocusedIcon: "briefcase-check-outline",
     },
     {
-      key: "account",
-      title: "Account",
+      key: "listadmin",
+      title: "ListAdmin",
       focusedIcon: "account",
       unfocusedIcon: "account-outline",
+    },
+    {
+      key: "account",
+      title: "Account",
+      focusedIcon: "cog",
+      unfocusedIcon: "cog-outline",
     },
   ]);
 
@@ -56,6 +63,7 @@ export default function HomePageUser() {
     home: HomeRoute,
     lost: LostItemPage,
     found: FoundItemPage,
+    listadmin: ListAdminPage,
     account: AccountPageUser,
   });
 
