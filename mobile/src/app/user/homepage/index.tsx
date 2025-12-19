@@ -6,6 +6,7 @@ import { styles } from "@/style/styles";
 import LostItemPage from "../lostitems";
 import FoundItemPage from "../founditems";
 import AccountPageUser from "../account";
+import ListAdminPage from "../list-admin";
 
 // Halaman HomePage
 const HomeRoute = () => (
@@ -56,6 +57,7 @@ export default function HomePageUser() {
     home: HomeRoute,
     lost: LostItemPage,
     found: FoundItemPage,
+    listadmin: ListAdminPage,
     account: AccountPageUser,
   });
 
