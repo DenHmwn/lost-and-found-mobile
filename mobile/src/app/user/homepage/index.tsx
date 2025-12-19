@@ -54,8 +54,8 @@ export default function HomePageUser() {
     {
       key: "account",
       title: "Account",
-      focusedIcon: "account",
-      unfocusedIcon: "account-outline",
+      focusedIcon: "cog",
+      unfocusedIcon: "cog-outline",
     },
   ]);
 
