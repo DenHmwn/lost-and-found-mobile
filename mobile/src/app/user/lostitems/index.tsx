@@ -47,18 +47,18 @@ export default function LostItemPage() {
         <Appbar.Content title="Lost & Found" style={{ alignItems: "center" }} />
       </Appbar.Header>
 
-      <View style={{ justifyContent: "center", alignItems: "center", padding: 10 }}>
+      <View style={styles.pageTitleContainer}>
         <Text>Halaman List Kehilangan Barang</Text>
       </View>
 
       {/* pisah style */}
       <FlatList
-        style={{ backgroundColor: "#a31c31", flex: 1 }} 
+        style={{ flex: 1 }} 
         contentContainerStyle={{ paddingBottom: 50 }}
         data={ListLost}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
-          <Card key={item.id} style={{ margin: 20 }}>
+          <Card key={item.id} style={ styles.card }>
             <Card.Title
               title={item.namaBarang}
               subtitle={item.lokasiHilang}
@@ -71,11 +71,11 @@ export default function LostItemPage() {
                   showDialog();
                   message.current = item.namaBarang;
                 }}
-                style={{ backgroundColor: "white" }}
+                style={{ backgroundColor: "#EF4444" }}
               >
                 <MaterialIcons name="delete" size={24} color="black" />
               </Button>
-              <Button onPress={() => console.log("edit")}>
+              <Button onPress={() => console.log("edit")} style={{ backgroundColor: "#5B7FFF" }}>
                 <MaterialIcons name="edit" size={24} color="black" />
               </Button>
             </Card.Actions>
