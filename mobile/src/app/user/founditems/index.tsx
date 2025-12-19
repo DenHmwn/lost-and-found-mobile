@@ -14,8 +14,9 @@ export default function FoundItemPage() {
           style={styles.PageTitle}
         />
       </Appbar.Header>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Text>Halaman List Penemuan Barang</Text>
+
+      <View style={styles.pageTitleContainer}>
+        <Text style={styles.PageTitle}>Halaman List Penemuan Barang</Text>
       </View>
     </View>
   );
