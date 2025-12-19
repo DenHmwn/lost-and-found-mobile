@@ -16,9 +16,23 @@ export default function LostItemPage() {
 
   // get data dari API
   const getBarangLost = async () => {
-    const response = await axios.get(strings.api_lost);
-    // console.log(response.data.barang);
-    setListLost(response.data.data);
+    try {
+      const response = await axios.get(strings.api_lost);
+      
+      // Cek apa isi response di Terminal Metro Bundler
+      // console.log("DATA DARI API:", JSON.stringify(response.data, null, 2));
+
+      // Cek struktur data sebelum set state
+      if (Array.isArray(response.data)) {
+        setListLost(response.data);
+      } else if (response.data.data) {
+        setListLost(response.data.data);
+      } else {
+        // console.log("Struktur data tidak dikenali, cek backend");
+      }
+    } catch (error) {
+      console.error("Error ambil data:", error);
+    }
   };
 
   const [visible, setVisible] = React.useState(false);
