@@ -35,13 +35,13 @@ export default function HomePageUser() {
     },
     {
       key: "lost",
-      title: "lost",
+      title: "Lost",
       focusedIcon: "help-box",
       unfocusedIcon: "box-variant",
     },
     {
       key: "found",
-      title: "found",
+      title: "Found",
       focusedIcon: "briefcase-check",
       unfocusedIcon: "briefcase-check-outline",
     },
