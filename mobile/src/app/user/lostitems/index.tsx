@@ -1,4 +1,3 @@
-// File: LostItemPage.tsx
 import { styles } from "@/style/styles";
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, FlatList } from "react-native";
@@ -6,24 +5,14 @@ import { Appbar, Button, Card } from "react-native-paper";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import axios from "axios";
 import { strings } from "@/constans/strings";
+import { LostReport } from "@/types/interface";
 
 export default function LostItemPage() {
-  
-  // buat react hook
-  const [ListLost, setListLost] = useState<
-  {
-    id: number;
-    namaBarang: string;
-    deskripsi: string;
-    lokasiHilang: string;
-    status: string;
-    statusReport: string;
-  }[]
-  >([]);
-  
+  const [ListLost, setListLost] = useState<LostReport[]>([]);
+
   useEffect(() => {
     getBarangLost();
-  },[]);
+  }, []);
 
   // get data dari API
   const getBarangLost = async () => {
