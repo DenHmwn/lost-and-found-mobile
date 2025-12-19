@@ -17,8 +17,8 @@ const HomeRoute = () => (
         style={styles.PageTitle}
       />
     </Appbar.Header>
-    <View style={{ justifyContent: "center", alignItems: "center" }}>
-      <Text>Halaman Home</Text>
+    <View style={styles.pageTitleContainer}>
+      <Text style={styles.PageTitle}>Halaman Home</Text>
     </View>
   </View>
 );
