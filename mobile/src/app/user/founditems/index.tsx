@@ -6,15 +6,17 @@ import { Appbar } from "react-native-paper";
 
 export default function FoundItemPage() {
   return (
-    <View>
-      <Appbar.Header style={styles.header}>
-        {/* <Appbar.BackAction onPress={_goBack} /> */}
-        <Appbar.Content title="Lost & Found" style={{ alignItems: "center" }} />
-        {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
-        {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
+    <View style={{ flex: 1, justifyContent: "flex-start" }}>
+      <Appbar.Header style={styles.background}>
+        <Appbar.Content
+          title="Lost & Found"
+          titleStyle={styles.PageTitle}
+          style={styles.PageTitle}
+        />
       </Appbar.Header>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Text>Halaman List Penemuan Barang</Text>
+
+      <View style={styles.pageTitleContainer}>
+        <Text style={styles.PageTitle}>Halaman List Penemuan Barang</Text>
       </View>
     </View>
   );
