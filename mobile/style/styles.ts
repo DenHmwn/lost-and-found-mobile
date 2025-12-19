@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const color = {
-  primary: '#486feeff',       // Biru yang lebih cerah
-  secondary: '#c5d5f9ff',     // Biru sangat muda untuk card
-  background: '#F8FAFC',    // Abu-abu sangat terang
+  primary: '#486feeff',
+  secondary: '#c5d5f9ff',
+  background: '#F8FAFC',
 }
 
 export const styles = StyleSheet.create({
