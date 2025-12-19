@@ -51,8 +51,10 @@ export default function LostItemPage() {
         <Text>Halaman List Kehilangan Barang</Text>
       </View>
 
+      {/* pisah style */}
       <FlatList
-        style={{ backgroundColor: "#a31c31" }}
+        style={{ backgroundColor: "#a31c31", flex: 1 }} 
+        contentContainerStyle={{ paddingBottom: 50 }}
         data={ListLost}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
@@ -71,18 +73,10 @@ export default function LostItemPage() {
                 }}
                 style={{ backgroundColor: "white" }}
               >
-                <MaterialIcons
-                  name="delete"
-                  size={24}
-                  color="black"
-                ></MaterialIcons>
+                <MaterialIcons name="delete" size={24} color="black" />
               </Button>
               <Button onPress={() => console.log("edit")}>
-                <MaterialIcons
-                  name="edit"
-                  size={24}
-                  color="black"
-                ></MaterialIcons>
+                <MaterialIcons name="edit" size={24} color="black" />
               </Button>
             </Card.Actions>
           </Card>
