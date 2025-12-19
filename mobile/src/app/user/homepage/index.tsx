@@ -10,13 +10,14 @@ import AccountPageUser from "../account";
 // Halaman HomePage
 const HomeRoute = () => (
   <View>
-    <Appbar.Header style={styles.header}>
-      {/* <Appbar.BackAction onPress={_goBack} /> */}
-      <Appbar.Content title="Lost & Found" style={{alignItems: "center"}} />
-      {/* <Appbar.Action icon="magnify" onPress={_handleSearch} /> */}
-      {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
+    <Appbar.Header style={styles.background}>
+      <Appbar.Content
+        title="Lost & Found"
+        titleStyle={styles.PageTitle}
+        style={styles.PageTitle}
+      />
     </Appbar.Header>
-    <View style={{justifyContent: "center", alignItems: "center",}}>
+    <View style={{ justifyContent: "center", alignItems: "center" }}>
       <Text>Halaman Home</Text>
     </View>
   </View>

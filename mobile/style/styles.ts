@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const color = {
-  primary: '#486feeff',       // Biru yang lebih cerah
-  secondary: '#c5d5f9ff',     // Biru sangat muda untuk card
-  background: '#F8FAFC',    // Abu-abu sangat terang
+  primary: '#486feeff',
+  secondary: '#becae6ff',
+  background: '#F8FAFC',
 }
 
 export const styles = StyleSheet.create({
@@ -30,8 +30,8 @@ export const styles = StyleSheet.create({
     backgroundColor: color.secondary,
     marginHorizontal: 20,
     marginVertical: 10,
-    borderRadius: 12,
-    elevation: 2,    
-    borderWidth: 0,   
+    borderRadius: 15,
+    elevation: 2,
+    borderWidth: 0,
   },
 });
