@@ -139,11 +139,11 @@ export default function FoundItemPage() {
               </View>
             </View>
 
-            {item.deskripsi && (
+            {/* {item.deskripsi && (
               <Text style={styles.cardDescription} numberOfLines={2}>
                 {item.deskripsi}
               </Text>
-            )}
+            )} */}
 
             <View style={styles.cardFooter}>
               <Chip 
