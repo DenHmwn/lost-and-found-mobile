@@ -9,7 +9,26 @@ import { View, Text, FlatList } from "react-native";
 import { Appbar, Button, Card } from "react-native-paper";
 
 export default function FoundItemPage() {
-  const [ListLost, setListLost] = useState<FoundReport[]>([]);
+  const formatToWIB = (dateString: string) => {
+    if (!dateString) return "Baru saja";
+    
+    const date = new Date(dateString);
+    
+    // Format: 20 Des 2024, 14:30 WIB
+    return new Intl.DateTimeFormat('id-ID', {
+      timeZone: 'Asia/Jakarta',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(date) + ' WIB';
+  };
+
+  const [ListFound, setListFound] = useState<FoundReport[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredList, setFilteredList] = useState<FoundReport[]>([]);
 
   useEffect(() => {
     getBarangLost();
