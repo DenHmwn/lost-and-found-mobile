@@ -1,80 +1,175 @@
-// File: LostItemPage.tsx
-import { strings } from "@/constans/strings";
-import { styles } from "@/style/styles";
-import { FoundReport } from "@/types/interface";
+import { styles, color } from "@/style/styles";
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, TouchableOpacity, StatusBar } from "react-native";
+import { Appbar, Card, Searchbar, Chip } from "react-native-paper";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, FlatList } from "react-native";
-import { Appbar, Button, Card } from "react-native-paper";
+import { strings } from "@/constans/strings";
+import { FoundReport } from "@/types/interface";
 
 export default function FoundItemPage() {
-  const [ListLost, setListLost] = useState<FoundReport[]>([]);
+  const formatToWIB = (dateString: string) => {
+    if (!dateString) return "Baru saja";
+    
+    const date = new Date(dateString);
+    
+    // Format: 20 Des 2024, 14:30 WIB
+    return new Intl.DateTimeFormat('id-ID', {
+      timeZone: 'Asia/Jakarta',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(date) + ' WIB';
+  };
+
+  const [ListFound, setListFound] = useState<FoundReport[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredList, setFilteredList] = useState<FoundReport[]>([]);
 
   useEffect(() => {
-    getBarangLost();
+    getBarangFound();
   }, []);
 
-  // get data dari API
-  const getBarangLost = async () => {
+  useEffect(() => {
+    const filtered = ListFound.filter(
+      (item) =>
+        item.namaBarang.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.lokasiTemu.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredList(filtered);
+  }, [searchQuery, ListFound]);
+
+  const getBarangFound = async () => {
     try {
       const response = await axios.get(strings.api_found);
-
-      // Cek apa isi response di Terminal Metro Bundler
-      // console.log("DATA DARI API:", JSON.stringify(response.data, null, 2));
-
-      // Cek struktur data sebelum set state
+      
       if (Array.isArray(response.data)) {
-        setListLost(response.data);
+        setListFound(response.data);
       } else if (response.data.data) {
-        setListLost(response.data.data);
-      } else {
-        // console.log("Struktur data tidak dikenali, cek backend");
+        setListFound(response.data.data);
       }
     } catch (error) {
       console.error("Error ambil data:", error);
     }
   };
 
-  const [visible, setVisible] = React.useState(false);
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
-  const message = useRef("");
-  const [id, setId] = useState(0);
+  const renderEmptyState = () => (
+    <View style={styles.emptyContainer}>
+      <MaterialIcons name="inventory" size={80} color="#CBD5E1" />
+      <Text style={styles.emptyTitle}>Tidak Ada Data</Text>
+      <Text style={styles.emptySubtitle}>
+        {searchQuery ? "Coba kata kunci lain" : "Belum ada laporan penemuan barang"}
+      </Text>
+    </View>
+  );
+
+  const renderHeader = () => (
+    <View style={styles.headerContainer}>
+      <Searchbar
+        placeholder="Cari barang atau lokasi penemuan..."
+        onChangeText={setSearchQuery}
+        value={searchQuery}
+        style={styles.searchBar}
+        iconColor="#64748B"
+        inputStyle={styles.searchInput}
+        elevation={0}
+      />
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <MaterialIcons name="check-circle" size={24} color={color.primary} />
+          <View style={styles.statTextContainer}>
+            <Text style={styles.statNumber}>{ListFound.length}</Text>
+            <Text style={styles.statLabel}>Barang Ditemukan</Text>
+          </View>
+        </View>
+        <View style={styles.statCard}>
+          <MaterialIcons name="search" size={24} color={color.accent} />
+          <View style={styles.statTextContainer}>
+            <Text style={styles.statNumber}>{filteredList.length}</Text>
+            <Text style={styles.statLabel}>Hasil Cari</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
 
   return (
-    <View style={{ flex: 1, justifyContent: "flex-start" }}>
-      <Appbar.Header style={styles.background}>
-        <Appbar.Content
-          title="Lost & Found"
-          titleStyle={styles.PageTitle}
-          style={styles.PageTitle}
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={color.primary} />
+      
+      <Appbar.Header style={styles.appBar} elevated>
+        <Appbar.Content 
+          title="Found Items" 
+          titleStyle={styles.appBarTitle}
+        />
+        <Appbar.Action 
+          icon="bell-outline" 
+          onPress={() => console.log("Notifikasi")}
+          color="#FFFFFF"
         />
       </Appbar.Header>
 
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.PageTitle}>Halaman List Penemuan Barang</Text>
-      </View>
       <FlatList
-        style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 50 }}
-        data={ListLost}
+        style={styles.listContainer}
+        contentContainerStyle={styles.listContent}
+        data={filteredList}
         keyExtractor={(item) => String(item.id)}
+        ListHeaderComponent={renderHeader}
+        ListEmptyComponent={renderEmptyState}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <Card key={item.id} style={styles.card}>
-            <Card.Title
-              title={item.namaBarang}
-              subtitle={item.lokasiTemu}
-              titleStyle={{ fontSize: 20 }}
-            />
-            <Card.Actions>
-              <Button
-                onPress={() => console.log("edit")}
-                style={{ backgroundColor: "#5B7FFF" }}
+          <Card style={styles.modernCard} elevation={2}>
+            <View style={styles.cardHeader}>
+              <View style={styles.iconContainer}>
+                <MaterialIcons name="check-circle" size={24} color={color.primary} />
+              </View>
+              <View style={styles.cardHeaderText}>
+                <Text style={styles.cardTitle} numberOfLines={2}>
+                  {item.namaBarang}
+                </Text>
+                <View style={styles.locationContainer}>
+                  <MaterialIcons name="place" size={14} color="#64748B" />
+                  <Text style={styles.cardLocation} numberOfLines={1}>
+                    {item.lokasiTemu}
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            {item.deskripsi && (
+              <Text style={styles.cardDescription} numberOfLines={2}>
+                {item.deskripsi}
+              </Text>
+            )}
+
+            <View style={styles.cardFooter}>
+              <Chip 
+                icon="clock-outline" 
+                style={styles.timeChip}
+                textStyle={styles.chipText}
               >
-                <MaterialIcons name="info" size={24} color="black" />
-              </Button>
-            </Card.Actions>
+                {formatToWIB(item.tanggalTemu as string)}
+              </Chip>
+              
+              <TouchableOpacity
+                style={[styles.actionButton, { 
+                  backgroundColor: color.primary,
+                  width: 'auto',
+                  paddingHorizontal: 16,
+                  flexDirection: 'row',
+                  gap: 6
+                }]}
+                onPress={() => console.log("Detail item:", item.id)}
+              >
+                <MaterialIcons name="info" size={18} color="#FFFFFF" />
+                <Text style={{ color: '#FFFFFF', fontSize: 14, fontWeight: '600' }}>
+                  Detail
+                </Text>
+              </TouchableOpacity>
+            </View>
           </Card>
         )}
       />
