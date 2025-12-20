@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
 import { View, Text, ScrollView, TouchableOpacity, Dimensions, Image } from "react-native";
 import { Appbar, BottomNavigation, PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { styles } from "@/style/styles";
 import { styles, color } from "@/style/styles";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import LostItemPage from "../lostitems";
@@ -11,7 +9,6 @@ import FoundItemPage from "../founditems";
 import AccountPageUser from "../account";
 import ListAdminPage from "../list-admin";
 
-// Halaman HomePage
 const { width } = Dimensions.get('window');
 
 // Halaman HomePage - Profile Program
@@ -311,7 +308,6 @@ const HomeRoute = () => {
         </View>
       </ScrollView>
     </View>
-  </View>
   );
 };
 
@@ -328,7 +324,7 @@ export default function HomePageUser() {
       key: "lost",
       title: "Lost",
       focusedIcon: "help-box",
-      unfocusedIcon: "box-variant",
+      unfocusedIcon: "help-box-outline",
     },
     {
       key: "found",
@@ -338,15 +334,15 @@ export default function HomePageUser() {
     },
     {
       key: "listadmin",
-      title: "ListAdmin",
-      focusedIcon: "account",
-      unfocusedIcon: "account-outline",
+      title: "List Admin",
+      focusedIcon: "format-list-bulleted",
+      unfocusedIcon: "format-list-bulleted",
     },
     {
       key: "account",
       title: "Account",
-      focusedIcon: "cog",
-      unfocusedIcon: "cog-outline",
+      focusedIcon: "account",
+      unfocusedIcon: "account-outline",
     },
   ]);
 
@@ -365,7 +361,9 @@ export default function HomePageUser() {
           navigationState={{ index, routes }}
           onIndexChange={setIndex}
           renderScene={renderScene}
-          barStyle={{ backgroundColor: "#486feeff" }}
+          barStyle={{ backgroundColor: color.primary }}
+          activeColor="#FFFFFF"
+          inactiveColor="rgba(255, 255, 255, 0.6)"
         />
       </PaperProvider>
     </SafeAreaProvider>
