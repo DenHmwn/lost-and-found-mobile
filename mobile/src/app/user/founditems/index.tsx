@@ -1,12 +1,11 @@
-// File: LostItemPage.tsx
-import { strings } from "@/constans/strings";
-import { styles } from "@/style/styles";
-import { FoundReport } from "@/types/interface";
+import { styles, color } from "@/style/styles";
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, TouchableOpacity, StatusBar } from "react-native";
+import { Appbar, Card, Searchbar, Chip } from "react-native-paper";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, FlatList } from "react-native";
-import { Appbar, Button, Card } from "react-native-paper";
+import { strings } from "@/constans/strings";
+import { FoundReport } from "@/types/interface";
 
 export default function FoundItemPage() {
   const formatToWIB = (dateString: string) => {
@@ -113,29 +112,64 @@ export default function FoundItemPage() {
         />
       </Appbar.Header>
 
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.PageTitle}>Halaman List Penemuan Barang</Text>
-      </View>
       <FlatList
-        style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 50 }}
-        data={ListLost}
+        style={styles.listContainer}
+        contentContainerStyle={styles.listContent}
+        data={filteredList}
         keyExtractor={(item) => String(item.id)}
+        ListHeaderComponent={renderHeader}
+        ListEmptyComponent={renderEmptyState}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <Card key={item.id} style={styles.card}>
-            <Card.Title
-              title={item.namaBarang}
-              subtitle={item.lokasiTemu}
-              titleStyle={{ fontSize: 20 }}
-            />
-            <Card.Actions>
-              <Button
-                onPress={() => console.log("edit")}
-                style={{ backgroundColor: "#5B7FFF" }}
+          <Card style={styles.modernCard} elevation={2}>
+            <View style={styles.cardHeader}>
+              <View style={styles.iconContainer}>
+                <MaterialIcons name="check-circle" size={24} color={color.primary} />
+              </View>
+              <View style={styles.cardHeaderText}>
+                <Text style={styles.cardTitle} numberOfLines={2}>
+                  {item.namaBarang}
+                </Text>
+                <View style={styles.locationContainer}>
+                  <MaterialIcons name="place" size={14} color="#64748B" />
+                  <Text style={styles.cardLocation} numberOfLines={1}>
+                    {item.lokasiTemu}
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            {item.deskripsi && (
+              <Text style={styles.cardDescription} numberOfLines={2}>
+                {item.deskripsi}
+              </Text>
+            )}
+
+            <View style={styles.cardFooter}>
+              <Chip 
+                icon="clock-outline" 
+                style={styles.timeChip}
+                textStyle={styles.chipText}
               >
-                <MaterialIcons name="info" size={24} color="black" />
-              </Button>
-            </Card.Actions>
+                {formatToWIB(item.tanggalTemu as string)}
+              </Chip>
+              
+              <TouchableOpacity
+                style={[styles.actionButton, { 
+                  backgroundColor: color.primary,
+                  width: 'auto',
+                  paddingHorizontal: 16,
+                  flexDirection: 'row',
+                  gap: 6
+                }]}
+                onPress={() => console.log("Detail item:", item.id)}
+              >
+                <MaterialIcons name="info" size={18} color="#FFFFFF" />
+                <Text style={{ color: '#FFFFFF', fontSize: 14, fontWeight: '600' }}>
+                  Detail
+                </Text>
+              </TouchableOpacity>
+            </View>
           </Card>
         )}
       />
