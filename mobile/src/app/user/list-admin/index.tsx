@@ -6,17 +6,17 @@ import { styles } from '@/style/styles'
 export default function ListAdminPage() {
   return (
    <View style={{ flex: 1, justifyContent: "flex-start" }}>
-      <Appbar.Header style={styles.background}>
-        <Appbar.Content
-          title="Lost & Found"
-          titleStyle={styles.PageTitle}
-          style={styles.PageTitle}
-        />
-      </Appbar.Header>
-
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.PageTitle}>Halaman List Admin</Text>
-      </View>
+      <Appbar.Header style={styles.appBar} elevated>
+              <Appbar.Content 
+                title="List Admin" 
+                titleStyle={styles.appBarTitle}
+              />
+              <Appbar.Action 
+                icon="bell-outline" 
+                onPress={() => console.log("Notifikasi")}
+                color="#FFFFFF"
+              />
+            </Appbar.Header>
     </View>
   )
 }
