@@ -57,19 +57,59 @@ export default function FoundItemPage() {
     }
   };
 
-  const [visible, setVisible] = React.useState(false);
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
-  const message = useRef("");
-  const [id, setId] = useState(0);
+  const renderEmptyState = () => (
+    <View style={styles.emptyContainer}>
+      <MaterialIcons name="inventory" size={80} color="#CBD5E1" />
+      <Text style={styles.emptyTitle}>Tidak Ada Data</Text>
+      <Text style={styles.emptySubtitle}>
+        {searchQuery ? "Coba kata kunci lain" : "Belum ada laporan penemuan barang"}
+      </Text>
+    </View>
+  );
+
+  const renderHeader = () => (
+    <View style={styles.headerContainer}>
+      <Searchbar
+        placeholder="Cari barang atau lokasi penemuan..."
+        onChangeText={setSearchQuery}
+        value={searchQuery}
+        style={styles.searchBar}
+        iconColor="#64748B"
+        inputStyle={styles.searchInput}
+        elevation={0}
+      />
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <MaterialIcons name="check-circle" size={24} color={color.primary} />
+          <View style={styles.statTextContainer}>
+            <Text style={styles.statNumber}>{ListFound.length}</Text>
+            <Text style={styles.statLabel}>Barang Ditemukan</Text>
+          </View>
+        </View>
+        <View style={styles.statCard}>
+          <MaterialIcons name="search" size={24} color={color.accent} />
+          <View style={styles.statTextContainer}>
+            <Text style={styles.statNumber}>{filteredList.length}</Text>
+            <Text style={styles.statLabel}>Hasil Cari</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
 
   return (
-    <View style={{ flex: 1, justifyContent: "flex-start" }}>
-      <Appbar.Header style={styles.background}>
-        <Appbar.Content
-          title="Lost & Found"
-          titleStyle={styles.PageTitle}
-          style={styles.PageTitle}
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={color.primary} />
+      
+      <Appbar.Header style={styles.appBar} elevated>
+        <Appbar.Content 
+          title="Found Items" 
+          titleStyle={styles.appBarTitle}
+        />
+        <Appbar.Action 
+          icon="bell-outline" 
+          onPress={() => console.log("Notifikasi")}
+          color="#FFFFFF"
         />
       </Appbar.Header>
 
