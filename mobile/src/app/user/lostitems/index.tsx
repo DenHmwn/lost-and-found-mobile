@@ -1,7 +1,7 @@
 import { styles } from "@/style/styles";
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, FlatList } from "react-native";
-import { Appbar, Button, Card } from "react-native-paper";
+import { View, Text, FlatList, TouchableOpacity, StatusBar } from "react-native";
+import { Appbar, Button, Card, Searchbar, Chip, FAB } from "react-native-paper";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import axios from "axios";
 import { strings } from "@/constans/strings";
@@ -123,6 +123,9 @@ export default function LostItemPage() {
         contentContainerStyle={styles.listContent}
         data={filteredList}
         keyExtractor={(item) => String(item.id)}
+        ListHeaderComponent={renderHeader}
+        ListEmptyComponent={renderEmptyState}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <Card style={styles.modernCard} elevation={2}>
             <View style={styles.cardHeader}>
