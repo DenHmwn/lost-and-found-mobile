@@ -14,41 +14,71 @@ export default function LostItemPage() {
     getBarangLost();
   }, []);
 
-  // get data dari API
+  useEffect(() => {
+    const filtered = ListLost.filter(
+      (item) =>
+        item.namaBarang.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.lokasiHilang.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredList(filtered);
+  }, [searchQuery, ListLost]);
+
   const getBarangLost = async () => {
     try {
       const response = await axios.get(strings.api_lost);
       
-      // Cek apa isi response di Terminal Metro Bundler
-      // console.log("DATA DARI API:", JSON.stringify(response.data, null, 2));
-
-      // Cek struktur data sebelum set state
       if (Array.isArray(response.data)) {
         setListLost(response.data);
       } else if (response.data.data) {
         setListLost(response.data.data);
-      } else {
-        // console.log("Struktur data tidak dikenali, cek backend");
       }
     } catch (error) {
       console.error("Error ambil data:", error);
     }
   };
 
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
   const message = useRef("");
   const [id, setId] = useState(0);
 
-  return (
-    <View style={{ flex: 1, justifyContent: "flex-start" }}>
-      <Appbar.Header style={styles.background}>
-        <Appbar.Content title="Lost & Found" titleStyle={styles.PageTitle} style={ styles.PageTitle} />
-      </Appbar.Header>
+  const renderEmptyState = () => (
+    <View style={styles.emptyContainer}>
+      <MaterialIcons name="search-off" size={80} color="#CBD5E1" />
+      <Text style={styles.emptyTitle}>Tidak Ada Data</Text>
+      <Text style={styles.emptySubtitle}>
+        {searchQuery ? "Coba kata kunci lain" : "Belum ada laporan kehilangan"}
+      </Text>
+    </View>
+  );
 
-      <View style={styles.pageTitleContainer}>
-        <Text style={styles.PageTitle}>Halaman List Kehilangan Barang</Text>
+  const renderHeader = () => (
+    <View style={styles.headerContainer}>
+      <Searchbar
+        placeholder="Cari barang atau lokasi..."
+        onChangeText={setSearchQuery}
+        value={searchQuery}
+        style={styles.searchBar}
+        iconColor="#64748B"
+        inputStyle={styles.searchInput}
+        elevation={0}
+      />
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <MaterialIcons name="inventory-2" size={24} color="#3B82F6" />
+          <View style={styles.statTextContainer}>
+            <Text style={styles.statNumber}>{ListLost.length}</Text>
+            <Text style={styles.statLabel}>Total Barang</Text>
+          </View>
+        </View>
+        <View style={styles.statCard}>
+          <MaterialIcons name="search" size={24} color="#F59E0B" />
+          <View style={styles.statTextContainer}>
+            <Text style={styles.statNumber}>{filteredList.length}</Text>
+            <Text style={styles.statLabel}>Hasil Cari</Text>
+          </View>
+        </View>
       </View>
 
       {/* pisah style */}
