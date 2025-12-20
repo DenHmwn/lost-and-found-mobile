@@ -15,6 +15,7 @@ export interface LostReport {
   statusReport: "Done" | "OnProgress" | "Closed";
   createdAt: string;
   user: Users;
+  tanggalHilang: string;
 }
 
 export interface FoundReport {
@@ -25,5 +26,6 @@ export interface FoundReport {
   statusReport: "Done" | "OnProgress" | "Closed";
   createdAt: string;
   admin: Users;
+  tanggalTemu: string;
   lostReportId: number | null;
 }
