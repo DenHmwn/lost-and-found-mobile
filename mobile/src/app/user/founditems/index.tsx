@@ -31,24 +31,26 @@ export default function FoundItemPage() {
   const [filteredList, setFilteredList] = useState<FoundReport[]>([]);
 
   useEffect(() => {
-    getBarangLost();
+    getBarangFound();
   }, []);
 
-  // get data dari API
-  const getBarangLost = async () => {
+  useEffect(() => {
+    const filtered = ListFound.filter(
+      (item) =>
+        item.namaBarang.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.lokasiTemu.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredList(filtered);
+  }, [searchQuery, ListFound]);
+
+  const getBarangFound = async () => {
     try {
       const response = await axios.get(strings.api_found);
-
-      // Cek apa isi response di Terminal Metro Bundler
-      // console.log("DATA DARI API:", JSON.stringify(response.data, null, 2));
-
-      // Cek struktur data sebelum set state
+      
       if (Array.isArray(response.data)) {
-        setListLost(response.data);
+        setListFound(response.data);
       } else if (response.data.data) {
-        setListLost(response.data.data);
-      } else {
-        // console.log("Struktur data tidak dikenali, cek backend");
+        setListFound(response.data.data);
       }
     } catch (error) {
       console.error("Error ambil data:", error);
