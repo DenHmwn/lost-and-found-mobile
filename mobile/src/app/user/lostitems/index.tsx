@@ -8,7 +8,26 @@ import { strings } from "@/constans/strings";
 import { LostReport } from "@/types/interface";
 
 export default function LostItemPage() {
+  const formatToWIB = (dateString: string) => {
+    if (!dateString) return "Baru saja";
+    
+    const date = new Date(dateString);
+    
+    // Format: 20 Des 2024, 14:30 WIB
+    return new Intl.DateTimeFormat('id-ID', {
+      timeZone: 'Asia/Jakarta',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(date) + ' WIB';
+  };
+
   const [ListLost, setListLost] = useState<LostReport[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredList, setFilteredList] = useState<LostReport[]>([]);
 
   useEffect(() => {
     getBarangLost();
@@ -80,37 +99,93 @@ export default function LostItemPage() {
           </View>
         </View>
       </View>
+    </View>
+  );
 
-      {/* pisah style */}
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#3B82F6" />
+      
+      <Appbar.Header style={styles.appBar} elevated>
+        <Appbar.Content 
+          title="Lost & Found" 
+          titleStyle={styles.appBarTitle}
+        />
+        <Appbar.Action 
+          icon="bell-outline" 
+          onPress={() => console.log("Notifikasi")}
+          color="#FFFFFF"
+        />
+      </Appbar.Header>
+
       <FlatList
-        style={{ flex: 1 }} 
-        contentContainerStyle={{ paddingBottom: 50 }}
-        data={ListLost}
+        style={styles.listContainer}
+        contentContainerStyle={styles.listContent}
+        data={filteredList}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
-          <Card key={item.id} style={ styles.card }>
-            <Card.Title
-              title={item.namaBarang}
-              subtitle={item.lokasiHilang}
-              titleStyle={{ fontSize: 20 }}
-            />
-            <Card.Actions>
-              <Button
-                onPress={() => {
-                  setId(item.id);
-                  showDialog();
-                  message.current = item.namaBarang;
-                }}
-                style={{ backgroundColor: "#EF4444" }}
+          <Card style={styles.modernCard} elevation={2}>
+            <View style={styles.cardHeader}>
+              <View style={styles.iconContainer}>
+                <MaterialIcons name="location-on" size={24} color="#3B82F6" />
+              </View>
+              <View style={styles.cardHeaderText}>
+                <Text style={styles.cardTitle} numberOfLines={2}>
+                  {item.namaBarang}
+                </Text>
+                <View style={styles.locationContainer}>
+                  <MaterialIcons name="place" size={14} color="#64748B" />
+                  <Text style={styles.cardLocation} numberOfLines={1}>
+                    {item.lokasiHilang}
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            {item.deskripsi && (
+              <Text style={styles.cardDescription} numberOfLines={2}>
+                {item.deskripsi}
+              </Text>
+            )}
+
+            <View style={styles.cardFooter}>
+              <Chip 
+                icon="clock-outline" 
+                style={styles.timeChip}
+                textStyle={styles.chipText}
               >
-                <MaterialIcons name="delete" size={24} color="black" />
-              </Button>
-              <Button onPress={() => console.log("edit")} style={{ backgroundColor: "#5B7FFF" }}>
-                <MaterialIcons name="edit" size={24} color="black" />
-              </Button>
-            </Card.Actions>
+                {formatToWIB(item.tanggalHilang as string)}
+              </Chip>
+              
+              <View style={styles.actionButtons}>
+                <TouchableOpacity
+                  style={[styles.actionButton, styles.editButton]}
+                  onPress={() => console.log("edit", item.id)}
+                >
+                  <MaterialIcons name="edit" size={18} color="#FFFFFF" />
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={[styles.actionButton, styles.deleteButton]}
+                  onPress={() => {
+                    setId(item.id);
+                    showDialog();
+                    message.current = item.namaBarang;
+                  }}
+                >
+                  <MaterialIcons name="delete" size={18} color="#FFFFFF" />
+                </TouchableOpacity>
+              </View>
+            </View>
           </Card>
         )}
+      />
+
+      <FAB
+        icon="plus"
+        style={styles.fab}
+        onPress={() => console.log("Tambah laporan")}
+        color="#FFFFFF"
       />
     </View>
   );
