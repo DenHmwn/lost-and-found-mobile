@@ -258,22 +258,22 @@ const HomeRoute = () => {
 
             {[
               {
-                icon: "add-alert",
+                icon: "add-alert" as const,
                 title: "Laporan Mudah",
                 desc: "Interface sederhana untuk membuat laporan",
               },
               {
-                icon: "search",
+                icon: "search" as const,
                 title: "Pencarian Cepat",
                 desc: "Temukan barang dengan filter lengkap",
               },
               {
-                icon: "notifications-active",
+                icon: "notifications-active" as const,
                 title: "Notifikasi",
                 desc: "Dapatkan update segera",
               },
               {
-                icon: "security",
+                icon: "security" as const,
                 title: "Data Aman",
                 desc: "Privasi dan keamanan terjaga",
               },
@@ -366,12 +366,12 @@ const HomeRoute = () => {
 
             {[
               {
-                icon: "email",
+                icon: "email" as const,
                 label: "Email",
                 value: "lostandfound@gmail.com",
               },
               {
-                icon: "language",
+                icon: "language" as const,
                 label: "Website",
                 value: "www.lostandfound.com",
               },
