@@ -28,19 +28,23 @@ export default function LoginPage() {
 }
 
 const styles = StyleSheet.create({
-      container: {
+    container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f5f5f5',
         padding: 20,
   },
-        title: {
-          fontSize: 36,
-          fontWeight: 'bold',
+    title: {
+        fontSize: 36,
+        fontWeight: 'bold',
         color: '#333',
-    marginBottom: 10,
+        marginBottom: 10,
 
         },
+        subtitle: {
+            
+  },
+
 });
 
