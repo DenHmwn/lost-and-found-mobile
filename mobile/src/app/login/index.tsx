@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
     adminButton: {
     backgroundColor: '#B0BEC5',
   },
+    buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
 
 
 
