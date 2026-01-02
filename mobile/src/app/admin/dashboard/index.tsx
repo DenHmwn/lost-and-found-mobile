@@ -54,6 +54,8 @@ return (
       <StatCard label="Dalam Proses" value={stats?.inProcess ?? 0} />
     </View>
 
+    <View style={styles.row}>
+    </View>
 
   </ScrollView>
 );
