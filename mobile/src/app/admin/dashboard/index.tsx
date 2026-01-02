@@ -42,6 +42,7 @@ return (
 >
     <Text style={styles.title}>Dashboard</Text>
     <Text style={styles.sub}>Ringkasan laporan & user</Text>
+    {error && <Text style={{ color: "tomato" }}>{error}</Text>}
 
   </ScrollView>
 );
