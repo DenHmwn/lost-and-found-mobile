@@ -25,7 +25,9 @@ export default function AdminTabsLayout() {
            title: "Hilang",
            headerShown: false,
 
-           tabBarIcon: ({ size, color }) => null,
+           tabBarIcon: ({ size, color }) => (
+            <Ionicons name="search-outline" size={size} color={color} />
+           ),
         }} 
         />
 
