@@ -21,7 +21,7 @@ const load = async () => {
     setError(e.message);
 } finally {
     setLoading(false);
-
+    setRefreshing(false);
 }
 
 };
