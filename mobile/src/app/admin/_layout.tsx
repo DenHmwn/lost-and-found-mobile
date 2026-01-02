@@ -54,6 +54,9 @@ export default function AdminTabsLayout() {
         options={{ 
             title: "Users", 
             headerShown: false,
+            tabBarIcon: ({ size, color }) => (
+            <Ionicons name="people-outline" size={size} color={color} />
+            ),
         }}
         />
 
