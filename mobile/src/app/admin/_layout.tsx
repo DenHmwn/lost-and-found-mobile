@@ -50,6 +50,10 @@ export default function AdminTabsLayout() {
         }}
         />
 
+        <Tabs.Screen name="users" 
+        
+        />
+
 
 
         </Tabs>
