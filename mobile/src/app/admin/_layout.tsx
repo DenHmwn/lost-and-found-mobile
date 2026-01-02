@@ -22,7 +22,7 @@ export default function AdminTabsLayout() {
       
         <Tabs.Screen name="lost"
         options={{
-            
+           title: "Hilang", 
         }} 
         />
 
