@@ -14,5 +14,9 @@ export default function AdminDashboard() {
 
 const load = async () => {
     setError(null);
+    try {
+} catch (e: any) {
+} finally {
+}
 
 };
