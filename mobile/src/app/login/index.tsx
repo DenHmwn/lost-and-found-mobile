@@ -6,5 +6,10 @@ export default function LoginPage() {
       const handleUserLogin = () => {
         router.replace('/user/homepage')
     };
+
+      const handleAdminLogin = () => {
+        
+  };
+
   
 }
