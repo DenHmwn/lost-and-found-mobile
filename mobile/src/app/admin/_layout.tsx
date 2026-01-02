@@ -44,7 +44,6 @@ export default function AdminTabsLayout() {
         options={{
             title: "Buat",
             headerShown: false,
-
             tabBarIcon: ({ size, color }) => (
             <Ionicons name="add-circle-outline" size={size} color={color} />
             ),
