@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
 
         },
         subtitle: {
-            
+             fontSize: 18,
+   
   },
 
 });
