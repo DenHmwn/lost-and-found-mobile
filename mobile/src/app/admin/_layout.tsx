@@ -33,6 +33,7 @@ export default function AdminTabsLayout() {
         <Tabs.Screen name="found" 
         options={{
             title: "Ditemukan",
+            headerShown: false,
         }}
         />
 
