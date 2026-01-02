@@ -37,7 +37,14 @@ export default function ReportCard({
     </View>
   </Pressable>
 );
-
   );
 }
+
+const styles = StyleSheet.create({
+  card: { borderWidth: 1, borderColor: "#eee", borderRadius: 14, padding: 14, gap: 6 },
+  title: { fontSize: 16, fontWeight: "900" },
+  meta: { color: "#666" },
+  badgesRow: { flexDirection: "row", gap: 8, marginTop: 6 },
+});
+
 
