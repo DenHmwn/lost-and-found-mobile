@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function AdminTabsLayout() {
     return (
-        <Tabs initialRouteName="dashboard" screenOptions={{headerTitleStyle: {}}}>
+        <Tabs initialRouteName="dashboard" screenOptions={{headerTitleStyle: {fontWeight: "900"}}}>
 
         </Tabs>
 
