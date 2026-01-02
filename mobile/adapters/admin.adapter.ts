@@ -5,8 +5,7 @@ function pickString(obj: any, keys: string[], fallback = ""): string {
         const v = obj?.[k];
         if (typeof v === "string" && v.trim() !== "") return v;
         if (typeof v === "number") return String(v);
-
 }
-
   return fallback;
+
 }
