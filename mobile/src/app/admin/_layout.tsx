@@ -45,7 +45,9 @@ export default function AdminTabsLayout() {
             title: "Buat",
             headerShown: false,
 
-            tabBarIcon: ({ size, color }) => null,
+            tabBarIcon: ({ size, color }) => (
+            <Ionicons name="add-circle-outline" size={size} color={color} />
+            ),
         }}
         />
 
