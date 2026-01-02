@@ -32,3 +32,15 @@ function normalizeProcess(v: any): UiReport["processStatus"] {
   return "open";
 }
 
+export function toUiStats(raw: any): UiStats {
+  
+  return {
+    totalLost: pickNumber(raw, ["totalLost", "total_lost", "barang_hilang"]),
+    totalFound: pickNumber(raw, ["totalFound", "total_found", "barang_ditemukan"]),
+    pendingApproval: pickNumber(raw, ["pendingApproval", "pending", "menunggu_approval"]),
+    approved: pickNumber(raw, ["approved", "disetujui"]),
+    inProcess: pickNumber(raw, ["inProcess", "dalam_proses", "processing"]),
+    totalUsers: pickNumber(raw, ["totalUsers", "users", "total_user"]),
+  };
+}
+
