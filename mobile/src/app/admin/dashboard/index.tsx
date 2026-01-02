@@ -37,6 +37,8 @@ if (loading) {
 
 return (
   <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}
+  contentContainerStyle={{ padding: 16, gap: 12 }}
+
 >
   </ScrollView>
 );
