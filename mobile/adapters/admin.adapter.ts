@@ -26,6 +26,8 @@ function normalizeApproval(v: any): UiReport["approvalStatus"] {
 }
 
 function normalizeProcess(v: any): UiReport["processStatus"] {
+    const s = String(v ?? "").toLowerCase();
+
   return "open";
 }
 
