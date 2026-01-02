@@ -8,7 +8,7 @@ export default function LoginPage() {
     };
 
       const handleAdminLogin = () => {
-        
+        router.replace('/admin/dashboard');
   };
 
   
