@@ -24,9 +24,20 @@ export default function ReportCard({
   onPress: () => void;
 }) {
   return (
-    <Pressable onPress={onPress}>
-      <Text>{item.title}</Text>
-    </Pressable>
+    return (
+  <Pressable onPress={onPress} style={styles.card}>
+    <Text style={styles.title}>{item.title}</Text>
+    <Text style={styles.meta}>Lokasi: {item.location}</Text>
+    <Text style={styles.meta}>Pelapor: {item.reporterName}</Text>
+    <Text style={styles.meta}>Tanggal: {formatDateTime(item.createdAtISO)}</Text>
+
+    <View style={styles.badgesRow}>
+      <Badge text={item.approvalStatus.toUpperCase()} bg={approvalColor(item.approvalStatus)} />
+      <Badge text={item.processStatus.toUpperCase()} bg={processColor(item.processStatus)} />
+    </View>
+  </Pressable>
+);
+
   );
 }
 
