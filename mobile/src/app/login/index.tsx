@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 
 export default function LoginPage() { 
       const handleUserLogin = () => {
-  };
+        router.replace('/user/homepage')
+    };
   
 }
