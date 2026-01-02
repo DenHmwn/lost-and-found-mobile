@@ -14,7 +14,7 @@ export default function LoginPage() {
     <View style={styles.container}>
          <StatusBar barStyle="light-content" />
          <Text style={styles.title}>Lost & Found</Text>
-         <Text>Pilih peran Anda untuk melanjutkan</Text>
+         <Text style={styles.subtitle}>Pilih peran Anda untuk melanjutkan</Text>
 
     </View>
   );
