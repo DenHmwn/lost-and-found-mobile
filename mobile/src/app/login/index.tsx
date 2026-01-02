@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
         padding: 20,
   },
         title: {
-            
+            fontSize: 36,
+
         },
 });
 
