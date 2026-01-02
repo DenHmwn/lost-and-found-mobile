@@ -55,6 +55,8 @@ return (
     </View>
 
     <View style={styles.row}>
+      <StatCard label="Disetujui" value={stats?.approved ?? 0} />
+      <StatCard label="Total Users" value={stats?.totalUsers ?? 0} />
     </View>
 
   </ScrollView>
