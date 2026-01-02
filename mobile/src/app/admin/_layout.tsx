@@ -4,7 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function AdminTabsLayout() {
     return (
-        <Tabs initialRouteName="dashboard" screenOptions={{
+        <Tabs 
+        initialRouteName="dashboard" screenOptions={{
         headerTitleStyle: {fontWeight: "900"},
         tabBarLabelStyle: {fontSize: 11},
         }}
@@ -59,11 +60,6 @@ export default function AdminTabsLayout() {
             ),
         }}
         />
-
-
-
-        </Tabs>
-
-
+    </Tabs>
     );
 }
