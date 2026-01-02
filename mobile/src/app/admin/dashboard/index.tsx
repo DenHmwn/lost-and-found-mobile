@@ -7,5 +7,6 @@ import { UiStats } from "@/types/admin.ui";
 
 export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
 
 }
