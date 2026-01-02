@@ -23,5 +23,6 @@ const load = async () => {
     setLoading(false);
     setRefreshing(false);
 }
-
 };
+
+useEffect(() => { load(); }, []);
