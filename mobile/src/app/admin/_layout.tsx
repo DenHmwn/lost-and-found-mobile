@@ -35,7 +35,9 @@ export default function AdminTabsLayout() {
             title: "Ditemukan",
             headerShown: false,
 
-            tabBarIcon: ({ size, color }) => null,
+            tabBarIcon: ({ size, color }) => (
+            <Ionicons name="cube-outline" size={size} color={color} />
+            ),
         }}
         />
 
