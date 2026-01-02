@@ -50,6 +50,8 @@ return (
     </View>
 
     <View style={styles.row}>
+      <StatCard label="Menunggu" value={stats?.pendingApproval ?? 0} />
+      <StatCard label="Dalam Proses" value={stats?.inProcess ?? 0} />
     </View>
 
 
