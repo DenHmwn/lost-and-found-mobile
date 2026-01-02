@@ -20,7 +20,7 @@ export default function LoginPage() {
           <Text style={styles.buttonText}>Masuk sebagai User</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleAdminLogin}>
+        <TouchableOpacity style={[styles.button, styles.adminButton]} onPress={handleAdminLogin}>
          <Text>Masuk sebagai Admin</Text>
         </TouchableOpacity>
 
