@@ -14,6 +14,7 @@ export default function AdminTabsLayout() {
         options={{
             title: "Dashboard"
             headerShown: false,
+            tabBarIcon: () => null,
         }}
         
         />
