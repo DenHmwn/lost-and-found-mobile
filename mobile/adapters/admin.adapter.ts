@@ -15,6 +15,6 @@ function pickNumber(obj: any, keys: string[], fallback = 0): number {
         if (typeof v === "number") return v;
         if (typeof v === "string" && !isNaN(Number(v))) return Number(v);
 }
-
   return fallback;
+
 }
