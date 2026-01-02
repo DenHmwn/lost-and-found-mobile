@@ -20,6 +20,7 @@ function pickNumber(obj: any, keys: string[], fallback = 0): number {
 
 function normalizeApproval(v: any): UiReport["approvalStatus"] {
     const s = String(v ?? "").toLowerCase();
+    if (["approved", "disetujui", "yes", "true"].includes(s)) return "approved";
 
   return "pending";
 }
