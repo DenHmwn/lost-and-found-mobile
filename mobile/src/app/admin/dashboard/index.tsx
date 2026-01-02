@@ -9,5 +9,5 @@ export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [stats, setStats] = useState<UiStats | null>(null);
-
+    const [error, setError] = useState<string | null>(null);
 }
