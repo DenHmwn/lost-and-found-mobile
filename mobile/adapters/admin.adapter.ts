@@ -13,7 +13,7 @@ function pickNumber(obj: any, keys: string[], fallback = 0): number {
     for (const k of keys) {
         const v = obj?.[k];
         if (typeof v === "number") return v;
-
+        if (typeof v === "string" && !isNaN(Number(v))) return Number(v);
 }
 
   return fallback;
