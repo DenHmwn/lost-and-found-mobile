@@ -25,3 +25,7 @@ function normalizeApproval(v: any): UiReport["approvalStatus"] {
   return "pending";
 }
 
+function normalizeProcess(v: any): UiReport["processStatus"] {
+  return "open";
+}
+
