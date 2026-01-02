@@ -51,7 +51,10 @@ export default function AdminTabsLayout() {
         />
 
         <Tabs.Screen name="users" 
-        
+        options={{ 
+            title: "Users", 
+            headerShown: false,
+        }}
         />
 
 
