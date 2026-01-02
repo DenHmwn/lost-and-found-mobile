@@ -10,5 +10,8 @@ function pickString(obj: any, keys: string[], fallback = ""): string {
 }
 
 function pickNumber(obj: any, keys: string[], fallback = 0): number {
+    for (const k of keys) {
+}
+
   return fallback;
 }
