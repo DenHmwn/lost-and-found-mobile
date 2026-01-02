@@ -15,3 +15,18 @@ function processColor(s: UiReport["processStatus"]) {
   if (s === "closed") return "#111";
   return "#2563eb";
 }
+
+export default function ReportCard({
+  item,
+  onPress,
+}: {
+  item: UiReport;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable onPress={onPress}>
+      <Text>{item.title}</Text>
+    </Pressable>
+  );
+}
+
