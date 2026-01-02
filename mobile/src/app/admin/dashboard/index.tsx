@@ -19,8 +19,9 @@ const load = async () => {
         setStats(toUiStats(raw));
 } catch (e: any) {
     setError(e.message);
-
 } finally {
+    setLoading(false);
+
 }
 
 };
