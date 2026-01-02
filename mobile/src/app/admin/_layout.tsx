@@ -14,7 +14,8 @@ export default function AdminTabsLayout() {
         options={{
             title: "Dashboard"
             headerShown: false,
-            tabBarIcon: ({ size, color }) => null,
+            tabBarIcon: ({ size, color }) =>  ( <Ionicons name="speedometer-outline" size={size} color={color} />
+            ),
         }}
         
         />
