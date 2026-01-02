@@ -46,7 +46,16 @@ export function toUiStats(raw: any): UiStats {
 
 export function toUiReport(raw: any, type: "lost" | "found"): UiReport {
   return {
+    id: pickString(raw, ["id", "_id", "report_id"]),
     type,
-  } as UiReport;
+    title: pickString(raw, ["title", "judul", "nama_barang", "item_name"], "-"),
+    location: pickString(raw, ["location", "lokasi", "place"], "-"),
+    reporterName: pickString(raw, ["reporterName", "pelapor", "nama_pelapor", "user_name"], "-"),
+    createdAtISO: pickString(raw, ["createdAt", "created_at", "tanggal", "date"], new Date().toISOString()),
+    description: pickString(raw, ["description", "deskripsi", "keterangan"], ""),
+    approvalStatus: normalizeApproval(raw?.approvalStatus ?? raw?.status_approval ?? raw?.approval),
+    processStatus: normalizeProcess(raw?.processStatus ?? raw?.status_laporan ?? raw?.status),
+  };
 }
+
 
