@@ -29,7 +29,8 @@ export default function LoginPage() {
 
 const styles = StyleSheet.create({
       container: {
-  },
+        flex: 1,
 
+  },
 });
 
