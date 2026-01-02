@@ -41,6 +41,7 @@ return (
   refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true); load(); }} />}
 >
     <Text style={styles.title}>Dashboard</Text>
+    <Text style={styles.sub}>Ringkasan laporan & user</Text>
 
   </ScrollView>
 );
