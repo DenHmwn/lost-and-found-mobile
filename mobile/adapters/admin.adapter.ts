@@ -16,5 +16,9 @@ function pickNumber(obj: any, keys: string[], fallback = 0): number {
         if (typeof v === "string" && !isNaN(Number(v))) return Number(v);
 }
   return fallback;
-
 }
+
+function normalizeApproval(v: any): UiReport["approvalStatus"] {
+  return "pending";
+}
+
