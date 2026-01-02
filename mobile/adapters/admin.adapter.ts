@@ -7,5 +7,8 @@ function pickString(obj: any, keys: string[], fallback = ""): string {
         if (typeof v === "number") return String(v);
 }
   return fallback;
+}
 
+function pickNumber(obj: any, keys: string[], fallback = 0): number {
+  return fallback;
 }
