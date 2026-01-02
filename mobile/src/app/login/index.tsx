@@ -9,8 +9,7 @@ export default function LoginPage() {
   };
 
   const handleAdminLogin = () => {
-    // Anda bisa menambahkan logika untuk admin di sini
-    alert('Fitur Admin belum tersedia');
+     router.replace('/admin/dashboard')
   };
 
   return (
