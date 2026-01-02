@@ -9,3 +9,9 @@ function approvalColor(s: UiReport["approvalStatus"]) {
   if (s === "rejected") return "tomato";
   return "#999";
 }
+
+function processColor(s: UiReport["processStatus"]) {
+  if (s === "in_progress") return "#f59e0b";
+  if (s === "closed") return "#111";
+  return "#2563eb";
+}
