@@ -34,7 +34,6 @@ export default function AdminTabsLayout() {
         options={{
             title: "Ditemukan",
             headerShown: false,
-
             tabBarIcon: ({ size, color }) => (
             <Ionicons name="cube-outline" size={size} color={color} />
             ),
