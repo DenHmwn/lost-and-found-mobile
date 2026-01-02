@@ -28,7 +28,7 @@ function normalizeApproval(v: any): UiReport["approvalStatus"] {
 function normalizeProcess(v: any): UiReport["processStatus"] {
     const s = String(v ?? "").toLowerCase();
     if (["in_progress", "processing", "proses", "dalam_proses"].includes(s)) return "in_progress";
-
+    if (["closed", "done", "selesai", "ditutup"].includes(s)) return "closed";
   return "open";
 }
 
