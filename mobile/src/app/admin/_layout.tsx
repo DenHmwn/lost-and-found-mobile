@@ -44,6 +44,8 @@ export default function AdminTabsLayout() {
         options={{
             title: "Buat",
             headerShown: false,
+
+            tabBarIcon: ({ size, color }) => null,
         }}
         />
 
