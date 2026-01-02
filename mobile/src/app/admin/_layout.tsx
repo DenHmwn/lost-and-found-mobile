@@ -34,6 +34,8 @@ export default function AdminTabsLayout() {
         options={{
             title: "Ditemukan",
             headerShown: false,
+
+            tabBarIcon: ({ size, color }) => null,
         }}
         />
 
