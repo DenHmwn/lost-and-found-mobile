@@ -23,7 +23,6 @@ export default function ReportCard({
   item: UiReport;
   onPress: () => void;
 }) {
-  return (
     return (
   <Pressable onPress={onPress} style={styles.card}>
     <Text style={styles.title}>{item.title}</Text>
@@ -37,7 +36,7 @@ export default function ReportCard({
     </View>
   </Pressable>
 );
-  );
+  
 }
 
 const styles = StyleSheet.create({
