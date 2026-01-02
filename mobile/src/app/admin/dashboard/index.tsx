@@ -16,7 +16,7 @@ const load = async () => {
     setError(null);
     try {
         const raw = await AdminService.getStats();
-
+        setStats(toUiStats(raw));
 } catch (e: any) {
 } finally {
 }
