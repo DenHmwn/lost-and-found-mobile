@@ -2,12 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function StatCard({ label, value }: { label: string; value: number }) {
-  return (
-    <View>
-      <Text>{label}</Text>
-      <Text>{value}</Text>
-    </View>
-  );
+ return (
+  <View style={styles.card}>
+    <Text style={styles.label}>{label}</Text>
+    <Text style={styles.value}>{value}</Text>
+  </View>
+);
+
 }
 
 const styles = StyleSheet.create({
