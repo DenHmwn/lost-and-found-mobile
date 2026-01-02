@@ -23,9 +23,10 @@ export default function LoginPage() {
         <TouchableOpacity style={[styles.button, styles.adminButton]} onPress={handleAdminLogin}>
          <Text style={styles.buttonText}>Masuk sebagai Admin</Text>
         </TouchableOpacity>
-
     </View>
   );
-
-  
 }
+
+const styles = StyleSheet.create({
+});
+
