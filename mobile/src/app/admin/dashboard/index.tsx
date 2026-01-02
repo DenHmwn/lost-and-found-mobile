@@ -3,3 +3,4 @@ import { ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View }
 import StatCard from "@/components/StatCard";
 import { AdminService } from "@/services/admin.service";
 import { toUiStats } from "@/adapters/admin.adapter";
+import { UiStats } from "@/types/admin.ui";
