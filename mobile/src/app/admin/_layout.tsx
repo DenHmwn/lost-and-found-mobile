@@ -20,8 +20,10 @@ export default function AdminTabsLayout() {
         />
 
       
-        <Tabs.Screen name="lost" 
-
+        <Tabs.Screen name="lost"
+        options={{
+            
+        }} 
         />
 
 
