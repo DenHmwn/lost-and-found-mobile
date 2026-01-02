@@ -18,6 +18,8 @@ const load = async () => {
         const raw = await AdminService.getStats();
         setStats(toUiStats(raw));
 } catch (e: any) {
+    setError(e.message);
+
 } finally {
 }
 
