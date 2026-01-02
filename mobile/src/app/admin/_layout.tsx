@@ -6,7 +6,7 @@ export default function AdminTabsLayout() {
     return (
         <Tabs initialRouteName="dashboard" screenOptions={{
         headerTitleStyle: {fontWeight: "900"},
-        tabBarLabelStyle: {},
+        tabBarLabelStyle: {fontSize: 11},
         }}>
 
         </Tabs>
