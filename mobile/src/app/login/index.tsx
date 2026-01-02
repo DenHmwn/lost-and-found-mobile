@@ -12,6 +12,7 @@ export default function LoginPage() {
   };
     return (
     <View style={styles.container}>
+         <StatusBar barStyle="light-content" />
     </View>
   );
 
