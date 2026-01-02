@@ -11,7 +11,7 @@ export default function LoginPage() {
         router.replace('/admin/dashboard');
   };
     return (
-    <View>
+    <View style={styles.container}>
     </View>
   );
 
