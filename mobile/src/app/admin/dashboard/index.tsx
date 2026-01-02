@@ -10,7 +10,7 @@ export default function AdminDashboard() {
     const [refreshing, setRefreshing] = useState(false);
     const [stats, setStats] = useState<UiStats | null>(null);
     const [error, setError] = useState<string | null>(null);
-}
+
 
 const load = async () => {
     setError(null);
@@ -58,6 +58,9 @@ return (
       <StatCard label="Disetujui" value={stats?.approved ?? 0} />
       <StatCard label="Total Users" value={stats?.totalUsers ?? 0} />
     </View>
-
   </ScrollView>
 );
+}
+
+const styles = StyleSheet.create({
+});
