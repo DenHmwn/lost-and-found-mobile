@@ -20,6 +20,10 @@ export default function LoginPage() {
           <Text style={styles.buttonText}>Masuk sebagai User</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity>
+         <Text>Masuk sebagai Admin</Text>
+        </TouchableOpacity>
+
     </View>
   );
 
