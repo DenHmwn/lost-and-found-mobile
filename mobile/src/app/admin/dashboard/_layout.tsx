@@ -8,5 +8,4 @@ export default function DashboardStack() {
         <Stack.Screen name="index" options={{ title: "Dashboard" }} />
     </Stack>
   );
-
 }
