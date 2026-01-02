@@ -40,6 +40,10 @@ export default function AdminTabsLayout() {
         }}
         />
 
+        <Tabs.Screen name="create-found" 
+        
+        />
+
 
 
         </Tabs>
