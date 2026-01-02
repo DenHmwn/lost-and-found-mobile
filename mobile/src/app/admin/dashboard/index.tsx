@@ -11,3 +11,6 @@ export default function AdminDashboard() {
     const [stats, setStats] = useState<UiStats | null>(null);
     const [error, setError] = useState<string | null>(null);
 }
+
+const load = async () => {
+};
