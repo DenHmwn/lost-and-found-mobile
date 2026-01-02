@@ -12,7 +12,7 @@ export default function AdminTabsLayout() {
             
         <Tabs.Screen name="dashboard" 
         options={{
-            title: "Dashboard"
+            title: "Dashboard",
             headerShown: false,
             tabBarIcon: ({ size, color }) =>  ( <Ionicons name="speedometer-outline" size={size} color={color} />
             ),
@@ -21,7 +21,7 @@ export default function AdminTabsLayout() {
 
       
         <Tabs.Screen name="lost" 
-        
+
         />
 
 
