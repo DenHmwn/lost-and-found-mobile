@@ -56,9 +56,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
         marginVertical: 10,
     alignItems: 'center',
-
-
   },
+    userButton: {
+    backgroundColor: '#486feeff',
+  },
+
 
 
 });
