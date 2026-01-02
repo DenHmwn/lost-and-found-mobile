@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
     userButton: {
     backgroundColor: '#486feeff',
   },
+    adminButton: {
+    backgroundColor: '#B0BEC5',
+  },
+
 
 
 
