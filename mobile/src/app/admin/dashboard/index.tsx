@@ -6,4 +6,6 @@ import { toUiStats } from "@/adapters/admin.adapter";
 import { UiStats } from "@/types/admin.ui";
 
 export default function AdminDashboard() {
+    const [loading, setLoading] = useState(true);
+
 }
