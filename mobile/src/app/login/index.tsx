@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#f5f5f5',
         padding: 20,
-
-
   },
+        title: {
+            
+        },
 });
 
