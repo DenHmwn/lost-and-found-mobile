@@ -44,3 +44,9 @@ export function toUiStats(raw: any): UiStats {
   };
 }
 
+export function toUiReport(raw: any, type: "lost" | "found"): UiReport {
+  return {
+    type,
+  } as UiReport;
+}
+
