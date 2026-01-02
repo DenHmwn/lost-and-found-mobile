@@ -7,7 +7,13 @@ export default function AdminTabsLayout() {
         <Tabs initialRouteName="dashboard" screenOptions={{
         headerTitleStyle: {fontWeight: "900"},
         tabBarLabelStyle: {fontSize: 11},
-        }}>
+        }}
+        >
+            
+        <Tabs.Screen name="dashboard" 
+        
+        
+        />
 
         </Tabs>
 
