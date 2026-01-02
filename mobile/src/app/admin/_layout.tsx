@@ -42,7 +42,8 @@ export default function AdminTabsLayout() {
 
         <Tabs.Screen name="create-found" 
         options={{
-            title: "Buat"
+            title: "Buat",
+            headerShown: false,
         }}
         />
 
