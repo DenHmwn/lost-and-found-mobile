@@ -63,4 +63,8 @@ return (
 }
 
 const styles = StyleSheet.create({
+    center: { flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#fff" },
+    title: { fontSize: 22, fontWeight: "900" },
+    sub: { color: "#666", marginTop: -6 },
+    row: { flexDirection: "row", gap: 12 },
 });
