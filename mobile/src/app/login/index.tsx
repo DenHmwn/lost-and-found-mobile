@@ -13,7 +13,7 @@ export default function LoginPage() {
     return (
     <View style={styles.container}>
          <StatusBar barStyle="light-content" />
-         <Text>Lost & Found</Text>
+         <Text style={styles.title}>Lost & Found</Text>
 
     </View>
   );
