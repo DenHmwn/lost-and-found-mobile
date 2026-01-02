@@ -8,9 +8,6 @@ export default function RootLayout() {
         <Stack.Screen name="login/index" />
         <Stack.Screen name="admin" />
         <Stack.Screen name="user" />
-
     </Stack>
-
-     );
-
+    );
 }
