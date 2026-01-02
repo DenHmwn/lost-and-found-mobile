@@ -26,3 +26,10 @@ const load = async () => {
 };
 
 useEffect(() => { load(); }, []);
+
+if (loading) {
+  return (
+    <View>
+    </View>
+  );
+}
