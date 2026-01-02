@@ -13,6 +13,7 @@ export default function AdminTabsLayout() {
         <Tabs.Screen name="dashboard" 
         options={{
             title: "Dashboard"
+            headerShown: false,
         }}
         
         />
