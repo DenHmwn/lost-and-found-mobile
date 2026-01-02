@@ -47,8 +47,11 @@ return (
     <View style={styles.row}>
       <StatCard label="Total Hilang" value={stats?.totalLost ?? 0} />
       <StatCard label="Total Ditemukan" value={stats?.totalFound ?? 0} />
-
     </View>
+
+    <View style={styles.row}>
+    </View>
+
 
   </ScrollView>
 );
