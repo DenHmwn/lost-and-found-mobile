@@ -29,7 +29,7 @@ useEffect(() => { load(); }, []);
 
 if (loading) {
   return (
-    <View>
+    <View style={styles.center}>
     </View>
   );
 }
