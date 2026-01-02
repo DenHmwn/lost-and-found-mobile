@@ -17,8 +17,15 @@ export default function AdminTabsLayout() {
             tabBarIcon: ({ size, color }) =>  ( <Ionicons name="speedometer-outline" size={size} color={color} />
             ),
         }}
+        />
+
+      
+        <Tabs.Screen name="lost" 
         
         />
+
+
+
 
         </Tabs>
 
