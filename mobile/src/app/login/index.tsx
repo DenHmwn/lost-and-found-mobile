@@ -16,6 +16,10 @@ export default function LoginPage() {
          <Text style={styles.title}>Lost & Found</Text>
          <Text style={styles.subtitle}>Pilih peran Anda untuk melanjutkan</Text>
 
+        <TouchableOpacity>
+          <Text>Masuk sebagai User</Text>
+        </TouchableOpacity>
+
     </View>
   );
 
