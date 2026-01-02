@@ -58,4 +58,8 @@ export function toUiReport(raw: any, type: "lost" | "found"): UiReport {
   };
 }
 
+export function toUiUser(raw: any): UiUser {
+  return {} as UiUser;
+}
+
 
