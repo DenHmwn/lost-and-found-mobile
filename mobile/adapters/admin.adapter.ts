@@ -59,7 +59,14 @@ export function toUiReport(raw: any, type: "lost" | "found"): UiReport {
 }
 
 export function toUiUser(raw: any): UiUser {
-  return {} as UiUser;
+  return {
+    id: pickString(raw, ["id", "_id", "user_id"]),
+    name: pickString(raw, ["name", "nama", "username"], "-"),
+    email: pickString(raw, ["email", "mail"], "-"),
+    status: String(raw?.status ?? raw?.user_status ?? "active").toLowerCase() === "banned" ? "banned" : "active",
+    role: pickString(raw, ["role", "user_role"], "user"),
+  };
 }
+
 
 
