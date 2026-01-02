@@ -24,6 +24,8 @@ export default function AdminTabsLayout() {
         options={{
            title: "Hilang",
            headerShown: false,
+
+           tabBarIcon: ({ size, color }) => null,
         }} 
         />
 
