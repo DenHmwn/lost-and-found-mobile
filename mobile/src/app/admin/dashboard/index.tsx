@@ -15,6 +15,8 @@ export default function AdminDashboard() {
 const load = async () => {
     setError(null);
     try {
+        const raw = await AdminService.getStats();
+
 } catch (e: any) {
 } finally {
 }
