@@ -4,8 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function AdminTabsLayout() {
     return (
-        <Tabs>
-            
+        <Tabs initialRouteName="dashboard">
+
         </Tabs>
 
 
