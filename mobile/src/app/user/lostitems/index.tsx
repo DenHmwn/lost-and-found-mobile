@@ -115,7 +115,7 @@ export default function LostItemPage() {
           <Card style={styles.modernCard} elevation={2}>
             <View style={styles.cardHeader}>
               <View style={styles.iconContainer}>
-                <MaterialIcons name="location-on" size={24} color="#3B82F6" />
+                <MaterialIcons name="inventory-2" size={24} color="#3B82F6" />
               </View>
               <View style={styles.cardHeaderText}>
                 <Text style={styles.cardTitle} numberOfLines={2}>

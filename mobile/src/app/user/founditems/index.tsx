@@ -109,7 +109,7 @@ export default function FoundItemPage() {
           <Card style={styles.modernCard} elevation={2}>
             <View style={styles.cardHeader}>
               <View style={styles.iconContainer}>
-                <MaterialIcons name="check-circle" size={24} color={color.primary} />
+                <MaterialIcons name="inventory-2" size={24} color={color.primary} />
               </View>
               <View style={styles.cardHeaderText}>
                 <Text style={styles.cardTitle} numberOfLines={2}>
