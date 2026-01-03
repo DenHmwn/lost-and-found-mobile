@@ -4,8 +4,6 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Dimensions,
-  Image,
 } from "react-native";
 import { Appbar, BottomNavigation, PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -15,8 +13,6 @@ import LostItemPage from "../lostitems";
 import FoundItemPage from "../founditems";
 import AccountPageUser from "../account";
 import ListAdminPage from "../list-admin";
-
-const { width } = Dimensions.get("window");
 
 // Halaman HomePage - Profile Program
 const HomeRoute = () => {
