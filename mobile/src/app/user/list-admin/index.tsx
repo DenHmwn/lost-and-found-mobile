@@ -5,7 +5,7 @@ import { styles } from '@/style/styles'
 
 export default function ListAdminPage() {
   return (
-   <View style={{ flex: 1, justifyContent: "flex-start" }}>
+    <View style={{ flex: 1, justifyContent: "flex-start" }}>
       <Appbar.Header style={styles.appBar} elevated>
               <Appbar.Content 
                 title="List Admin" 
@@ -18,5 +18,5 @@ export default function ListAdminPage() {
               />
             </Appbar.Header>
     </View>
-  )
+  );
 }
