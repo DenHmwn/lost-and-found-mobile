@@ -28,4 +28,27 @@ export default function UsersPage() {
     return data.filter((u) => u.name.toLowerCase().includes(s) || u.email.toLowerCase().includes(s));
   }, [q, data]);
 
+    return (
+    <View style={styles.container}>
+      <TextInput style={styles.input} placeholder="Cari user..." value={q} onChangeText={setQ} />
+
+      <FlatList
+        data={filtered}
+        keyExtractor={(x) => x.id}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true); load(); }} />}
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.meta}>{item.email}</Text>
+            <Text style={styles.meta}>Role: {item.role ?? "user"}</Text>
+            <Text style={[styles.badge, item.status === "active" ? styles.ok : styles.bad]}>
+              {item.status.toUpperCase()}
+            </Text>
+          </View>
+        )}
+      />
+    </View>
+  );
+
 }
