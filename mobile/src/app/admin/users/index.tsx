@@ -50,5 +50,16 @@ export default function UsersPage() {
       />
     </View>
   );
-
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff", padding: 16, gap: 10 },
+  input: { borderWidth: 1, borderColor: "#ddd", borderRadius: 12, padding: 12 },
+  card: { borderWidth: 1, borderColor: "#eee", borderRadius: 14, padding: 14, gap: 6 },
+  name: { fontSize: 16, fontWeight: "900" },
+  meta: { color: "#666" },
+  badge: { alignSelf: "flex-start", paddingVertical: 6, paddingHorizontal: 10, borderRadius: 999, overflow: "hidden", color: "white", fontWeight: "900", marginTop: 6 },
+  ok: { backgroundColor: "green" },
+  bad: { backgroundColor: "tomato" },
+});
+
