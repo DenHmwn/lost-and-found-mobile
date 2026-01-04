@@ -17,3 +17,10 @@ async function parseError(res: Response): Promise<string> {
     return `HTTP ${res.status}`;
   }
 }
+
+export async function apiGet<T>(path: string): Promise<T> {
+  const url = joinUrl(path);
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`${await parseError(res)} (${url})`);
+  return (await res.json()) as T;
+}
