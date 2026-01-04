@@ -81,5 +81,22 @@ export default function LostDetail() {
       </View>
     </View>
   );
-
 }
+
+const styles = StyleSheet.create({
+  center: { flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#fff" },
+  container: { flex: 1, backgroundColor: "#fff", padding: 16, gap: 10 },
+  title: { fontSize: 18, fontWeight: "900" },
+  meta: { color: "#666" },
+  panel: { borderWidth: 1, borderColor: "#eee", borderRadius: 14, padding: 14, gap: 8 },
+  label: { color: "#666" },
+  value: { fontWeight: "800" },
+  actionsRow: { flexDirection: "row", gap: 10, marginTop: 6 },
+  btn: { flex: 1, padding: 12, borderRadius: 12, alignItems: "center" },
+  btnText: { color: "white", fontWeight: "900" },
+  btnTextDark: { color: "#111", fontWeight: "900" },
+  ok: { backgroundColor: "green" },
+  danger: { backgroundColor: "tomato" },
+  gray: { backgroundColor: "#e5e7eb" },
+});
+
