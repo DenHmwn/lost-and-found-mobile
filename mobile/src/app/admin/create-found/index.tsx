@@ -28,5 +28,35 @@ export default function CreateFound() {
     }
   };
 
-  return <View />;
+    return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Buat Laporan Temuan</Text>
+      <Text style={styles.sub}>Tambah laporan barang ditemukan</Text>
+
+      <TextInput style={styles.input} placeholder="Judul" value={title} onChangeText={setTitle} />
+      <TextInput style={styles.input} placeholder="Lokasi" value={location} onChangeText={setLocation} />
+      <TextInput style={styles.input} placeholder="Nama Pelapor" value={reporterName} onChangeText={setReporterName} />
+      <TextInput
+        style={[styles.input, { height: 110, textAlignVertical: "top" }]}
+        placeholder="Deskripsi (opsional)"
+        value={description}
+        onChangeText={setDescription}
+        multiline
+      />
+
+      <Pressable style={[styles.btn, loading && { opacity: 0.7 }]} onPress={submit} disabled={loading}>
+        <Text style={styles.btnText}>{loading ? "Menyimpan..." : "Simpan"}</Text>
+      </Pressable>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff", padding: 16, gap: 10 },
+  title: { fontSize: 18, fontWeight: "900" },
+  sub: { color: "#666", marginTop: -6 },
+  input: { borderWidth: 1, borderColor: "#ddd", borderRadius: 12, padding: 12 },
+  btn: { backgroundColor: "#2563eb", padding: 14, borderRadius: 12, alignItems: "center", marginTop: 6 },
+  btnText: { color: "white", fontWeight: "900" },
+});
+
