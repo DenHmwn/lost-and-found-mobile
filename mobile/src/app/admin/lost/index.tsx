@@ -24,5 +24,24 @@ export default function LostList() {
 
   useEffect(() => { load(); }, []);
 
-  
+    const stats = useMemo(() => {
+    const total = items.length;
+    const pending = items.filter((x) => x.approvalStatus === "pending").length;
+    const approved = items.filter((x) => x.approvalStatus === "approved").length;
+    const inProcess = items.filter((x) => x.processStatus === "in_progress").length;
+    return { total, pending, approved, inProcess };
+  }, [items]);
+
+  const action = async (id: string, type: "approve" | "reject" | "done" | "close") => {
+    try {
+      if (type === "approve") await AdminService.approve(id);
+      if (type === "reject") await AdminService.reject(id);
+      if (type === "done") await AdminService.done(id);
+      if (type === "close") await AdminService.close(id);
+      await load();
+    } catch (e: any) {
+      Alert.alert("Gagal", e.message);
+    }
+  };
+
 }
