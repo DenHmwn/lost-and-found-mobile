@@ -21,4 +21,13 @@ export const AdminService = {
       type: "found",
       ...payload,
     }),
+
+    approve: (id: string) => apiPatch(Endpoints.approve(id), {}),
+    reject: (id: string) => apiPatch(Endpoints.reject(id), {}),
+    done: (id: string) => apiPatch(Endpoints.done(id), {}),
+    close: (id: string) => apiPatch(Endpoints.close(id), {}),
+
+    listUsers: () => apiGet<BackendUser[]>(Endpoints.users),
+
 };
+
