@@ -21,5 +21,11 @@ export default function UsersPage() {
   };
 
   useEffect(() => { load(); }, []);
-  
+
+    const filtered = useMemo(() => {
+    const s = q.trim().toLowerCase();
+    if (!s) return data;
+    return data.filter((u) => u.name.toLowerCase().includes(s) || u.email.toLowerCase().includes(s));
+  }, [q, data]);
+
 }
