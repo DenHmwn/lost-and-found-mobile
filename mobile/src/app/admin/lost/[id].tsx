@@ -23,4 +23,21 @@ export default function LostDetail() {
   };
 
   useEffect(() => { load(); }, [id]);
+
+    const action = async (type: "approve" | "reject" | "done" | "close") => {
+    if (!item) return;
+    try {
+      if (type === "approve") await AdminService.approve(item.id);
+      if (type === "reject") await AdminService.reject(item.id);
+      if (type === "done") await AdminService.done(item.id);
+      if (type === "close") await AdminService.close(item.id);
+      await load();
+    } catch (e: any) {
+      Alert.alert("Gagal", e.message);
+    }
+  };
+
+  if (loading) return <View style={styles.center}><ActivityIndicator size="large" /></View>;
+  if (!item) return <View style={styles.container}><Text>Data tidak ditemukan</Text></View>;
+
 }
