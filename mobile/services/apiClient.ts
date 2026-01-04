@@ -24,3 +24,26 @@ export async function apiGet<T>(path: string): Promise<T> {
   if (!res.ok) throw new Error(`${await parseError(res)} (${url})`);
   return (await res.json()) as T;
 }
+
+export async function apiPost<T>(path: string, body: unknown): Promise<T> {
+  const url = joinUrl(path);
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`${await parseError(res)} (${url})`);
+  return (await res.json()) as T;
+}
+
+export async function apiPatch<T>(path: string, body: unknown): Promise<T> {
+  const url = joinUrl(path);
+  const res = await fetch(url, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`${await parseError(res)} (${url})`);
+  return (await res.json()) as T;
+}
+
