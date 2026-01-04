@@ -109,3 +109,18 @@ export default function FoundList() {
   );
 }
 
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff", padding: 16, gap: 10 },
+  pageTitle: { fontSize: 20, fontWeight: "900" },
+  pageSub: { color: "#666", marginTop: -6 },
+  row: { flexDirection: "row", gap: 12 },
+  actionsRow: { flexDirection: "row", gap: 10 },
+  btn: { flex: 1, padding: 12, borderRadius: 12, alignItems: "center" },
+  btnText: { color: "white", fontWeight: "900" },
+  btnTextDark: { color: "#111", fontWeight: "900" },
+  ok: { backgroundColor: "green" },
+  danger: { backgroundColor: "tomato" },
+  gray: { backgroundColor: "#e5e7eb" },
+});
+
+
