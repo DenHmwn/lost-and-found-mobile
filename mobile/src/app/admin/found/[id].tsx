@@ -40,4 +40,46 @@ export default function FoundDetail() {
   if (loading) return <View style={styles.center}><ActivityIndicator size="large" /></View>;
   if (!item) return <View style={styles.container}><Text>Data tidak ditemukan</Text></View>;
 
+    return (
+    <View style={styles.container}>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.meta}>Lokasi: {item.location}</Text>
+      <Text style={styles.meta}>Pelapor: {item.reporterName}</Text>
+      <Text style={styles.meta}>Tanggal: {formatDateTime(item.createdAtISO)}</Text>
+
+      <View style={styles.panel}>
+        <Text style={styles.label}>Deskripsi</Text>
+        <Text style={styles.value}>{item.description || "-"}</Text>
+
+        <Text style={styles.label}>Approval</Text>
+        <Text style={styles.value}>{item.approvalStatus}</Text>
+
+        <Text style={styles.label}>Status Proses</Text>
+        <Text style={styles.value}>{item.processStatus}</Text>
+      </View>
+
+      <View style={styles.actionsRow}>
+        {item.approvalStatus === "pending" ? (
+          <>
+            <Pressable style={[styles.btn, styles.ok]} onPress={() => action("approve")}>
+              <Text style={styles.btnText}>Approve</Text>
+            </Pressable>
+            <Pressable style={[styles.btn, styles.danger]} onPress={() => action("reject")}>
+              <Text style={styles.btnText}>Reject</Text>
+            </Pressable>
+          </>
+        ) : (
+          <>
+            <Pressable style={[styles.btn, styles.ok]} onPress={() => action("done")}>
+              <Text style={styles.btnText}>Done</Text>
+            </Pressable>
+            <Pressable style={[styles.btn, styles.gray]} onPress={() => action("close")}>
+              <Text style={styles.btnTextDark}>Closed</Text>
+            </Pressable>
+          </>
+        )}
+      </View>
+    </View>
+  );
+
 }
