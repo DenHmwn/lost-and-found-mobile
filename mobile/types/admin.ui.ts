@@ -9,3 +9,22 @@ export type UiStats = {
   inProcess: number;
   totalUsers: number;
 };
+export type UiReport = {
+  id: string;
+  type: "lost" | "found";
+  title: string;
+  location: string;
+  reporterName: string;
+  createdAtISO: string;
+  description?: string;
+  approvalStatus: ApprovalStatus;
+  processStatus: ProcessStatus;
+};
+
+export type UiUser = {
+  id: string;
+  name: string;
+  email: string;
+  status: "active" | "banned";
+  role?: string;
+};
