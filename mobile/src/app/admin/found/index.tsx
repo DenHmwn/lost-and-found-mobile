@@ -48,5 +48,64 @@ export default function FoundList() {
     }
   };
 
+    return (
+    <View style={styles.container}>
+      <Text style={styles.pageTitle}>Barang Ditemukan</Text>
+      <Text style={styles.pageSub}>Kelola laporan barang ditemukan</Text>
+
+      {error && <Text style={{ color: "tomato" }}>{error}</Text>}
+
+      <View style={styles.row}>
+        <StatCard label="Total" value={stats.total} />
+        <StatCard label="Menunggu" value={stats.pending} />
+      </View>
+      <View style={styles.row}>
+        <StatCard label="Disetujui" value={stats.approved} />
+        <StatCard label="Proses" value={stats.inProcess} />
+      </View>
+
+      <FlatList
+        data={items}
+        keyExtractor={(x) => x.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+              load();
+            }}
+          />
+        }
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        renderItem={({ item }) => (
+          <View style={{ gap: 10 }}>
+            <ReportCard item={item} onPress={() => router.push(`/admin/found/${item.id}`)} />
+
+            <View style={styles.actionsRow}>
+              {item.approvalStatus === "pending" ? (
+                <>
+                  <Pressable style={[styles.btn, styles.ok]} onPress={() => action(item.id, "approve")}>
+                    <Text style={styles.btnText}>Approve</Text>
+                  </Pressable>
+                  <Pressable style={[styles.btn, styles.danger]} onPress={() => action(item.id, "reject")}>
+                    <Text style={styles.btnText}>Reject</Text>
+                  </Pressable>
+                </>
+              ) : (
+                <>
+                  <Pressable style={[styles.btn, styles.ok]} onPress={() => action(item.id, "done")}>
+                    <Text style={styles.btnText}>Done</Text>
+                  </Pressable>
+                  <Pressable style={[styles.btn, styles.gray]} onPress={() => action(item.id, "close")}>
+                    <Text style={styles.btnTextDark}>Closed</Text>
+                  </Pressable>
+                </>
+              )}
+            </View>
+          </View>
+        )}
+      />
+    </View>
+  );
 }
 
