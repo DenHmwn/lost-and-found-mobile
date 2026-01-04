@@ -8,3 +8,12 @@ function joinUrl(path: string) {
   const prefix = PREFIX ? (PREFIX.startsWith("/") ? PREFIX : `/${PREFIX}`) : "";
   return `${BASE_URL}${prefix}${p}`;
 }
+
+async function parseError(res: Response): Promise<string> {
+  try {
+    const j = (await res.json()) as ApiErrorResponse;
+    return j.message || j.error || `HTTP ${res.status}`;
+  } catch {
+    return `HTTP ${res.status}`;
+  }
+}
