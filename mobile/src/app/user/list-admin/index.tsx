@@ -51,6 +51,7 @@ export default function ListAdminPage() {
       </Text>
     </View>
   );
+  
   const renderHeader = () => (
     <View style={styles.headerContainer}>
       <Searchbar
@@ -95,6 +96,7 @@ export default function ListAdminPage() {
           <Card style={styles.modernCard} elevation={2}>
             <View style={styles.cardHeader}>
               <View style={styles.iconContainer}>
+                <MaterialIcons name="person" size={24} color={color.primary} />
               </View>
               <View style={styles.cardHeaderText}>
                 <Text style={styles.cardTitle} numberOfLines={2}>
