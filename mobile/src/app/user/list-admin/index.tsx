@@ -1,7 +1,12 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Appbar } from 'react-native-paper'
-import { styles } from '@/style/styles'
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Appbar, Card, Chip, Searchbar } from "react-native-paper";
+import { color, styles } from "@/style/styles";
+import { MaterialIcons } from "@expo/vector-icons";
+import { formatToWIB } from "@/utils/scripts";
+import axios from "axios";
+import { FoundReport, Users } from "@/types/interface";
+import { strings } from "@/constans/strings";
 
 export default function ListAdminPage() {
   const [ListAdmin, setListAdmin] = useState<Users[]>([]);
@@ -90,6 +95,25 @@ export default function ListAdminPage() {
           <Card style={styles.modernCard} elevation={2}>
             <View style={styles.cardHeader}>
               <View style={styles.iconContainer}>
+              </View>
+              <View style={styles.cardHeaderText}>
+                <Text style={styles.cardTitle} numberOfLines={2}>
+                  {item.name}
+                </Text>
+                <View style={styles.locationContainer}>
+                  <MaterialIcons name="phone" size={14} color="#64748B" />
+                  <Text style={styles.cardLocation} numberOfLines={1}>
+                    {item.notelp}
+                  </Text>
+                </View>
+
+                <View style={styles.locationContainer}>
+                  <MaterialIcons name="mail" size={14} color="#64748B" />
+                  <Text style={styles.cardLocation} numberOfLines={1}>
+                    {item.email}
+                  </Text>
+                </View>
+              </View>
             </View>
           </Card>
         )}
