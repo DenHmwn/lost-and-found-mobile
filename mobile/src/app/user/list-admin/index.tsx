@@ -6,6 +6,35 @@ import { styles } from '@/style/styles'
 export default function ListAdminPage() {
   const [ListAdmin, setListAdmin] = useState<Users[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterList, setFilterList] = useState<Users[]>([]);
+
+  useEffect(() => {
+    getAdmin();
+  }, []);
+
+  useEffect(() => {
+    const filtered = ListAdmin.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.notelp.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilterList(filtered);
+  }, [searchQuery, ListAdmin]);
+
+  const getAdmin = async () => {
+    try {
+      const response = await axios.get(strings.api_user);
+
+      if (Array.isArray(response.data)) {
+        setListAdmin(response.data);
+      } else if (response.data.data) {
+        setListAdmin(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error ambil data:", error);
+    }
+  };
+
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
       <MaterialIcons name="inventory" size={80} color="#CBD5E1" />
@@ -49,6 +78,22 @@ export default function ListAdminPage() {
           color="#FFFFFF"
         />
       </Appbar.Header>
+      <FlatList
+        style={styles.listContainer}
+        contentContainerStyle={styles.listContent}
+        data={filterList}
+        keyExtractor={(item) => String(item.id)}
+        ListHeaderComponent={renderHeader()}
+        ListEmptyComponent={renderEmptyState}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <Card style={styles.modernCard} elevation={2}>
+            <View style={styles.cardHeader}>
+              <View style={styles.iconContainer}>
+            </View>
+          </Card>
+        )}
+      />
     </View>
   );
 }
