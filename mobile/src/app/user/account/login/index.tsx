@@ -1,9 +1,7 @@
+import React, { useState } from "react";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import { Appbar } from "react-native-paper";
 import { styles } from "@/style/styles";
-import { Text } from "@react-navigation/elements";
-import { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Appbar, TextInput } from "react-native-paper";
-
 
 export default function LoginPage({ navigation }: any) {
   const [email, setEmail] = useState("");
@@ -24,42 +22,44 @@ export default function LoginPage({ navigation }: any) {
       <Appbar.Header style={styles.appBar} elevated>
         <Appbar.Content title="Login" titleStyle={styles.appBarTitle} />
       </Appbar.Header>
-        <View style={localStyles.container}>
-            <View style={localStyles.formCard}>
-                <Text style={localStyles.label}>Email</Text>
-                <TextInput
-                    style={localStyles.input}
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder="Masukkan email"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                />
-            
-            <Text style={localStyles.label}>Password</Text>
-                <TextInput
-                    style={localStyles.input}
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder="Masukkan password"
-                    secureTextEntry
-                />
-            
-            <TouchableOpacity
+
+      
+      <View style={localStyles.container}>
+        <View style={localStyles.formCard}>
+          <Text style={localStyles.label}>Email</Text>
+          <TextInput
+            style={localStyles.input}
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Masukkan email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+
+          <Text style={localStyles.label}>Password</Text>
+          <TextInput
+            style={localStyles.input}
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Masukkan password"
+            secureTextEntry
+          />
+
+          <TouchableOpacity
             style={localStyles.buttonPrimary}
             onPress={handleLogin}
-            >
-                <Text style={localStyles.buttonPrimaryText}>Login</Text>
+          >
+            <Text style={localStyles.buttonPrimaryText}>Login</Text>
+          </TouchableOpacity>
+
+          <View style={localStyles.bottomTextWrapper}>
+            <Text style={localStyles.smallText}>Belum punya akun? </Text>
+            <TouchableOpacity onPress={goToRegister}>
+              <Text style={localStyles.linkText}>Register</Text>
             </TouchableOpacity>
-            
-            <View style={localStyles.bottomTextWrapper}>
-                <Text style={localStyles.smallText}>Belum punya akun? </Text>
-                <TouchableOpacity onPress={goToRegister}>
-                <Text style={localStyles.linkText}>Register</Text>
-                </TouchableOpacity>
-            </View>
-            </View>
+          </View>
         </View>
+      </View>
     </View>
   );
 }
