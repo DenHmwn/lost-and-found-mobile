@@ -23,6 +23,12 @@ export default function AccountPageUser() {
           >
             <Text style={localStyles.buttonPrimaryText}>Login</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={[localStyles.button, localStyles.buttonSecondary]}
+            onPress={() => console.log("Register")}
+          >
+            <Text style={localStyles.buttonSecondaryText}>Register</Text>
+          </TouchableOpacity>
          </View>
       </View>
     </View>
