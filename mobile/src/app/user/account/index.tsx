@@ -15,7 +15,9 @@ export default function AccountPageUser() {
           color="#FFFFFF"
         />
       </Appbar.Header>
-      
+      <View style={localStyles.centerWrapper}>
+        
+      </View>
     </View>
   );
 }
