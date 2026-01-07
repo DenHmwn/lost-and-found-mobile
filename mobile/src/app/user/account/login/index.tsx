@@ -1,7 +1,8 @@
 import { styles } from "@/style/styles";
+import { Text } from "@react-navigation/elements";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Appbar } from "react-native-paper";
+import { Appbar, TextInput } from "react-native-paper";
 
 
 export default function LoginPage({ navigation }: any) {
@@ -23,7 +24,20 @@ export default function LoginPage({ navigation }: any) {
       <Appbar.Header style={styles.appBar} elevated>
         <Appbar.Content title="Login" titleStyle={styles.appBarTitle} />
       </Appbar.Header>
+        <View style={localStyles.container}>
+            <View style={localStyles.formCard}>
+                <Text style={localStyles.label}>Email</Text>
+                <TextInput
+                    style={localStyles.input}
+                    value={email}
+                    onChangeText={setEmail}
+                    placeholder="Masukkan email"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                />
 
+            </View>
+        </View>
     </View>
   );
 }
