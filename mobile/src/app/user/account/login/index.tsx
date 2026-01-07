@@ -1,7 +1,7 @@
 import { styles } from "@/style/styles";
 import { Text } from "@react-navigation/elements";
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 
 
@@ -51,6 +51,13 @@ export default function LoginPage({ navigation }: any) {
             >
                 <Text style={localStyles.buttonPrimaryText}>Login</Text>
             </TouchableOpacity>
+            
+            <View style={localStyles.bottomTextWrapper}>
+                <Text style={localStyles.smallText}>Belum punya akun? </Text>
+                <TouchableOpacity onPress={goToRegister}>
+                <Text style={localStyles.linkText}>Register</Text>
+                </TouchableOpacity>
+            </View>
             </View>
         </View>
     </View>
