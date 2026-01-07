@@ -1,5 +1,7 @@
+import { styles } from "@/style/styles";
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Appbar } from "react-native-paper";
 
 
 export default function LoginPage({ navigation }: any) {
@@ -15,6 +17,15 @@ export default function LoginPage({ navigation }: any) {
     navigation.navigate("RegisterPage");
   };
 
+  return (
+    <View style={{ flex: 1, backgroundColor: "#f7f7ff" }}>
+     
+      <Appbar.Header style={styles.appBar} elevated>
+        <Appbar.Content title="Login" titleStyle={styles.appBarTitle} />
+      </Appbar.Header>
+
+    </View>
+  );
 }
 
 const localStyles = StyleSheet.create({
