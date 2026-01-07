@@ -4,7 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import { AdminService } from "@/services/admin.service";
 import { toUiReport } from "@/adapters/admin.adapter";
 import { UiReport } from "@/types/admin.ui";
-import { formatDateTime } from "@/utils/date";
+import { formatToWIB } from "@/utils/scripts";
 
 export default function LostDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -45,7 +45,7 @@ export default function LostDetail() {
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.meta}>Lokasi: {item.location}</Text>
       <Text style={styles.meta}>Pelapor: {item.reporterName}</Text>
-      <Text style={styles.meta}>Tanggal: {formatDateTime(item.createdAtISO)}</Text>
+      <Text style={styles.meta}>Tanggal: {formatToWIB(item.createdAtISO)}</Text>
 
       <View style={styles.panel}>
         <Text style={styles.label}>Deskripsi</Text>
