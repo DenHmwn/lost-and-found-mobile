@@ -1,7 +1,7 @@
 // File: LostItemPage.tsx
 import { styles } from "@/style/styles";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar } from "react-native-paper";
 
 export default function AccountPageUser() {
@@ -17,7 +17,12 @@ export default function AccountPageUser() {
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
          <View style={localStyles.buttonContainer}>
-          
+          <TouchableOpacity
+            style={[localStyles.button, localStyles.buttonPrimary]}
+            onPress={() => console.log("Login")}
+          >
+            <Text style={localStyles.buttonPrimaryText}>Login</Text>
+          </TouchableOpacity>
          </View>
       </View>
     </View>
