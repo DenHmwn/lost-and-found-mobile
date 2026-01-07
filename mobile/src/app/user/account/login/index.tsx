@@ -35,7 +35,15 @@ export default function LoginPage({ navigation }: any) {
                     keyboardType="email-address"
                     autoCapitalize="none"
                 />
-
+            
+            <Text style={localStyles.label}>Password</Text>
+                <TextInput
+                    style={localStyles.input}
+                    value={password}
+                    onChangeText={setPassword}
+                    placeholder="Masukkan password"
+                    secureTextEntry
+                />
             </View>
         </View>
     </View>
