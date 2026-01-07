@@ -16,7 +16,9 @@ export default function AccountPageUser() {
         />
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
-        
+         <View style={localStyles.buttonContainer}>
+          
+         </View>
       </View>
     </View>
   );
