@@ -2,16 +2,25 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar } from "react-native-paper";
 import { styles } from "@/style/styles";
+import axios from "axios";
 
 export default function LoginPage({ navigation }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log("login", { email, password });
-
-  };
-
+  const handleLogin = async () => {
+    try{
+    const res = await axios.post("http://localhost:3001/api/auth/login", {
+      email,
+      password,
+    },{
+        withCredentials: true,
+    });
+    console.log("Login successful:", res.data.message);
+  } catch (error) {
+    console.error("Login failed:", error);
+    }
+  }
   const goToRegister = () => {
     navigation.navigate("RegisterPage");
   };
