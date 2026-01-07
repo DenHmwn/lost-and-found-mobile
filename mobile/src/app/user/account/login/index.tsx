@@ -44,6 +44,13 @@ export default function LoginPage({ navigation }: any) {
                     placeholder="Masukkan password"
                     secureTextEntry
                 />
+            
+            <TouchableOpacity
+            style={localStyles.buttonPrimary}
+            onPress={handleLogin}
+            >
+                <Text style={localStyles.buttonPrimaryText}>Login</Text>
+            </TouchableOpacity>
             </View>
         </View>
     </View>
