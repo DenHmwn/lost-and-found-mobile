@@ -46,6 +46,8 @@ export default function LoginPage() {
             <View style={localStyles.container}>
                 <Text style={localStyles.label}>Nama</Text>
                 <TextInput
+                value={name}
+                onChangeText={setName}
                 style={localStyles.input}
                 placeholder="Masukkan nama"
              />
