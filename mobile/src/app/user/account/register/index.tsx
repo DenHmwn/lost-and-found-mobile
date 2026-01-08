@@ -46,15 +46,17 @@ export default function LoginPage() {
             <View style={localStyles.container}>
                 <Text style={localStyles.label}>Nama</Text>
                 <TextInput
+                style={localStyles.input}
                 value={name}
                 onChangeText={setName}
-                style={localStyles.input}
                 placeholder="Masukkan nama"
              />
 
             <Text style={localStyles.label}>Email</Text>
             <TextInput
             style={localStyles.input}
+            value={email}
+            onChangeText={setEmail}
             placeholder="Masukkan email"
             keyboardType="email-address"
             autoCapitalize="none"
