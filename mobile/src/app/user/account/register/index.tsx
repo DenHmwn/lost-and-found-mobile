@@ -14,7 +14,14 @@ export default function LoginPage() {
                 <TextInput
                 style={localStyles.input}
                 placeholder="Masukkan nama"
-        />
+             />
+            <Text style={localStyles.label}>Email</Text>
+            <TextInput
+            style={localStyles.input}
+            placeholder="Masukkan email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            />
             </View>
        </View>
     )
