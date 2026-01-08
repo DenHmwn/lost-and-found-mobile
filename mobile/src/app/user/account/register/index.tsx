@@ -1,9 +1,13 @@
+import { styles } from "@/style/styles";
 import { StyleSheet, View } from "react-native";
+import { Appbar } from "react-native-paper";
 
 export default function LoginPage() {
     return (
        <View style={{ flex: 1, backgroundColor: "#f7f7ff" }}>
-
+            <Appbar.Header style={styles.appBar} elevated>
+            <Appbar.Content title="Register" titleStyle={styles.appBarTitle} />
+            </Appbar.Header>
        </View>
     )
 }
