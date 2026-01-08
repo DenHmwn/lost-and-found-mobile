@@ -1,10 +1,11 @@
 import { styles } from "@/style/styles";
+import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 
 export default function LoginPage() {
     const handleUserLogin = () => {
-              router.replace('/user/account/register')
+              router.replace('/user/account/login')
           };
     return (
        <View style={{ flex: 1, backgroundColor: "#f7f7ff" }}>
@@ -51,7 +52,11 @@ export default function LoginPage() {
             <View style={localStyles.bottomTextWrapper}>
                 <Text style={localStyles.smallText}>Sudah punya akun? </Text>
                 <TouchableOpacity >
-                    <Text style={localStyles.linkText}>Login</Text>
+                    <Text 
+                    style={localStyles.linkText}
+                    onPress={handleUserLogin}
+                    >Login
+                    </Text>
                 </TouchableOpacity>
             </View>
             </View>
