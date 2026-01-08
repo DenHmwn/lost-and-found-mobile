@@ -1,11 +1,16 @@
 // File: LostItemPage.tsx
 import { styles } from "@/style/styles";
 import { router } from "expo-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar } from "react-native-paper";
+import * as SecureStore from "expo-secure-store";
 
 export default function AccountPageUser() {
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+
+  
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
