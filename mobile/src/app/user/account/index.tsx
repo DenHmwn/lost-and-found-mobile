@@ -10,7 +10,15 @@ export default function AccountPageUser() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  
+  useEffect(() => {
+      const loadTokenAndUser = async () => {
+      const storedToken = await SecureStore.getItemAsync("accessToken");
+      setToken(storedToken);
+      
+      if (!storedToken) return;
+      };
+      loadTokenAndUser();
+  }, []);
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
