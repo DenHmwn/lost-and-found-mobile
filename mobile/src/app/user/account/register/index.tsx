@@ -1,6 +1,6 @@
 import { styles } from "@/style/styles";
-import { StyleSheet, View } from "react-native";
-import { Appbar } from "react-native-paper";
+import { StyleSheet, Text, View } from "react-native";
+import { Appbar, TextInput } from "react-native-paper";
 
 export default function LoginPage() {
     return (
@@ -10,7 +10,11 @@ export default function LoginPage() {
             </Appbar.Header>
 
             <View style={localStyles.container}>
-                
+                <Text style={localStyles.label}>Nama</Text>
+                <TextInput
+                style={localStyles.input}
+                placeholder="Masukkan nama"
+        />
             </View>
        </View>
     )
