@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-nativ
 import { Appbar } from "react-native-paper";
 import { styles } from "@/style/styles";
 import axios from "axios";
-
+import * as SecureStore from "expo-secure-store";
 
 export default function LoginPage({ navigation }: any) {
   const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ export default function LoginPage({ navigation }: any) {
         withCredentials: true,
     });
     console.log("Login successful:", res.data.message);
-
+    await SecureStore.setItemAsync("refreshToken", res.data.refreshToken);
   } catch (error) {
     console.error("Login failed:", error);
     }
