@@ -3,6 +3,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 
 export default function LoginPage() {
+    const handleUserLogin = () => {
+              router.replace('/user/account/register')
+          };
     return (
        <View style={{ flex: 1, backgroundColor: "#f7f7ff" }}>
             <Appbar.Header style={styles.appBar} elevated>
