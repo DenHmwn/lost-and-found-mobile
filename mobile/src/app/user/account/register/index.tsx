@@ -44,6 +44,13 @@ export default function LoginPage() {
             >
             <Text style={localStyles.buttonPrimaryText}>Register</Text>
             </TouchableOpacity>
+
+            <View style={localStyles.bottomTextWrapper}>
+                <Text style={localStyles.smallText}>Sudah punya akun? </Text>
+                <TouchableOpacity >
+                    <Text style={localStyles.linkText}>Login</Text>
+                </TouchableOpacity>
+            </View>
             </View>
        </View>
     )
