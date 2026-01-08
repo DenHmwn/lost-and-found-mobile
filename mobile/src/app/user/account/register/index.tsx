@@ -1,9 +1,12 @@
 import { styles } from "@/style/styles";
 import { router } from "expo-router";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 
 export default function LoginPage() {
+    
+
     const handleUserLogin = () => {
               router.replace('/user/account/login')
           };
@@ -29,6 +32,13 @@ export default function LoginPage() {
             />
 
             <Text style={localStyles.label}>Password</Text>
+            <TextInput
+            style={localStyles.input}
+            placeholder="Masukkan password"
+            secureTextEntry
+            />
+
+            <Text style={localStyles.label}>Confirm Password</Text>
             <TextInput
             style={localStyles.input}
             placeholder="Masukkan password"
