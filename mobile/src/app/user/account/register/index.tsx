@@ -18,8 +18,7 @@ export default function LoginPage() {
                 name,
                 email,
                 password,
-                confirmPassword,
-                phone,
+                notelp : phone,
             }, {
                 withCredentials: true,
             });
@@ -91,7 +90,7 @@ export default function LoginPage() {
 
             <TouchableOpacity
             style={localStyles.buttonPrimary}
-                onPress={() => console.log("Register")}
+                onPress={handleRegister}
             >
             <Text style={localStyles.buttonPrimaryText}>Register</Text>
             </TouchableOpacity>
