@@ -4,6 +4,7 @@ import { Appbar } from "react-native-paper";
 import { styles } from "@/style/styles";
 import axios from "axios";
 
+
 export default function LoginPage({ navigation }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,7 @@ export default function LoginPage({ navigation }: any) {
         withCredentials: true,
     });
     console.log("Login successful:", res.data.message);
+
   } catch (error) {
     console.error("Login failed:", error);
     }

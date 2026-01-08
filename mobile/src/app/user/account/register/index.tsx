@@ -18,6 +18,7 @@ export default function LoginPage() {
                 name,
                 email,
                 password,
+                confirmPassword,
                 notelp : phone,
             }, {
                 withCredentials: true,
