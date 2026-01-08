@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, password, notelp, role } = await req.json();
+    const { name, email, password, notelp, role, confirmPassword } = await req.json();
 
     // Validasi input
-    if (!name || !email || !password || !notelp) {
+    if (!name || !email || !password || !notelp || !confirmPassword) {
       return NextResponse.json(
         {
           success: false,
@@ -34,6 +34,13 @@ export async function POST(req: Request) {
       );
     }
 
+    // Validasi konfirmasi password
+    if (password !== confirmPassword) {
+      return NextResponse.json(
+        { success: false, message: "Password tidak cocok" },
+        { status: 400 }
+      );
+    }
     // Validasi panjang no telepon
     if (notelp.length > 13) {
       return NextResponse.json(

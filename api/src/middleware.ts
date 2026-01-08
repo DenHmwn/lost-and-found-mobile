@@ -2,9 +2,11 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const api = "http://localhost:8081"
 // Helper function untuk set CORS headers
 export function setCorsHeaders(response: NextResponse) {
-  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set("Access-Control-Allow-Origin", api);
+  response.headers.set("Access-Control-Allow-Credentials", "true");
   response.headers.set(
     "Access-Control-Allow-Methods",
     "GET, POST, DELETE, PUT, PATCH, OPTIONS"
@@ -132,6 +134,8 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
+    "/api/:path*",
+    "/api/auth/:path*",
     "/api/user",
     "/api/user/:path*",
     "/api/lostreport/:path*",
