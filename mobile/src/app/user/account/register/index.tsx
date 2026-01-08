@@ -83,6 +83,8 @@ export default function LoginPage() {
             <Text style={localStyles.label}>No Telepon</Text>
             <TextInput
             style={localStyles.input}
+            value={phone}
+            onChangeText={setPhone}
             placeholder="Masukkan no telepon"
             keyboardType="phone-pad"
             />
