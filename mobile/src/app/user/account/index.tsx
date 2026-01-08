@@ -1,10 +1,14 @@
 // File: LostItemPage.tsx
 import { styles } from "@/style/styles";
+import { router } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar } from "react-native-paper";
 
 export default function AccountPageUser() {
+  const handleUserLogin = () => {
+          router.replace('/user/account/login')
+      };
   return (
     <View style={{ flex: 1, justifyContent: "flex-start" }}>
       <Appbar.Header style={styles.appBar} elevated>
@@ -19,7 +23,7 @@ export default function AccountPageUser() {
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
-            onPress={() => console.log("Login")}
+            onPress={handleUserLogin}
           >
             <Text style={localStyles.buttonPrimaryText}>Login</Text>
           </TouchableOpacity>
