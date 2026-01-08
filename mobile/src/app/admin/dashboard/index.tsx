@@ -4,6 +4,7 @@ import StatCard from "@/components/startcard";
 import { AdminService } from "@/services/admin.service";
 import { toUiStats } from "@/adapters/admin.adapter";
 import { UiStats } from "@/types/admin.ui";
+import StatCard from "@/components/startcard";
 
 export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);

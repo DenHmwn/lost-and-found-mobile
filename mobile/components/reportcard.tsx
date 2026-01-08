@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Badge from "./badge";
 import { UiReport } from "../types/admin.ui";
-import { formatDateTime } from "../utils/scripts";
+import { formatToWIB } from "@/utils/scripts";
 
 function approvalColor(s: UiReport["approvalStatus"]) {
   if (s === "approved") return "green";
@@ -28,7 +28,7 @@ export default function ReportCard({
     <Text style={styles.title}>{item.title}</Text>
     <Text style={styles.meta}>Lokasi: {item.location}</Text>
     <Text style={styles.meta}>Pelapor: {item.reporterName}</Text>
-    <Text style={styles.meta}>Tanggal: {formatDateTime(item.createdAtISO)}</Text>
+    <Text style={styles.meta}>Tanggal: {formatToWIB(item.createdAtISO)}</Text>
 
     <View style={styles.badgesRow}>
       <Badge text={item.approvalStatus.toUpperCase()} bg={approvalColor(item.approvalStatus)} />
