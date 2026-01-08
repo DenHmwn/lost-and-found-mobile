@@ -74,6 +74,8 @@ export default function LoginPage() {
             <Text style={localStyles.label}>Confirm Password</Text>
             <TextInput
             style={localStyles.input}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
             placeholder="Masukkan password"
             secureTextEntry
             />
