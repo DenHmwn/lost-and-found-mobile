@@ -1,16 +1,38 @@
 import { styles } from "@/style/styles";
+import axios from "axios";
 import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 
 export default function LoginPage() {
-    const [nama, setName] = useState("");
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phone, setPhone] = useState("");
 
+    const handleRegister = async () => {
+        try {
+            const res = await axios.post("http://localhost:3001/api/auth/register", {
+                name,
+                email,
+                password,
+                confirmPassword,
+                phone,
+            }, {
+                withCredentials: true,
+            });
+            if (res.data.success) {
+                console.log("Register successful:", res.data.message);
+            }else{
+                console.error("Register failed:", res.data.message);
+            }
+           
+        } catch (error) {
+            console.error("Register failed:", error);
+        }
+    };
 
     const handleUserLogin = () => {
               router.replace('/user/account/login')
