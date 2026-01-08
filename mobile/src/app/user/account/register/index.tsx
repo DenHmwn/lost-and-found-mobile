@@ -5,7 +5,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 
 export default function LoginPage() {
-    
+    const [nama, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [phone, setPhone] = useState("");
+
 
     const handleUserLogin = () => {
               router.replace('/user/account/login')
