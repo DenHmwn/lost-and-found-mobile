@@ -1,5 +1,5 @@
 import { styles } from "@/style/styles";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 
 export default function LoginPage() {
@@ -37,6 +37,13 @@ export default function LoginPage() {
             placeholder="Masukkan no telepon"
             keyboardType="phone-pad"
             />
+
+            <TouchableOpacity
+            style={localStyles.buttonPrimary}
+                onPress={() => console.log("Register")}
+            >
+            <Text style={localStyles.buttonPrimaryText}>Register</Text>
+            </TouchableOpacity>
             </View>
        </View>
     )
