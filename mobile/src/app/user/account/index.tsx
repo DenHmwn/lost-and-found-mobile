@@ -9,6 +9,10 @@ export default function AccountPageUser() {
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
+
+  const handleUserRegister = () => {
+          router.replace('/user/account/register')
+      };
   return (
     <View style={{ flex: 1, justifyContent: "flex-start" }}>
       <Appbar.Header style={styles.appBar} elevated>
@@ -29,7 +33,7 @@ export default function AccountPageUser() {
           </TouchableOpacity>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonSecondary]}
-            onPress={() => console.log("Register")}
+            onPress={handleUserRegister}
           >
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>
