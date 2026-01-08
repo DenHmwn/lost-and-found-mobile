@@ -4,7 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import { AdminService } from "@/services/admin.service";
 import { toUiReport } from "@/adapters/admin.adapter";
 import { UiReport } from "@/types/admin.ui";
-import { formatDateTime } from "@/utils/date";
+import { formatDateTime } from "@/utils/scripts";
 
 export default function FoundDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();

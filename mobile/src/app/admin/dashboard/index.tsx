@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
-import StatCard from "@/components/StatCard";
+import StatCard from "@/components/startcard";
 import { AdminService } from "@/services/admin.service";
 import { toUiStats } from "@/adapters/admin.adapter";
 import { UiStats } from "@/types/admin.ui";
