@@ -8,6 +8,10 @@ export default function LoginPage() {
             <Appbar.Header style={styles.appBar} elevated>
             <Appbar.Content title="Register" titleStyle={styles.appBarTitle} />
             </Appbar.Header>
+
+            <View style={localStyles.container}>
+                
+            </View>
        </View>
     )
 }
