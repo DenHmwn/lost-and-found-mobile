@@ -19,6 +19,7 @@ export default function LoginPage({ navigation }: any) {
     });
     console.log("Login successful:", res.data.message);
     await SecureStore.setItemAsync("refreshToken", res.data.refreshToken);
+    
   } catch (error) {
     console.error("Login failed:", error);
     }

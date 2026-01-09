@@ -10,15 +10,17 @@ export default function AccountPageUser() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  useEffect(() => {
-      const loadTokenAndUser = async () => {
-      const storedToken = await SecureStore.getItemAsync("accessToken");
-      setToken(storedToken);
+  // useEffect(() => {
+  //     const loadTokenAndUser = async () => {
+  //     const storedToken = await SecureStore.getItemAsync("refreshToken");
+  //     setToken(storedToken);
       
-      if (!storedToken) return;
-      };
-      loadTokenAndUser();
-  }, []);
+  //     if (!storedToken) return;
+  //     };
+  //     loadTokenAndUser();
+  // }, []);
+ 
+  console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
