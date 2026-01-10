@@ -4,8 +4,8 @@ import { router } from "expo-router";
 import { AdminService } from "@/services/admin.service";
 import { toUiReport } from "@/adapters/admin.adapter";
 import { UiReport } from "@/types/admin.ui";
-import StatCard from "@/components/startcard";
 import ReportCard from "@/components/reportcard";
+import { StatCard } from "@/components/startcard";
 
 export default function LostList() {
   const [items, setItems] = useState<UiReport[]>([]);
