@@ -13,7 +13,7 @@ export default function FoundDetail() {
 
   const load = async () => {
     try {
-      const raw = await AdminService.getReportById(String(id));
+      const raw = await AdminService.getReportById(String(id), "found");
       setItem(toUiReport(raw, "found"));
     } catch (e: any) {
       Alert.alert("Error", e.message);
@@ -27,10 +27,10 @@ export default function FoundDetail() {
     const action = async (type: "approve" | "reject" | "done" | "close") => {
     if (!item) return;
     try {
-      if (type === "approve") await AdminService.approve(item.id);
-      if (type === "reject") await AdminService.reject(item.id);
-      if (type === "done") await AdminService.done(item.id);
-      if (type === "close") await AdminService.close(item.id);
+      if (type === "approve") await AdminService.approve(item.id, "found");
+      if (type === "reject") await AdminService.reject(item.id, "found");
+      if (type === "done") await AdminService.done(item.id, "found");
+      if (type === "close") await AdminService.close(item.id, "found");
       await load();
     } catch (e: any) {
       Alert.alert("Gagal", e.message);
