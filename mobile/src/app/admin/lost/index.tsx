@@ -34,10 +34,10 @@ export default function LostList() {
 
   const action = async (id: string, type: "approve" | "reject" | "done" | "close") => {
     try {
-      if (type === "approve") await AdminService.approve(id);
-      if (type === "reject") await AdminService.reject(id);
-      if (type === "done") await AdminService.done(id);
-      if (type === "close") await AdminService.close(id);
+      if (type === "approve") await AdminService.approve(id, "lost");
+      if (type === "reject") await AdminService.reject(id, "lost");
+      if (type === "done") await AdminService.done(id, "lost");
+      if (type === "close") await AdminService.close(id, "lost");
       await load();
     } catch (e: any) {
       Alert.alert("Gagal", e.message);

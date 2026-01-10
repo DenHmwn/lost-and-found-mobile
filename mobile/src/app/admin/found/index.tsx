@@ -39,10 +39,10 @@ export default function FoundList() {
 
   const action = async (id: string, type: "approve" | "reject" | "done" | "close") => {
     try {
-      if (type === "approve") await AdminService.approve(id);
-      if (type === "reject") await AdminService.reject(id);
-      if (type === "done") await AdminService.done(id);
-      if (type === "close") await AdminService.close(id);
+      if (type === "approve") await AdminService.approve(id, "found");
+      if (type === "reject") await AdminService.reject(id, "found");
+      if (type === "done") await AdminService.done(id, "found");
+      if (type === "close") await AdminService.close(id, "found");
       await load();
     } catch (e: any) {
       setError(e.message);
