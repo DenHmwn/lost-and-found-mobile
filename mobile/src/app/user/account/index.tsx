@@ -1,10 +1,33 @@
 // File: LostItemPage.tsx
 import { styles } from "@/style/styles";
-import React from "react";
+import { router } from "expo-router";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar } from "react-native-paper";
+import * as SecureStore from "expo-secure-store";
 
 export default function AccountPageUser() {
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+
+  // useEffect(() => {
+  //     const loadTokenAndUser = async () => {
+  //     const storedToken = await SecureStore.getItemAsync("refreshToken");
+  //     setToken(storedToken);
+      
+  //     if (!storedToken) return;
+  //     };
+  //     loadTokenAndUser();
+  // }, []);
+ 
+  console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
+  const handleUserLogin = () => {
+          router.replace('/user/account/login')
+      };
+
+  const handleUserRegister = () => {
+          router.replace('/user/account/register')
+      };
   return (
     <View style={{ flex: 1, justifyContent: "flex-start" }}>
       <Appbar.Header style={styles.appBar} elevated>
@@ -19,13 +42,13 @@ export default function AccountPageUser() {
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
-            onPress={() => console.log("Login")}
+            onPress={handleUserLogin}
           >
             <Text style={localStyles.buttonPrimaryText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonSecondary]}
-            onPress={() => console.log("Register")}
+            onPress={handleUserRegister}
           >
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>

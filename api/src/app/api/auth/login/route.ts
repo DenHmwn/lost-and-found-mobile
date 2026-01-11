@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
+
   try {
     const { email, password } = await req.json();
 
@@ -75,30 +76,7 @@ export async function POST(req: Request) {
       },
     });
 
-    // Set token HTTP-only cookie untuk keamanan
-    response.cookies.set("accessToken", accessToken, {
-      // Tidak bisa diakses JavaScript
-      httpOnly: true,
-      // HTTPS only di production
-      secure: process.env.NODE_ENV === "production",
-      // set waktu kedaluwarsa
-      maxAge: 20 * 60,
-      path: "/",
-      // Proteksi CSRF
-      sameSite: "lax",
-    });
-
-    response.cookies.set("refreshToken", refreshToken, {
-      // Tidak bisa diakses JavaScript
-      httpOnly: true,
-      // HTTPS only di production
-      secure: process.env.NODE_ENV === "production",
-      // set waktu kedaluwarsa
-      maxAge: 3 * 24 * 60 * 60,
-      path: "/",
-      // Proteksi CSRF
-      sameSite: "lax",
-    });
+   
 
     return response;
   } catch (error) {
