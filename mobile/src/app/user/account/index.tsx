@@ -175,4 +175,15 @@ const localStyles = StyleSheet.create({
     width: '100%',           
     alignSelf: 'stretch',  
   },
+  header: {
+    height: 56,
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#E0E0E0',
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
 });
