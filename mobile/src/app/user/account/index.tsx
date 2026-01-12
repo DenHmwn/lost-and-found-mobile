@@ -196,4 +196,9 @@ const localStyles = StyleSheet.create({
     borderRadius: 48,
     backgroundColor: '#EEE',
   },
+  changePhotoText: {
+    marginTop: 8,
+    color: '#2200ff',
+    fontWeight: '500',
+  },
 });
