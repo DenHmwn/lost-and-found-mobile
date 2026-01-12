@@ -2,10 +2,11 @@
 import { styles } from "@/style/styles";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const decodeJwtPayload = (token: string) => {
@@ -63,25 +64,14 @@ export default function AccountPageUser() {
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
         {token && user ? (
-            <View style={localStyles.profileContainer}>
-            <Text style={localStyles.profileTitle}>Profil</Text>
+            <SafeAreaView style={localStyles.root}>
+              <ScrollView
+              style={localStyles.scroll}
+              contentContainerStyle={localStyles.scrollContent}
+              >
 
-            <Text style={localStyles.label}>Nama</Text>
-            <TextInput
-              style={localStyles.input}
-              value={user.name || ""}
-              editable={false}
-              placeholder="Nama"
-            />
-
-            <Text style={localStyles.label}>Email</Text>
-            <TextInput
-              style={localStyles.input}
-              value={user.email || ""}
-              editable={false}
-              placeholder="Email"
-            />
-          </View>
+              </ScrollView>
+            </SafeAreaView>
           ) : ( 
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
