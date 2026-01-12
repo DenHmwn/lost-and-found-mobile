@@ -186,4 +186,8 @@ const localStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
+  avatarSection: {
+    alignItems: 'center',
+    paddingVertical: 24,
+  },
 });
