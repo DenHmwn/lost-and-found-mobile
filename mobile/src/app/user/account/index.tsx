@@ -3,7 +3,7 @@ import { styles } from "@/style/styles";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Appbar } from "react-native-paper";
+import { Appbar, TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
 
@@ -62,7 +62,25 @@ export default function AccountPageUser() {
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
         {token && user ? (
-          
+           <View style={localStyles.profileContainer}>
+            <Text style={localStyles.profileTitle}>Profil</Text>
+
+            <Text style={localStyles.label}>Nama</Text>
+            <TextInput
+              style={localStyles.input}
+              value={user.name || ""}
+              editable={false}
+              placeholder="Nama"
+            />
+
+            <Text style={localStyles.label}>Email</Text>
+            <TextInput
+              style={localStyles.input}
+              value={user.email || ""}
+              editable={false}
+              placeholder="Email"
+            />
+          </View>
           ) : (
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
@@ -78,6 +96,7 @@ export default function AccountPageUser() {
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>
          </View>
+          )}
       </View>
     </View>
   );
