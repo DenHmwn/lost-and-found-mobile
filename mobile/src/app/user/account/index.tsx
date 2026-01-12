@@ -212,4 +212,20 @@ const localStyles = StyleSheet.create({
     marginBottom: 8,
     fontWeight: '500',
   },
+  row: {
+    paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#E0E0E0',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  value: {
+    fontSize: 14,
+    color: '#111',
+  },
+  placeholder: {
+    fontSize: 14,
+    color: '#B0B0B0',
+  },
 });
