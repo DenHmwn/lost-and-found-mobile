@@ -6,6 +6,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 
+const decodeJwtPayload = (token: string) => {
+  if (!token) throw new Error("Token kosong");
+  const base64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+  return JSON.parse(atob(base64));
+};
+
 export default function AccountPageUser() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -19,8 +25,10 @@ export default function AccountPageUser() {
       };
       loadTokenAndUser();
   }, []);
+
+  
  
-  // console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
+  console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
