@@ -201,4 +201,15 @@ const localStyles = StyleSheet.create({
     color: '#2200ff',
     fontWeight: '500',
   },
+  section: {
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 8,
+    fontWeight: '500',
+  },
 });
