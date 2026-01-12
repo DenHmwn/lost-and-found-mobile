@@ -69,7 +69,11 @@ export default function AccountPageUser() {
               style={localStyles.scroll}
               contentContainerStyle={localStyles.scrollContent}
               >
-
+                <View style={localStyles.container}>
+                  <View style={localStyles.header}>
+                    <Text style={localStyles.headerTitle}>Ubah Profil</Text>
+                  </View>
+                </View>
               </ScrollView>
             </SafeAreaView>
           ) : ( 
