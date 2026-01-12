@@ -20,7 +20,7 @@ export default function AccountPageUser() {
   //     loadTokenAndUser();
   // }, []);
  
-  console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
+  // console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
@@ -66,6 +66,19 @@ const localStyles = StyleSheet.create({
   },
   buttonContainer: {
     width: "70%",
+  },
+  profileContainer: {
+    width: "80%",
+    backgroundColor: "#ffffff",
+    borderRadius: 16,
+    padding: 16,
+    elevation: 2,
+  },
+   profileTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 12,
+    textAlign: "center",
   },
   button: {
     paddingVertical: 12,
