@@ -190,4 +190,10 @@ const localStyles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 24,
   },
+  avatar: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: '#EEE',
+  },
 });
