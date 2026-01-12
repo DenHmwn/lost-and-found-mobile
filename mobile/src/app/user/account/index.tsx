@@ -21,6 +21,7 @@ export default function AccountPageUser() {
 
   useEffect(() => {
       const loadTokenAndUser = async () => {
+        try {
       const storedToken = await SecureStore.getItemAsync("refreshToken");
       setToken(storedToken);
       
@@ -30,7 +31,10 @@ export default function AccountPageUser() {
           name: decoded.name ?? "",
           email: decoded.email ?? "",
         });
-      };
+      } catch (err) {
+        console.log("Error decode token:", err);
+      }
+    }
       
       loadTokenAndUser();
   }, []);
