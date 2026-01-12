@@ -3,22 +3,44 @@ import { styles } from "@/style/styles";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Appbar } from "react-native-paper";
+import { Appbar, TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
+import { decode as base64Decode } from "base-64";
+
+const decodeJwtPayload = (token: string) => {
+  if (!token) throw new Error("Token kosong");
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = base64Decode(base64); 
+  return JSON.parse(jsonPayload);
+};
 
 export default function AccountPageUser() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //     const loadTokenAndUser = async () => {
-  //     const storedToken = await SecureStore.getItemAsync("refreshToken");
-  //     setToken(storedToken);
+  useEffect(() => {
+      const loadTokenAndUser = async () => {
+        try {
+      const storedToken = await SecureStore.getItemAsync("refreshToken");
+      setToken(storedToken);
       
-  //     if (!storedToken) return;
-  //     };
-  //     loadTokenAndUser();
-  // }, []);
+      if (!storedToken) return;
+      const decoded = decodeJwtPayload(token || "");
+      setUser({
+          name: decoded.name ?? "",
+          email: decoded.email ?? "",
+        });
+      } catch (err) {
+        console.log("Error decode token:", err);
+      }
+    }
+      
+      loadTokenAndUser();
+  }, []);
+  
+  
+  
  
   // console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
   const handleUserLogin = () => {
@@ -39,6 +61,27 @@ export default function AccountPageUser() {
         />
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
+        {token && user ? (
+           <View style={localStyles.profileContainer}>
+            <Text style={localStyles.profileTitle}>Profil</Text>
+
+            <Text style={localStyles.label}>Nama</Text>
+            <TextInput
+              style={localStyles.input}
+              value={user.name || ""}
+              editable={false}
+              placeholder="Nama"
+            />
+
+            <Text style={localStyles.label}>Email</Text>
+            <TextInput
+              style={localStyles.input}
+              value={user.email || ""}
+              editable={false}
+              placeholder="Email"
+            />
+          </View>
+          ) : (
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
@@ -53,6 +96,7 @@ export default function AccountPageUser() {
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>
          </View>
+          )}
       </View>
     </View>
   );
@@ -73,6 +117,25 @@ const localStyles = StyleSheet.create({
     borderRadius: 16,
     padding: 16,
     elevation: 2,
+  },
+   profileTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 12,
+    textAlign: "center",
+  },
+  label: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 8,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginTop: 4,
   },
   button: {
     paddingVertical: 12,
