@@ -164,4 +164,10 @@ const localStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF', 
   },
+  scroll: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
 });
