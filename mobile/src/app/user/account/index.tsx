@@ -85,6 +85,14 @@ const localStyles = StyleSheet.create({
     color: "#666",
     marginTop: 8,
   },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginTop: 4,
+  },
   button: {
     paddingVertical: 12,
     borderRadius: 24,
