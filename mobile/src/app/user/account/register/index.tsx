@@ -46,7 +46,7 @@ export default function LoginPage() {
             <View style={localStyles.container}>
                 <Text style={localStyles.label}>Nama</Text>
                 <TextInput
-                style={localStyles.input}
+                style={{ backgroundColor: "transparent", height: 40 }}
                 value={name}
                 onChangeText={setName}
                 placeholder="Masukkan nama"
@@ -54,7 +54,7 @@ export default function LoginPage() {
 
             <Text style={localStyles.label}>Email</Text>
             <TextInput
-            style={localStyles.input}
+            style={{ backgroundColor: "transparent", height: 40 }}
             value={email}
             onChangeText={setEmail}
             placeholder="Masukkan email"
@@ -64,7 +64,7 @@ export default function LoginPage() {
 
             <Text style={localStyles.label}>Password</Text>
             <TextInput
-            style={localStyles.input}
+            style={{ backgroundColor: "transparent", height: 40 }}
             value={password}
             onChangeText={setPassword}
             placeholder="Masukkan password"
@@ -73,7 +73,7 @@ export default function LoginPage() {
 
             <Text style={localStyles.label}>Confirm Password</Text>
             <TextInput
-            style={localStyles.input}
+            style={{ backgroundColor: "transparent", height: 40 }}
             value={confirmPassword}
             onChangeText={setConfirmPassword}
             placeholder="Masukkan password"
@@ -82,7 +82,8 @@ export default function LoginPage() {
 
             <Text style={localStyles.label}>No Telepon</Text>
             <TextInput
-            style={localStyles.input}
+            
+            style={{ backgroundColor: "transparent", height: 40 }}
             value={phone}
             onChangeText={setPhone}
             placeholder="Masukkan no telepon"
@@ -133,19 +134,22 @@ const localStyles = StyleSheet.create({
     marginTop: 8,
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#cbd5f5",
-    borderRadius: 999,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: "#f9fafb",
-    fontSize: 13,
+    
+  height : 40,
+  borderWidth: 1,
+  borderColor: "#cbd5f5",
+  borderRadius: 12,       
+  paddingHorizontal: 12,
+  paddingVertical: 6,      
+  backgroundColor: "transparent",  
+  fontSize: 13,
   },
   buttonPrimary: {
     marginTop: 24,
     backgroundColor: "#2f80ed",
-    borderRadius: 999,
+    borderRadius: 20,
     paddingVertical: 10,
+    paddingHorizontal: 24,
     alignItems: "center",
   },
   buttonPrimaryText: {

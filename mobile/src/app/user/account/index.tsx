@@ -21,25 +21,25 @@ export default function AccountPageUser() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  useEffect(() => {
-      const loadTokenAndUser = async () => {
-        try {
-      const storedToken = await SecureStore.getItemAsync("refreshToken");
-      setToken(storedToken);
+  // useEffect(() => {
+  //     const loadTokenAndUser = async () => {
+  //       try {
+  //     const storedToken = await SecureStore.getItemAsync("refreshToken");
+  //     setToken(storedToken);
       
-      if (!storedToken) return;
-      const decoded = decodeJwtPayload(token || "");
-      setUser({
-          name: decoded.name ?? "",
-          email: decoded.email ?? "",
-        });
-      } catch (err) {
-        console.log("Error decode token:", err);
-      }
-    }
+  //     if (!storedToken) return;
+  //     const decoded = decodeJwtPayload(token || "");
+  //     setUser({
+  //         name: decoded.name ?? "",
+  //         email: decoded.email ?? "",
+  //       });
+  //     } catch (err) {
+  //       console.log("Error decode token:", err);
+  //     }
+  //   }
       
-      loadTokenAndUser();
-  }, []);
+  //     loadTokenAndUser();
+  // }, []);
   
   
   
@@ -62,8 +62,8 @@ export default function AccountPageUser() {
           color="#FFFFFF"
         />
       </Appbar.Header>
-      <View style={localStyles.centerWrapper}>
-        {token && user ? (
+      
+        {/* {token && user ? ( */}
             <SafeAreaView style={localStyles.root}>
               <ScrollView
               style={localStyles.scroll}
@@ -86,17 +86,17 @@ export default function AccountPageUser() {
                       <Text style={localStyles.sectionTitle}>Info profil</Text>
 
                       <TouchableOpacity style={localStyles.row}>
-                        <Text style={localStyles.label}>Nama</Text>
+                        <Text style={localStyles.labell}>Nama</Text>
                         <Text style={localStyles.value}>Dehendy Wijaya</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity style={localStyles.row}>
-                        <Text style={localStyles.label}>Email</Text>
+                        <Text style={localStyles.labell}>Email</Text>
                         <Text style={localStyles.placeholder}>@gmail.com</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity style={localStyles.row}>
-                        <Text style={localStyles.label}>No HP</Text>
+                        <Text style={localStyles.labell}>No HP</Text>
                         <Text style={localStyles.placeholder}>08239312</Text>
                       </TouchableOpacity>
                     </View>
@@ -104,8 +104,9 @@ export default function AccountPageUser() {
                 </View>
               </ScrollView>
             </SafeAreaView>
-          ) : ( 
-         <View style={localStyles.buttonContainer}>
+          {/* ) : (  */}
+          <View style={localStyles.centerWrapper}>
+         {/* <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
             onPress={handleUserLogin}
@@ -118,8 +119,8 @@ export default function AccountPageUser() {
           >
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>
-         </View>
-          )} 
+         </View> */}
+          {/* )}  */}
       </View>
     </View>
   );
@@ -151,6 +152,10 @@ const localStyles = StyleSheet.create({
     fontSize: 12,
     color: "#666",
     marginTop: 8,
+  },
+  labell: {
+    fontSize: 14,
+    color: '#777',
   },
   input: {
     borderWidth: 1,
