@@ -3,7 +3,7 @@ import { styles } from "@/style/styles";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
-import { Appbar, TextInput } from "react-native-paper";
+import { Appbar} from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -81,8 +81,26 @@ export default function AccountPageUser() {
                       <TouchableOpacity>
                         <Text style={localStyles.changePhotoText}>Ubah Foto Profil</Text>
                       </TouchableOpacity>
-                      </View>
-                  </View>
+                    </View>
+                    <View style={localStyles.section}>
+                      <Text style={localStyles.sectionTitle}>Info profil</Text>
+
+                      <TouchableOpacity style={localStyles.row}>
+                        <Text style={localStyles.label}>Nama</Text>
+                        <Text style={localStyles.value}>Dehendy Wijaya</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity style={localStyles.row}>
+                        <Text style={localStyles.label}>Email</Text>
+                        <Text style={localStyles.placeholder}>@gmail.com</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity style={localStyles.row}>
+                        <Text style={localStyles.label}>No HP</Text>
+                        <Text style={localStyles.placeholder}>08239312</Text>
+                      </TouchableOpacity>
+                    </View>
+                 </View>
                 </View>
               </ScrollView>
             </SafeAreaView>
