@@ -23,9 +23,11 @@ export default function AccountPageUser() {
       
       if (!storedToken) return;
       };
+      const decoded = decodeJwtPayload(token || "");
       loadTokenAndUser();
   }, []);
-
+  
+  
   
  
   console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
