@@ -25,8 +25,13 @@ export default function AccountPageUser() {
       setToken(storedToken);
       
       if (!storedToken) return;
-      };
       const decoded = decodeJwtPayload(token || "");
+      setUser({
+          name: decoded.name ?? "",
+          email: decoded.email ?? "",
+        });
+      };
+      
       loadTokenAndUser();
   }, []);
   
