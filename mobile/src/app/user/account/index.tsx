@@ -2,10 +2,12 @@
 import { styles } from "@/style/styles";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Appbar, TextInput } from "react-native-paper";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
+import { Appbar} from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const decodeJwtPayload = (token: string) => {
   if (!token) throw new Error("Token kosong");
@@ -62,26 +64,47 @@ export default function AccountPageUser() {
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
         {token && user ? (
-           <View style={localStyles.profileContainer}>
-            <Text style={localStyles.profileTitle}>Profil</Text>
+            <SafeAreaView style={localStyles.root}>
+              <ScrollView
+              style={localStyles.scroll}
+              contentContainerStyle={localStyles.scrollContent}
+              >
+                <View style={localStyles.container}>
+                  <View style={localStyles.header}>
+                    <Text style={localStyles.headerTitle}>Ubah Profil</Text>
+                    
+                    <View style={localStyles.avatarSection}>
+                      <Image
+                        source={{ uri: 'https://youtube.com' }}
+                        style={localStyles.avatar}
+                      />
+                      <TouchableOpacity>
+                        <Text style={localStyles.changePhotoText}>Ubah Foto Profil</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <View style={localStyles.section}>
+                      <Text style={localStyles.sectionTitle}>Info profil</Text>
 
-            <Text style={localStyles.label}>Nama</Text>
-            <TextInput
-              style={localStyles.input}
-              value={user.name || ""}
-              editable={false}
-              placeholder="Nama"
-            />
+                      <TouchableOpacity style={localStyles.row}>
+                        <Text style={localStyles.label}>Nama</Text>
+                        <Text style={localStyles.value}>Dehendy Wijaya</Text>
+                      </TouchableOpacity>
 
-            <Text style={localStyles.label}>Email</Text>
-            <TextInput
-              style={localStyles.input}
-              value={user.email || ""}
-              editable={false}
-              placeholder="Email"
-            />
-          </View>
-          ) : (
+                      <TouchableOpacity style={localStyles.row}>
+                        <Text style={localStyles.label}>Email</Text>
+                        <Text style={localStyles.placeholder}>@gmail.com</Text>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity style={localStyles.row}>
+                        <Text style={localStyles.label}>No HP</Text>
+                        <Text style={localStyles.placeholder}>08239312</Text>
+                      </TouchableOpacity>
+                    </View>
+                 </View>
+                </View>
+              </ScrollView>
+            </SafeAreaView>
+          ) : ( 
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
@@ -96,7 +119,7 @@ export default function AccountPageUser() {
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>
          </View>
-          )}
+          )} 
       </View>
     </View>
   );
@@ -158,5 +181,73 @@ const localStyles = StyleSheet.create({
   buttonSecondaryText: {
     color: "#2f80ed",
     fontWeight: "600",
+  },
+  root: {
+    flex: 1,
+    backgroundColor: '#FFFFFF', 
+  },
+  scroll: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
+  container: {
+    flex: 1,
+    width: '100%',           
+    alignSelf: 'stretch',  
+  },
+  header: {
+    height: 56,
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#E0E0E0',
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  avatarSection: {
+    alignItems: 'center',
+    paddingVertical: 24,
+  },
+  avatar: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: '#EEE',
+  },
+  changePhotoText: {
+    marginTop: 8,
+    color: '#2200ff',
+    fontWeight: '500',
+  },
+  section: {
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 8,
+    fontWeight: '500',
+  },
+  row: {
+    paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#E0E0E0',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  value: {
+    fontSize: 14,
+    color: '#111',
+  },
+  placeholder: {
+    fontSize: 14,
+    color: '#B0B0B0',
   },
 });
