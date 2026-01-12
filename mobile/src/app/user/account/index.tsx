@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
-import ProfileScreen from "@/types/profil";
+
 
 const decodeJwtPayload = (token: string) => {
   if (!token) throw new Error("Token kosong");
@@ -43,7 +43,7 @@ export default function AccountPageUser() {
   
   
  
-  console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
+  // console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
@@ -63,7 +63,25 @@ export default function AccountPageUser() {
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
         {token && user ? (
-           <ProfileScreen />
+            <View style={localStyles.profileContainer}>
+            <Text style={localStyles.profileTitle}>Profil</Text>
+
+            <Text style={localStyles.label}>Nama</Text>
+            <TextInput
+              style={localStyles.input}
+              value={user.name || ""}
+              editable={false}
+              placeholder="Nama"
+            />
+
+            <Text style={localStyles.label}>Email</Text>
+            <TextInput
+              style={localStyles.input}
+              value={user.email || ""}
+              editable={false}
+              placeholder="Email"
+            />
+          </View>
           ) : ( 
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity

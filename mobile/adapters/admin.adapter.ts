@@ -27,7 +27,9 @@ function normalizeApproval(v: any): UiReport["approvalStatus"] {
 
 function normalizeProcess(v: any): UiReport["processStatus"] {
     const s = String(v ?? "").toLowerCase();
-    if (["in_progress", "processing", "proses", "dalam_proses"].includes(s)) return "in_progress";
+    if (["in_progress", "processing", "proses", "dalam_proses", "onprogress", "on_progress"].includes(s)) {
+      return "in_progress";
+    }
     if (["closed", "done", "selesai", "ditutup"].includes(s)) return "closed";
   return "open";
 }
@@ -39,22 +41,32 @@ export function toUiStats(raw: any): UiStats {
     totalFound: pickNumber(raw, ["totalFound", "total_found", "barang_ditemukan"]),
     pendingApproval: pickNumber(raw, ["pendingApproval", "pending", "menunggu_approval"]),
     approved: pickNumber(raw, ["approved", "disetujui"]),
-    inProcess: pickNumber(raw, ["inProcess", "dalam_proses", "processing"]),
+    inProcess: pickNumber(raw, ["inProcess", "dalam_proses", "processing", "on_progress"]),
     totalUsers: pickNumber(raw, ["totalUsers", "users", "total_user"]),
   };
 }
 
 export function toUiReport(raw: any, type: "lost" | "found"): UiReport {
+  const reporterFromRel = raw?.user?.name ?? raw?.admin?.name;
+  const approvalSource =
+    type === "found"
+      ? "approved"
+      : raw?.status ?? raw?.approvalStatus ?? raw?.status_approval ?? raw?.approval;
+
   return {
     id: pickString(raw, ["id", "_id", "report_id"]),
     type,
-    title: pickString(raw, ["title", "judul", "nama_barang", "item_name"], "-"),
-    location: pickString(raw, ["location", "lokasi", "place"], "-"),
-    reporterName: pickString(raw, ["reporterName", "pelapor", "nama_pelapor", "user_name"], "-"),
-    createdAtISO: pickString(raw, ["createdAt", "created_at", "tanggal", "date"], new Date().toISOString()),
+    title: pickString(raw, ["title", "judul", "nama_barang", "item_name", "namaBarang"], "-"),
+    location: pickString(raw, ["location", "lokasi", "place", "lokasiHilang", "lokasiTemu"], "-"),
+    reporterName: reporterFromRel || pickString(raw, ["reporterName", "pelapor", "nama_pelapor", "user_name", "name"], "-"),
+    createdAtISO: pickString(
+      raw,
+      ["createdAt", "created_at", "tanggal", "date", "tanggalHilang", "tanggalTemu"],
+      new Date().toISOString()
+    ),
     description: pickString(raw, ["description", "deskripsi", "keterangan"], ""),
-    approvalStatus: normalizeApproval(raw?.approvalStatus ?? raw?.status_approval ?? raw?.approval),
-    processStatus: normalizeProcess(raw?.processStatus ?? raw?.status_laporan ?? raw?.status),
+    approvalStatus: normalizeApproval(approvalSource),
+    processStatus: normalizeProcess(raw?.statusReport ?? raw?.processStatus ?? raw?.status_laporan ?? raw?.status),
   };
 }
 
