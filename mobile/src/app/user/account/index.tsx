@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Appbar } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
+import { decode as base64Decode } from "base-64";
 
 const decodeJwtPayload = (token: string) => {
   if (!token) throw new Error("Token kosong");
