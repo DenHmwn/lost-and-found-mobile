@@ -4,8 +4,8 @@ import { router } from "expo-router";
 import { AdminService } from "@/services/admin.service";
 import { toUiReport } from "@/adapters/admin.adapter";
 import { UiReport } from "@/types/admin.ui";
-import StatCard from "@/components/startcard";
 import ReportCard from "@/components/reportcard";
+import { StatCard } from "@/components/startcard";
 
 export default function LostList() {
   const [items, setItems] = useState<UiReport[]>([]);
@@ -34,10 +34,10 @@ export default function LostList() {
 
   const action = async (id: string, type: "approve" | "reject" | "done" | "close") => {
     try {
-      if (type === "approve") await AdminService.approve(id);
-      if (type === "reject") await AdminService.reject(id);
-      if (type === "done") await AdminService.done(id);
-      if (type === "close") await AdminService.close(id);
+      if (type === "approve") await AdminService.approve(id, "lost");
+      if (type === "reject") await AdminService.reject(id, "lost");
+      if (type === "done") await AdminService.done(id, "lost");
+      if (type === "close") await AdminService.close(id, "lost");
       await load();
     } catch (e: any) {
       Alert.alert("Gagal", e.message);

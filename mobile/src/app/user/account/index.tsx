@@ -42,7 +42,7 @@ export default function AccountPageUser() {
   
   
  
-  console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
+  // console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };

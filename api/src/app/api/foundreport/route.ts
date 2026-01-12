@@ -1,12 +1,19 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-// buat fungsi GET
+export const runtime = "nodejs";
+
+// helper untuk validasi angka (kalau id kamu Int)
+function toInt(value: unknown) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
+// GET /api/foundreport
 export async function GET() {
   try {
     const reports = await prisma.foundReport.findMany({
       include: {
-        // rellasi ke admin yang buat laporan temu
         admin: {
           select: {
             id: true,
@@ -16,10 +23,8 @@ export async function GET() {
             role: true,
           },
         },
-        // relasi ke lostreport (jika udah di cocokkan)
         lostReport: {
           include: {
-            // include sama data user yang kehilangan barang
             user: {
               select: {
                 id: true,
@@ -31,22 +36,17 @@ export async function GET() {
           },
         },
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: { createdAt: "desc" },
     });
-    //   Response Success
+
     return NextResponse.json(
       {
         success: true,
         message: "Berhasil mengambil data barang temuan",
         data: reports,
       },
-      {
-        status: 200,
-      }
+      { status: 200 }
     );
-    // Response Error
   } catch (error) {
     console.error("Error fetching found reports:", error);
     return NextResponse.json(
@@ -59,66 +59,36 @@ export async function GET() {
     );
   }
 }
-// BUat fungsi POST
+
+// POST /api/foundreport
 export async function POST(req: Request) {
   try {
-    const data = await req.json();
-    const {
-      namaBarang,
-      deskripsi,
-      lokasiTemu,
-      adminId,
-      lostReportId,
-      tanggalTemu,
-      waktuTemu,
-    } = data;
+    const body = await req.json();
 
-    // validasi input data
-    if (
-      !namaBarang ||
-      !deskripsi ||
-      !lokasiTemu ||
-      !adminId ||
-      !tanggalTemu ||
-      !waktuTemu
-    ) {
+    const namaBarang = String(body?.namaBarang ?? "").trim();
+    const deskripsi = String(body?.deskripsi ?? "").trim();
+    const lokasiTemu = String(body?.lokasiTemu ?? "").trim();
+    const waktuTemu = String(body?.waktuTemu ?? "").trim();
+
+    const adminId = toInt(body?.adminId);
+    const lostReportIdRaw = body?.lostReportId;
+    const lostReportId = lostReportIdRaw !== null && lostReportIdRaw !== undefined && lostReportIdRaw !== ""
+      ? toInt(lostReportIdRaw)
+      : null;
+
+    const tanggalTemu = body?.tanggalTemu;
+
+    if (!namaBarang || !deskripsi || !lokasiTemu || !waktuTemu || adminId === null || !tanggalTemu) {
       return NextResponse.json(
         {
           success: false,
           message:
-            "Data tidak lengkap. Pastikan nama barang, deskripsi, lokasi temuan, dan admin ID terisi.",
+            "Data tidak lengkap. Pastikan nama barang, deskripsi, lokasi temuan, tanggal temu, waktu temu, dan adminId terisi dengan benar.",
         },
         { status: 400 }
       );
     }
 
-    //   validasi admin ada atau tidak
-    const adminExists = await prisma.user.findUnique({
-      where: { id: Number(adminId) },
-    });
-
-    if (!adminExists) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Admin tidak ditemukan",
-        },
-        { status: 404 }
-      );
-    }
-
-    if (adminExists.role !== "ADMIN") {
-      return NextResponse.json(
-        {
-          success: false,
-          message:
-            "Pengguna ini bukan admin. Hanya admin yang dapat membuat laporan barang temuan.",
-        },
-        { status: 403 }
-      );
-    }
-
-    // Validasi dan parsing tanggal
     const formatTanggalTemu = new Date(tanggalTemu);
     if (isNaN(formatTanggalTemu.getTime())) {
       return NextResponse.json(
@@ -127,48 +97,69 @@ export async function POST(req: Request) {
       );
     }
 
-    // Validasi lostReportId jika ada
-    if (lostReportId) {
+    // validasi admin
+    const adminExists = await prisma.user.findUnique({
+      where: { id: adminId },
+      select: { id: true, role: true, name: true, email: true, notelp: true },
+    });
+
+    if (!adminExists) {
+      return NextResponse.json(
+        { success: false, message: "Admin tidak ditemukan" },
+        { status: 404 }
+      );
+    }
+
+    if (adminExists.role !== "ADMIN") {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Pengguna ini bukan admin. Hanya admin yang dapat membuat laporan barang temuan.",
+        },
+        { status: 403 }
+      );
+    }
+
+    // validasi lostReportId jika ada
+    if (lostReportId !== null) {
       const lostReportExists = await prisma.lostReport.findUnique({
-        where: { id: Number(lostReportId) },
+        where: { id: lostReportId },
+        select: { id: true },
       });
 
       if (!lostReportExists) {
         return NextResponse.json(
-          {
-            success: false,
-            message: "Laporan barang hilang tidak ditemukan",
-          },
+          { success: false, message: "Laporan barang hilang tidak ditemukan" },
           { status: 404 }
         );
       }
-      // Cek apakah lostReport sudah memiliki foundReport
-      const alreadyMatched = await prisma.foundReport.findUnique({
-        where: { lostReportId: Number(lostReportId) },
+
+      // PENTING: gunakan findFirst agar aman walaupun lostReportId tidak unique
+      const alreadyMatched = await prisma.foundReport.findFirst({
+        where: { lostReportId },
+        select: { id: true },
       });
 
       if (alreadyMatched) {
         return NextResponse.json(
           {
             success: false,
-            message:
-              "Laporan barang hilang ini sudah memiliki pasangan barang temuan",
+            message: "Laporan barang hilang ini sudah memiliki pasangan barang temuan",
           },
           { status: 409 }
         );
       }
     }
 
-    //   create report
     const report = await prisma.foundReport.create({
       data: {
-        namaBarang: namaBarang.trim(),
-        deskripsi: deskripsi.trim(),
-        lokasiTemu: lokasiTemu.trim(),
-        adminId: Number(adminId),
-        lostReportId: lostReportId ? Number(lostReportId) : null,
+        namaBarang,
+        deskripsi,
+        lokasiTemu,
+        adminId,
+        lostReportId,
         tanggalTemu: formatTanggalTemu,
-        waktuTemu: waktuTemu.trim(),
+        waktuTemu,
       },
       include: {
         admin: {
@@ -193,7 +184,7 @@ export async function POST(req: Request) {
         },
       },
     });
-    // Response Success
+
     return NextResponse.json(
       {
         success: true,
@@ -202,7 +193,6 @@ export async function POST(req: Request) {
       },
       { status: 201 }
     );
-    // response error
   } catch (error) {
     console.error("Error creating found report:", error);
     return NextResponse.json(

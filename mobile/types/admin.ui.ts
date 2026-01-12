@@ -20,7 +20,6 @@ export type UiReport = {
   approvalStatus: ApprovalStatus;
   processStatus: ProcessStatus;
 };
-
 export type UiUser = {
   id: string;
   name: string;

@@ -13,7 +13,7 @@ export default function LostDetail() {
 
   const load = async () => {
     try {
-      const raw = await AdminService.getReportById(String(id));
+      const raw = await AdminService.getReportById(String(id), "lost");
       setItem(toUiReport(raw, "lost"));
     } catch (e: any) {
       Alert.alert("Error", e.message);
@@ -27,10 +27,10 @@ export default function LostDetail() {
     const action = async (type: "approve" | "reject" | "done" | "close") => {
     if (!item) return;
     try {
-      if (type === "approve") await AdminService.approve(item.id);
-      if (type === "reject") await AdminService.reject(item.id);
-      if (type === "done") await AdminService.done(item.id);
-      if (type === "close") await AdminService.close(item.id);
+      if (type === "approve") await AdminService.approve(item.id, "lost");
+      if (type === "reject") await AdminService.reject(item.id, "lost");
+      if (type === "done") await AdminService.done(item.id, "lost");
+      if (type === "close") await AdminService.close(item.id, "lost");
       await load();
     } catch (e: any) {
       Alert.alert("Gagal", e.message);
