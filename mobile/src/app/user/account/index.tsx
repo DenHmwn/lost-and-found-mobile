@@ -160,4 +160,8 @@ const localStyles = StyleSheet.create({
     color: "#2f80ed",
     fontWeight: "600",
   },
+  root: {
+    flex: 1,
+    backgroundColor: '#FFFFFF', 
+  },
 });
