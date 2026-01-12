@@ -170,4 +170,9 @@ const localStyles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
   },
+  container: {
+    flex: 1,
+    width: '100%',           
+    alignSelf: 'stretch',  
+  },
 });
