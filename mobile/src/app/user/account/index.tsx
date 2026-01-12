@@ -2,7 +2,7 @@
 import { styles } from "@/style/styles";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
 import { Appbar, TextInput } from "react-native-paper";
 import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
@@ -72,6 +72,16 @@ export default function AccountPageUser() {
                 <View style={localStyles.container}>
                   <View style={localStyles.header}>
                     <Text style={localStyles.headerTitle}>Ubah Profil</Text>
+                    
+                    <View style={localStyles.avatarSection}>
+                      <Image
+                        source={{ uri: 'https://youtube.com' }}
+                        style={localStyles.avatar}
+                      />
+                      <TouchableOpacity>
+                        <Text style={localStyles.changePhotoText}>Ubah Foto Profil</Text>
+                      </TouchableOpacity>
+                      </View>
                   </View>
                 </View>
               </ScrollView>
