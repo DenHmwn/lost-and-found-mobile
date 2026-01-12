@@ -9,8 +9,10 @@ import { decode as base64Decode } from "base-64";
 
 const decodeJwtPayload = (token: string) => {
   if (!token) throw new Error("Token kosong");
-  const base64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
-  return JSON.parse(atob(base64));
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = base64Decode(base64); 
+  return JSON.parse(jsonPayload);
 };
 
 export default function AccountPageUser() {
