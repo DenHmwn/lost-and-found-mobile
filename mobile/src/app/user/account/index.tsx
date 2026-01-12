@@ -61,6 +61,9 @@ export default function AccountPageUser() {
         />
       </Appbar.Header>
       <View style={localStyles.centerWrapper}>
+        {token && user ? (
+          
+          ) : (
          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
