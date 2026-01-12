@@ -80,6 +80,11 @@ const localStyles = StyleSheet.create({
     marginBottom: 12,
     textAlign: "center",
   },
+  label: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 8,
+  },
   button: {
     paddingVertical: 12,
     borderRadius: 24,
