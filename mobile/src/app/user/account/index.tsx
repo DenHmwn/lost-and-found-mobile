@@ -4,7 +4,6 @@ import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
 import { Appbar} from "react-native-paper";
-import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -18,33 +17,30 @@ const decodeJwtPayload = (token: string) => {
 };
 
 export default function AccountPageUser() {
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string; notelp: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //     const loadTokenAndUser = async () => {
-  //       try {
-  //     const storedToken = await SecureStore.getItemAsync("refreshToken");
-  //     setToken(storedToken);
+  useEffect(() => {
+      const loadTokenAndUser = async () => {
+        try {
+      const storedToken = localStorage.getItem("refreshToken");
+      setToken(storedToken);
       
-  //     if (!storedToken) return;
-  //     const decoded = decodeJwtPayload(token || "");
-  //     setUser({
-  //         name: decoded.name ?? "",
-  //         email: decoded.email ?? "",
-  //       });
-  //     } catch (err) {
-  //       console.log("Error decode token:", err);
-  //     }
-  //   }
+      if (!storedToken) return;
+      const decoded = decodeJwtPayload(token || "");
+      setUser({
+          name: decoded.name ?? "",
+          email: decoded.email ?? "",
+          notelp : decoded.notelp ?? "",
+        });
+      } catch (err) {
+        console.log("Error decode token:", err);
+      }
+    }
       
-  //     loadTokenAndUser();
-  // }, []);
-  
-  
-  
- 
-  // console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
+      loadTokenAndUser();
+  }, [token]);
+
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
@@ -63,7 +59,7 @@ export default function AccountPageUser() {
         />
       </Appbar.Header>
       
-        {/* {token && user ? ( */}
+        {token && user ? (
             <SafeAreaView style={localStyles.root}>
               <ScrollView
               style={localStyles.scroll}
@@ -71,8 +67,6 @@ export default function AccountPageUser() {
               >
                 <View style={localStyles.container}>
                   <View style={localStyles.header}>
-                    <Text style={localStyles.headerTitle}>Ubah Profil</Text>
-                    
                     <View style={localStyles.avatarSection}>
                       <Image
                         source={{ uri: 'https://youtube.com' }}
@@ -87,26 +81,26 @@ export default function AccountPageUser() {
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>Nama</Text>
-                        <Text style={localStyles.value}>Dehendy Wijaya</Text>
+                        <Text style={localStyles.value}>{user.name}</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>Email</Text>
-                        <Text style={localStyles.placeholder}>@gmail.com</Text>
+                        <Text style={localStyles.value}>{user.email}</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>No HP</Text>
-                        <Text style={localStyles.placeholder}>08239312</Text>
+                        <Text style={localStyles.value}>{user.notelp}</Text>
                       </TouchableOpacity>
                     </View>
                  </View>
                 </View>
               </ScrollView>
             </SafeAreaView>
-          {/* ) : (  */}
+           ) : (  
           <View style={localStyles.centerWrapper}>
-         {/* <View style={localStyles.buttonContainer}>
+          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
             onPress={handleUserLogin}
@@ -119,9 +113,9 @@ export default function AccountPageUser() {
           >
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>
-         </View> */}
-          {/* )}  */}
-      </View>
+         </View> 
+         </View>
+           )}  
     </View>
   );
 }
@@ -203,7 +197,7 @@ const localStyles = StyleSheet.create({
     alignSelf: 'stretch',  
   },
   header: {
-    height: 56,
+    height: 420,
     justifyContent: 'center',
     paddingHorizontal: 16,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -230,7 +224,7 @@ const localStyles = StyleSheet.create({
   },
   section: {
     paddingHorizontal: 16,
-    paddingTop: 8,
+    paddingTop: 18,
     paddingBottom: 16,
   },
   sectionTitle: {

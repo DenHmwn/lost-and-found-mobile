@@ -52,6 +52,8 @@ export async function POST(req: Request) {
       id: String(user.id),
       name: user.name,
       role: user.role,
+      notelp : user.notelp,
+      email : user.email
     });
 
     // Buat refresh token
@@ -59,6 +61,8 @@ export async function POST(req: Request) {
       id: String(user.id),
       name: user.name,
       role: user.role,
+      notelp : user.notelp,
+      email : user.email
     });
 
     // Buat response dengan user data

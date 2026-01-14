@@ -7,9 +7,10 @@ import axios from "axios";
 import { strings } from "@/constans/strings";
 import { LostReport } from "@/types/interface";
 import { formatToWIB } from "@/utils/scripts";
+import { router } from "expo-router";
 
 export default function LostItemPage() {
-
+  const [token, setToken] = useState("")
   const [ListLost, setListLost] = useState<LostReport[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredList, setFilteredList] = useState<LostReport[]>([]);
@@ -19,13 +20,15 @@ export default function LostItemPage() {
   }, []);
 
   useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    setToken(refreshToken || "");
     const filtered = ListLost.filter(
       (item) =>
         item.namaBarang.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.lokasiHilang.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredList(filtered);
-  }, [searchQuery, ListLost]);
+  }, [searchQuery, ListLost, token]);
 
   const getBarangLost = async () => {
     try {
@@ -168,13 +171,22 @@ export default function LostItemPage() {
           </Card>
         )}
       />
-
+      {token ? (
       <FAB
         icon="plus"
         style={styles.fab}
         onPress={() => console.log("Tambah laporan")}
         color="#FFFFFF"
       />
+      ):(
+        <FAB
+        icon="plus"
+        style={styles.fab}
+        onPress={() => router.replace("/user/account/login")}
+        color="#FFFFFF"
+      />
+      )
+    }
     </View>
   );
 }

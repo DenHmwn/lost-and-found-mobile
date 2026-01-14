@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-nativ
 import { Appbar } from "react-native-paper";
 import { styles } from "@/style/styles";
 import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+import { router } from "expo-router";
 
 export default function LoginPage({ navigation }: any) {
   const [email, setEmail] = useState("");
@@ -18,14 +18,19 @@ export default function LoginPage({ navigation }: any) {
         withCredentials: true,
     });
     console.log("Login successful:", res.data.message);
-    await SecureStore.setItemAsync("refreshToken", res.data.refreshToken);
+    localStorage.setItem("refreshToken", res.data.refreshToken);
     
+    if (res.data.success) {
+      router.replace('/user/homepage')
+    }else{
+      console.error("Login failed:", res.data.message);
+    }
   } catch (error) {
     console.error("Login failed:", error);
     }
   }
   const goToRegister = () => {
-    navigation.navigate("RegisterPage");
+    router.replace('/user/account/register')
   };
 
   return (
