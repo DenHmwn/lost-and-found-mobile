@@ -21,7 +21,7 @@ export default function LoginPage({ navigation }: any) {
     localStorage.setItem("refreshToken", res.data.refreshToken);
     
     if (res.data.success) {
-      router.replace('/user/account')
+      router.replace('/user/homepage')
     }else{
       console.error("Login failed:", res.data.message);
     }
