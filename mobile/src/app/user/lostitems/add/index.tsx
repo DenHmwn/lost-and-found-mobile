@@ -16,7 +16,8 @@ export default function LostItemForm() {
     statusReport: "OnProgress",
     createdAt: "",
     userId: 0 ,
-    tanggalHilang: ""
+    tanggalHilang: "",
+    waktuHilang: "",
     });
 
     const handleSubmit = async() => {
@@ -112,6 +113,13 @@ export default function LostItemForm() {
               style={styles.input}
               placeholder="Contoh: 09.00"
               placeholderTextColor={color.textSecondary}
+              value={barang?.waktuHilang}
+              onChangeText={(text) =>
+                setBarang(prev => ({
+                ...prev,
+                waktuHilang: text
+                }))
+            }
             />
           </View>
 
