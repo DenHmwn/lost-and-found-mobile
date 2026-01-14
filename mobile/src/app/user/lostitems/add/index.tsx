@@ -8,6 +8,7 @@ import { LostReport} from "@/types/interface";
 import axios from "axios";
 
 export default function LostItemForm() {
+    const [token, setToken] = useState<string | null>(null);
     const [barang, setBarang] = useState<LostReport>({
     id: 0,
     namaBarang: "",
@@ -21,8 +22,12 @@ export default function LostItemForm() {
     waktuHilang: "",
     });
 
+    const getToken = () => {
+        const ref = localStorage.getItem("refreshToken");
+        setToken(ref);
+    }
+    
     const handleSubmit = async() => {
-        const token = localStorage.getItem("refreshToken");
         const decoded = decodeJwtPayload(token || "");
         const res = await axios.post("http://localhost:3001/api/lostreport",{
             id : decoded.id,
@@ -38,9 +43,8 @@ export default function LostItemForm() {
         })
         console.log(res.status);
     }
-
     useEffect(() => {
-       
+       getToken();
     })
   return (
     <View style={styles.container}>
