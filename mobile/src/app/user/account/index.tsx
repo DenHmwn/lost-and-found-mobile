@@ -24,7 +24,6 @@ export default function AccountPageUser() {
       const loadTokenAndUser = async () => {
         try {
       const storedToken = localStorage.getItem("refreshToken");
-      console.log("Token:", storedToken);
       setToken(storedToken);
       
       if (!storedToken) return;
