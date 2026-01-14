@@ -4,7 +4,6 @@ import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
 import { Appbar} from "react-native-paper";
-import * as SecureStore from "expo-secure-store";
 import { decode as base64Decode } from "base-64";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -18,7 +17,7 @@ const decodeJwtPayload = (token: string) => {
 };
 
 export default function AccountPageUser() {
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string; notelp: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,6 +32,7 @@ export default function AccountPageUser() {
       setUser({
           name: decoded.name ?? "",
           email: decoded.email ?? "",
+          notelp : decoded.notelp ?? "",
         });
       } catch (err) {
         console.log("Error decode token:", err);
@@ -40,7 +40,7 @@ export default function AccountPageUser() {
     }
       
       loadTokenAndUser();
-  }, []);
+  }, [token]);
   
   const handleUserLogin = () => {
           router.replace('/user/account/login')
