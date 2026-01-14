@@ -1,20 +1,10 @@
-// File: LostItemPage.tsx
 import { styles } from "@/style/styles";
+import { decodeJwtPayload } from "@/utils/decoded";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
 import { Appbar} from "react-native-paper";
-import { decode as base64Decode } from "base-64";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-
-const decodeJwtPayload = (token: string) => {
-  if (!token) throw new Error("Token kosong");
-  const base64Url = token.split(".")[1];
-  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  const jsonPayload = base64Decode(base64); 
-  return JSON.parse(jsonPayload);
-};
 
 export default function AccountPageUser() {
   const [user, setUser] = useState<{ name: string; email: string; notelp: string } | null>(null);
