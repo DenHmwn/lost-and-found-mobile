@@ -9,7 +9,7 @@ import { LostReport } from "@/types/interface";
 import { formatToWIB } from "@/utils/scripts";
 
 export default function LostItemPage() {
-
+  const [token, setToken] = useState("")
   const [ListLost, setListLost] = useState<LostReport[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredList, setFilteredList] = useState<LostReport[]>([]);
@@ -19,13 +19,15 @@ export default function LostItemPage() {
   }, []);
 
   useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    setToken(refreshToken || "");
     const filtered = ListLost.filter(
       (item) =>
         item.namaBarang.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.lokasiHilang.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredList(filtered);
-  }, [searchQuery, ListLost]);
+  }, [searchQuery, ListLost, token]);
 
   const getBarangLost = async () => {
     try {
