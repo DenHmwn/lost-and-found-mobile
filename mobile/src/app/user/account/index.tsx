@@ -68,8 +68,6 @@ export default function AccountPageUser() {
               >
                 <View style={localStyles.container}>
                   <View style={localStyles.header}>
-                    <Text style={localStyles.headerTitle}>Ubah Profil</Text>
-                    
                     <View style={localStyles.avatarSection}>
                       <Image
                         source={{ uri: 'https://youtube.com' }}
@@ -200,7 +198,7 @@ const localStyles = StyleSheet.create({
     alignSelf: 'stretch',  
   },
   header: {
-    height: 56,
+    height: 420,
     justifyContent: 'center',
     paddingHorizontal: 16,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -227,7 +225,7 @@ const localStyles = StyleSheet.create({
   },
   section: {
     paddingHorizontal: 16,
-    paddingTop: 8,
+    paddingTop: 18,
     paddingBottom: 16,
   },
   sectionTitle: {
