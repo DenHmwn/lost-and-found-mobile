@@ -7,12 +7,21 @@ import { decodeJwtPayload } from "@/utils/decoded";
 import { LostReport} from "@/types/interface";
 
 export default function LostItemForm() {
-    const [barang, setBarang] = useState<LostReport>()
+    const [barang, setBarang] = useState<LostReport>({
+    id: 0,
+    namaBarang: "",
+    deskripsi: "",
+    lokasiHilang: "",
+    status: "PENDING",
+    statusReport: "OnProgress",
+    createdAt: "",
+    userId: 0 ,
+    tanggalHilang: ""
+    });
 
     useEffect(() => {
         const token = localStorage.getItem("refreshToken");
         const decoded = decodeJwtPayload(token || "");
-
         
     })
   return (
