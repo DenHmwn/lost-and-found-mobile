@@ -141,7 +141,7 @@ export default function LostItemForm() {
             />
           </View>
 
-          <TouchableOpacity style={styles.submitButton} onPress= {() => {}}>
+          <TouchableOpacity style={styles.submitButton} onPress= {handleSubmit}>
             <Text style={styles.submitText}>Kirim Laporan</Text>
           </TouchableOpacity>
         </View>
