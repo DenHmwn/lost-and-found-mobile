@@ -7,6 +7,7 @@ import axios from "axios";
 import { strings } from "@/constans/strings";
 import { LostReport } from "@/types/interface";
 import { formatToWIB } from "@/utils/scripts";
+import { router } from "expo-router";
 
 export default function LostItemPage() {
   const [token, setToken] = useState("")
@@ -170,13 +171,22 @@ export default function LostItemPage() {
           </Card>
         )}
       />
-
+      {token ? (
       <FAB
         icon="plus"
         style={styles.fab}
         onPress={() => console.log("Tambah laporan")}
         color="#FFFFFF"
       />
+      ):(
+        <FAB
+        icon="plus"
+        style={styles.fab}
+        onPress={() => router.replace("/user/account/login")}
+        color="#FFFFFF"
+      />
+      )
+    }
     </View>
   );
 }
