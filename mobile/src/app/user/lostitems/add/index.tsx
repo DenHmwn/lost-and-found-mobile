@@ -19,9 +19,13 @@ export default function LostItemForm() {
     tanggalHilang: ""
     });
 
-    useEffect(() => {
+    const handleSubmit = async() => {
         const token = localStorage.getItem("refreshToken");
         const decoded = decodeJwtPayload(token || "");
+    }
+
+    useEffect(() => {
+       
     })
   return (
     <View style={styles.container}>
