@@ -16,6 +16,7 @@ export interface LostReport {
   createdAt: string;
   userId: number;
   tanggalHilang: string;
+  waktuHilang: string;
 }
 
 export interface FoundReport {
