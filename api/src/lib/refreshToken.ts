@@ -7,7 +7,8 @@ export async function RefreshToken(payload: TokenPayload): Promise<string> {
     id: payload.id,
     name: payload.name,
     role: payload.role,
-    notelp : payload.notelp
+    notelp : payload.notelp,
+    email : payload.email
   })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
