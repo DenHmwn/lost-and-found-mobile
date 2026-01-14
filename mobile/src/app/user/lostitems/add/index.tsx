@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { Appbar } from "react-native-paper";
 import { router } from "expo-router";
 import { styles, color } from "@/style/styles";
+import { decodeJwtPayload } from "@/utils/decoded";
 
 export default function LostItemForm() {
     const [barang, setBarang] = useState<{ 
@@ -17,7 +18,12 @@ export default function LostItemForm() {
         waktuHilang: string;
     } | null>(null);
 
-    
+    useEffect(() => {
+        const token = localStorage.getItem("refreshToken");
+        const decoded = decodeJwtPayload(token || "");
+        const userId = decoded.id
+        
+    })
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.appBar} elevated>
