@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import { styles, color } from "@/style/styles";
 import { decodeJwtPayload } from "@/utils/decoded";
 import { LostReport} from "@/types/interface";
+import axios from "axios";
 
 export default function LostItemForm() {
     const [barang, setBarang] = useState<LostReport>({
@@ -23,6 +24,19 @@ export default function LostItemForm() {
     const handleSubmit = async() => {
         const token = localStorage.getItem("refreshToken");
         const decoded = decodeJwtPayload(token || "");
+        const res = await axios.post("http://localhost:3001/api/lostreport",{
+            id : decoded.id,
+            namaBarang : barang.namaBarang,
+            deskripsi : barang.deskripsi,
+            lokasiHilang : barang.lokasiHilang,
+            status : barang.status,
+            statusReport : barang.statusReport,
+            createdAt : barang.createdAt,
+            userId : decoded.id,
+            tanggalHilang : barang.tanggalHilang,
+            waktuHilang : barang.waktuHilang
+        })
+        console.log(res.status);
     }
 
     useEffect(() => {
