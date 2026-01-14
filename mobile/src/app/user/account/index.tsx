@@ -21,30 +21,27 @@ export default function AccountPageUser() {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //     const loadTokenAndUser = async () => {
-  //       try {
-  //     const storedToken = await SecureStore.getItemAsync("refreshToken");
-  //     setToken(storedToken);
+  useEffect(() => {
+      const loadTokenAndUser = async () => {
+        try {
+      const storedToken = localStorage.getItem("refreshToken");
+      console.log("Token:", storedToken);
+      setToken(storedToken);
       
-  //     if (!storedToken) return;
-  //     const decoded = decodeJwtPayload(token || "");
-  //     setUser({
-  //         name: decoded.name ?? "",
-  //         email: decoded.email ?? "",
-  //       });
-  //     } catch (err) {
-  //       console.log("Error decode token:", err);
-  //     }
-  //   }
+      if (!storedToken) return;
+      const decoded = decodeJwtPayload(token || "");
+      setUser({
+          name: decoded.name ?? "",
+          email: decoded.email ?? "",
+        });
+      } catch (err) {
+        console.log("Error decode token:", err);
+      }
+    }
       
-  //     loadTokenAndUser();
-  // }, []);
+      loadTokenAndUser();
+  }, []);
   
-  
-  
- 
-  // console.log("User Token:", SecureStore.getItemAsync("refreshToken"));
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
@@ -63,7 +60,7 @@ export default function AccountPageUser() {
         />
       </Appbar.Header>
       
-        {/* {token && user ? ( */}
+        {token && user ? (
             <SafeAreaView style={localStyles.root}>
               <ScrollView
               style={localStyles.scroll}
@@ -104,9 +101,9 @@ export default function AccountPageUser() {
                 </View>
               </ScrollView>
             </SafeAreaView>
-          {/* ) : (  */}
+           ) : (  
           <View style={localStyles.centerWrapper}>
-         {/* <View style={localStyles.buttonContainer}>
+          <View style={localStyles.buttonContainer}>
           <TouchableOpacity
             style={[localStyles.button, localStyles.buttonPrimary]}
             onPress={handleUserLogin}
@@ -119,9 +116,9 @@ export default function AccountPageUser() {
           >
             <Text style={localStyles.buttonSecondaryText}>Register</Text>
           </TouchableOpacity>
-         </View> */}
-          {/* )}  */}
-      </View>
+         </View> 
+         </View>
+           )}  
     </View>
   );
 }
