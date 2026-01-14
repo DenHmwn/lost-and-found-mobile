@@ -4,24 +4,15 @@ import { Appbar } from "react-native-paper";
 import { router } from "expo-router";
 import { styles, color } from "@/style/styles";
 import { decodeJwtPayload } from "@/utils/decoded";
+import { LostReport} from "@/types/interface";
 
 export default function LostItemForm() {
-    const [barang, setBarang] = useState<{ 
-        namaBarang: string;
-        deskripsi: string;
-        lokasiHilang: string;
-        status: string;
-        statusReport: string;
-        createdAt: string;
-        userId: string;
-        tanggalHilang: string;
-        waktuHilang: string;
-    } | null>(null);
+    const [barang, setBarang] = useState<LostReport>()
 
     useEffect(() => {
         const token = localStorage.getItem("refreshToken");
         const decoded = decodeJwtPayload(token || "");
-        const userId = decoded.id
+
         
     })
   return (
