@@ -2,6 +2,7 @@ export interface TokenPayload {
   id: string;
   name: string;
   role: string;
+  notelp: string
 }
 
 export interface RefreshPayload {
