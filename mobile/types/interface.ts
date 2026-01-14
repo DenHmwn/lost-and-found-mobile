@@ -14,8 +14,9 @@ export interface LostReport {
   status: "PENDING" | "APPROVED" | "REJECTED";
   statusReport: "Done" | "OnProgress" | "Closed";
   createdAt: string;
-  user: Users;
+  userId: number;
   tanggalHilang: string;
+  waktuHilang: string;
 }
 
 export interface FoundReport {

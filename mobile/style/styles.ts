@@ -215,4 +215,58 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
   },
+    formContainer: {
+    padding: 16,
+    paddingBottom: 32,
+  },
+  card: {
+    backgroundColor: color.cardBg,
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: color.border,
+    ...(Platform.OS === "android"
+      ? { elevation: 3 }
+      : {
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.08,
+          shadowRadius: 8,
+        }),
+  },
+  field: {
+    marginBottom: 12,
+  },
+  label: {
+    fontSize: 14,
+    color: color.text,
+    marginBottom: 6,
+    fontWeight: "500",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: color.border,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 14,
+    color: color.text,
+    backgroundColor: color.cardBg,
+  },
+  textArea: {
+    minHeight: 80,
+    textAlignVertical: "top",
+  },
+  submitButton: {
+    marginTop: 16,
+    backgroundColor: color.primary,
+    borderRadius: 12,
+    paddingVertical: 12,
+    alignItems: "center",
+  },
+  submitText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
 });
