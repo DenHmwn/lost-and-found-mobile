@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Platform } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { Appbar } from "react-native-paper";
 import { router } from "expo-router";
 import { styles, color } from "@/style/styles";
 
 export default function LostItemForm() {
-
+    const [barang, setBarang] = useState<{ 
+        namaBarang: string;
+        deskripsi: string;
+        lokasiHilang: string;
+        status: string;
+        statusReport: string;
+        createdAt: string;
+        userId: string;
+        tanggalHilang: string;
+        waktuHilang: string;
+    } | null>(null);
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.appBar} elevated>
