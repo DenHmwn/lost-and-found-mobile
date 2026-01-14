@@ -41,7 +41,7 @@ export default function AccountPageUser() {
       
       loadTokenAndUser();
   }, [token]);
-  
+
   const handleUserLogin = () => {
           router.replace('/user/account/login')
       };
@@ -89,12 +89,12 @@ export default function AccountPageUser() {
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>Email</Text>
-                        <Text style={localStyles.placeholder}>{user.email}</Text>
+                        <Text style={localStyles.value}>{user.email}</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>No HP</Text>
-                        <Text style={localStyles.placeholder}>{user.notelp}</Text>
+                        <Text style={localStyles.value}>{user.notelp}</Text>
                       </TouchableOpacity>
                     </View>
                  </View>
