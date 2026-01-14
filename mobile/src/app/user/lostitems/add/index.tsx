@@ -49,7 +49,7 @@ export default function LostItemForm() {
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.appBar} elevated>
-        <Appbar.BackAction onPress={() => router.back()} color="#FFFFFF" />
+        <Appbar.BackAction onPress={() => router.replace("/user/homepage")} color="#FFFFFF" />
         <Appbar.Content title="Laporkan Barang Hilang" titleStyle={styles.appBarTitle} />
       </Appbar.Header>
 

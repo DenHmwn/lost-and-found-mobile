@@ -175,7 +175,7 @@ export default function LostItemPage() {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => console.log("Tambah laporan")}
+        onPress={() => router.replace("/user/lostitems/add")}
         color="#FFFFFF"
       />
       ):(
