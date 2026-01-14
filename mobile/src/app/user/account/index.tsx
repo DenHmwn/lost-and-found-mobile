@@ -84,17 +84,17 @@ export default function AccountPageUser() {
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>Nama</Text>
-                        <Text style={localStyles.value}>Dehendy Wijaya</Text>
+                        <Text style={localStyles.value}>{user.name}</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>Email</Text>
-                        <Text style={localStyles.placeholder}>@gmail.com</Text>
+                        <Text style={localStyles.placeholder}>{user.email}</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity style={localStyles.row}>
                         <Text style={localStyles.labell}>No HP</Text>
-                        <Text style={localStyles.placeholder}>08239312</Text>
+                        <Text style={localStyles.placeholder}>{user.notelp}</Text>
                       </TouchableOpacity>
                     </View>
                  </View>
