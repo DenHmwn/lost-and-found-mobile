@@ -22,7 +22,6 @@ export default function LostItemForm() {
     useEffect(() => {
         const token = localStorage.getItem("refreshToken");
         const decoded = decodeJwtPayload(token || "");
-        
     })
   return (
     <View style={styles.container}>
@@ -44,6 +43,13 @@ export default function LostItemForm() {
               style={styles.input}
               placeholder="Contoh: kunci motor beat"
               placeholderTextColor={color.textSecondary}
+              value={barang?.namaBarang}
+              onChangeText={(text) =>
+                setBarang(prev => ({
+                ...prev,
+                namaBarang: text
+                }))
+            }
             />
           </View>
 
@@ -54,6 +60,13 @@ export default function LostItemForm() {
               placeholder="Contoh: kunci motor Honda warna hitam..."
               placeholderTextColor={color.textSecondary}
               multiline
+              value={barang?.deskripsi}
+              onChangeText={(text) =>
+                setBarang(prev => ({
+                ...prev,
+                deskripsi: text
+                }))
+            }
             />
           </View>
 
@@ -63,6 +76,13 @@ export default function LostItemForm() {
               style={styles.input}
               placeholder="Contoh: PS 77"
               placeholderTextColor={color.textSecondary}
+              value={barang?.lokasiHilang}
+              onChangeText={(text) =>
+                setBarang(prev => ({
+                ...prev,
+                lokasiHilang: text
+                }))
+            }
             />
           </View>
 
@@ -72,6 +92,13 @@ export default function LostItemForm() {
               style={styles.input}
               placeholder="YYYY-MM-DD (misal: 2025-12-08)"
               placeholderTextColor={color.textSecondary}
+              value={barang?.tanggalHilang}
+              onChangeText={(text) =>
+                setBarang(prev => ({
+                ...prev,
+                tanggalHilang: text
+                }))
+            }
             />
           </View>
 
