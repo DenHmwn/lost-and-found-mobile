@@ -83,6 +83,13 @@ export default function AccountPageUser() {
                         <Text style={localStyles.labell}>No HP</Text>
                         <Text style={localStyles.value}>{user.notelp}</Text>
                       </TouchableOpacity>
+
+                      <TouchableOpacity 
+                      style={[localStyles.button, localStyles.buttonPrimary]}
+                      onPress={() => router.replace('/user/lostitems/my-lostitems')}
+                      >
+                        <Text style={localStyles.buttonPrimaryText}>Laporan anda</Text>
+                      </TouchableOpacity>
                     </View>
                  </View>
                 </View>

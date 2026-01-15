@@ -37,6 +37,7 @@ export default function LoginPage({ navigation }: any) {
     <View style={{ flex: 1, backgroundColor: "#f7f7ff" }}>
      
       <Appbar.Header style={styles.appBar} elevated>
+        <Appbar.BackAction onPress={() => router.replace("/user/homepage")} color="#FFFFFF" />
         <Appbar.Content title="Login" titleStyle={styles.appBarTitle} />
       </Appbar.Header>
 

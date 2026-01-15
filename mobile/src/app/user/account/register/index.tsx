@@ -40,6 +40,7 @@ export default function RegisterPage() {
     return (
        <View style={{ flex: 1, backgroundColor: "#f7f7ff" }}>
             <Appbar.Header style={styles.appBar} elevated>
+            <Appbar.BackAction onPress={() => router.replace("/user/homepage")} color="#FFFFFF" />
             <Appbar.Content title="Register" titleStyle={styles.appBarTitle} />
             </Appbar.Header>
 
