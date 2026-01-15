@@ -19,8 +19,23 @@ const load = async () => {
       withCredentials: true
     })
     setLost(res.data.data)
+    console.log(res.data.data);
+    setError(null);
+    try {
+        const raw = await AdminService.getStats();
+        setStats(toUiStats(raw));
+    } catch (e: any) {
+        setError(e.message);
+    } finally {
+        setLoading(false);
+        setRefreshing(false);
+    }
     };
-
+    const totalDone = lost.filter(
+    (item) => item.statusReport === "Done"
+    ).length;
+    console.log(totalDone);
+    
 useEffect(() => { load(); }, []);
 
 if (loading) {
@@ -41,8 +56,8 @@ return (
     {error && <Text style={{ color: "tomato" }}>{error}</Text>}
 
     <View style={styles.row}>
-      <StatCard label="Total Hilang" value={stats?.totalLost ?? 0} />
-      <StatCard label="Total Ditemukan" value={stats?.totalFound ?? 0} />
+      <StatCard label="Total Hilang" value={lost?.length ?? 0} />
+      <StatCard label="Total Ditemukan" value={totalDone ?? 0} />
     </View>
 
     <View style={styles.row}>
