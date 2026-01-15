@@ -39,6 +39,12 @@ export default function LostItemPage() {
     }
   };
 
+  const handleDelete = async (id: number) => {
+      const deleted = await axios.delete(`http://localhost:3001/api/lostreport/${id}`, {
+          withCredentials: true
+      })
+  }
+
   const renderHeader = () => (
     <View style={styles.headerContainer}>
       <View style={styles.statsContainer}>
@@ -121,9 +127,7 @@ export default function LostItemPage() {
                 
                 <TouchableOpacity
                   style={[styles.actionButton, styles.deleteButton]}
-                  onPress={() => {
-                  }}
-                >
+                  onPress={() => handleDelete(item.id)}>
                   <MaterialIcons name="delete" size={18} color="#FFFFFF" />
                 </TouchableOpacity>
               </View>
