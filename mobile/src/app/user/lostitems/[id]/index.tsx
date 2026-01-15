@@ -41,7 +41,7 @@ export default function LostDetailPage() {
         <View style={styles.card}>
           <Text style={styles.label}>Nama Barang</Text>
           <Text style={[styles.input, { paddingVertical: 10 }]}>
-            
+            {lost?.namaBarang}
           </Text>
 
           <Text style={styles.label}>Deskripsi</Text>
@@ -52,17 +52,17 @@ export default function LostDetailPage() {
               { paddingVertical: 10, lineHeight: 20 },
             ]}
           >
-           
+           {lost?.deskripsi}
           </Text>
 
           <Text style={styles.label}>Lokasi Hilang</Text>
           <Text style={[styles.input, { paddingVertical: 10 }]}>
-            
+            {lost?.lokasiHilang}
           </Text>
 
           <Text style={styles.label}>Tanggal & Waktu Hilang</Text>
           <Text style={[styles.input, { paddingVertical: 10 }]}>
-    
+            {lost?.tanggalHilang} {lost?.waktuHilang}
           </Text>
 
           <Text style={styles.label}>Status</Text>
@@ -77,9 +77,10 @@ export default function LostDetailPage() {
               },
             ]}
           >
+            <Text>{lost?.statusReport}</Text>
           </View>
           <Text style={styles.label}>Dibuat Pada</Text>
-          <Text style={[styles.input, { paddingVertical: 10 }]}></Text>
+          <Text style={[styles.input, { paddingVertical: 10 }]}>{lost?.createdAt}</Text>
         </View>
       </ScrollView>
     </View>
