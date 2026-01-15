@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
-import { UiStats } from "@/types/admin.ui";
+import {  ScrollView, StyleSheet, Text, View } from "react-native";
 import { StatCard } from "@/components/startcard";
 import axios from "axios";
 import { LostReport } from "@/types/interface";
 
 export default function AdminDashboard() {
-    const [loading, setLoading] = useState(true);
-    const [refreshing, setRefreshing] = useState(false);
-    const [stats, setStats] = useState<UiStats | null>(null);
-    const [error, setError] = useState<string | null>(null);
     const [lost, setLost] = useState<LostReport[]>([]);
     const [totalDone, setTotalDone] = useState(0);
     const [totalWait, setTotalWait] = useState(0);
@@ -47,7 +42,6 @@ return (
 >
     <Text style={styles.title}>Dashboard</Text>
     <Text style={styles.sub}>Ringkasan laporan & user</Text>
-    {error && <Text style={{ color: "tomato" }}>{error}</Text>}
 
     <View style={styles.row}>
       <StatCard label="Total Hilang" value={lost?.length - totalDone} />
