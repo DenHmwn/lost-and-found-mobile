@@ -58,8 +58,9 @@ export default function LostItemPage() {
       <StatusBar barStyle="light-content" backgroundColor="#3B82F6" />
       
       <Appbar.Header style={styles.appBar} elevated>
+        <Appbar.BackAction onPress={() => router.replace("/user/homepage")} color="#FFFFFF" />
         <Appbar.Content 
-          title="Lost & Found" 
+          title="Barang Hilang Saya" 
           titleStyle={styles.appBarTitle}
         />
         <Appbar.Action 
