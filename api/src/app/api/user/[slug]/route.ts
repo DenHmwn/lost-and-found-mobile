@@ -154,6 +154,7 @@ export async function GET(
         email: true,
         notelp: true,
         role: true,
+        lostReports: true,
       },
     });
     // jika data tidak ditemukan
