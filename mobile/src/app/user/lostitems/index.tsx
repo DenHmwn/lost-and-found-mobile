@@ -147,26 +147,6 @@ export default function LostItemPage() {
               >
                 {formatToWIB(item.tanggalHilang as string)}
               </Chip>
-              
-              <View style={styles.actionButtons}>
-                <TouchableOpacity
-                  style={[styles.actionButton, styles.editButton]}
-                  onPress={() => console.log("edit", item.id)}
-                >
-                  <MaterialIcons name="edit" size={18} color="#FFFFFF" />
-                </TouchableOpacity>
-                
-                <TouchableOpacity
-                  style={[styles.actionButton, styles.deleteButton]}
-                  onPress={() => {
-                    setId(item.id);
-                    showDialog();
-                    message.current = item.namaBarang;
-                  }}
-                >
-                  <MaterialIcons name="delete" size={18} color="#FFFFFF" />
-                </TouchableOpacity>
-              </View>
             </View>
           </Card>
           </TouchableOpacity>
