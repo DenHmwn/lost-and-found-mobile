@@ -9,6 +9,8 @@ export default function AdminDashboard() {
     const [totalDone, setTotalDone] = useState(0);
     const [totalWait, setTotalWait] = useState(0);
     const [totalConfirm, setTotalConfirm] = useState(0);
+    const [totalUser, setTotalUser] = useState(0);
+    const [totalReject, setTotalReject] = useState(0);
 
 const load = async () => {
     const res = await axios.get("http://localhost:3001/api/lostreport", {
@@ -30,10 +32,16 @@ const load = async () => {
     (item) => item.status === "APPROVED"
     ).length;
     setTotalConfirm(confirm);
+
+    const reject = lost.filter(
+    (item) => item.status === "REJECTED"
+    ).length;
+    setTotalReject(reject);
     };
 
     useEffect(() => { 
       load(); 
+      console.log(totalConfirm);
     }, []);
 
 return (
@@ -54,8 +62,7 @@ return (
     </View>
 
     <View style={styles.row}>
-      <StatCard label="DiTolak" value={totalConfirm} />
-      <StatCard label="Total Users" value={totalConfirm} />
+      <StatCard label="DiTolak" value={totalReject} />
     </View>
   </ScrollView>
 );
