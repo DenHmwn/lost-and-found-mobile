@@ -105,7 +105,6 @@ export default function LostItemPage() {
           color="#FFFFFF"
         />
       </Appbar.Header>
-
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={styles.listContent}
@@ -115,6 +114,7 @@ export default function LostItemPage() {
         ListEmptyComponent={renderEmptyState}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => router.push(`/user/lostitems/${item.id}`)}>
           <Card style={styles.modernCard} elevation={2}>
             <View style={styles.cardHeader}>
               <View style={styles.iconContainer}>
@@ -169,6 +169,7 @@ export default function LostItemPage() {
               </View>
             </View>
           </Card>
+          </TouchableOpacity>
         )}
       />
       {token ? (
