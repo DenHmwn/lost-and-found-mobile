@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { router, useLocalSearchParams }from "expo-router";
 import { Appbar } from "react-native-paper";
@@ -24,6 +24,9 @@ export default function LostDetailPage() {
       router.replace("/user/homepage");
     }
   }
+  useEffect(() => {
+    loadBarang();
+  })
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.appBar}>
