@@ -4,11 +4,26 @@ import { router, useLocalSearchParams }from "expo-router";
 import { Appbar } from "react-native-paper";
 import { styles } from "@/style/styles";
 import { LostReport } from "@/types/interface";
+import axios from "axios";
 
 export default function LostDetailPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [lost, setLost] = useState<LostReport | null>(null);
 
+  const loadBarang = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/lostreport/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+      setLost(response.data.data);
+    } catch (error) {
+      console.error("Error ambil data:", error);
+      router.replace("/user/homepage");
+    }
+  }
   return (
     <View style={styles.container}>
       <Appbar.Header style={styles.appBar}>
