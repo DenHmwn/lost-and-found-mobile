@@ -4,26 +4,22 @@ import { AdminService } from "@/services/admin.service";
 import { toUiStats } from "@/adapters/admin.adapter";
 import { UiStats } from "@/types/admin.ui";
 import { StatCard } from "@/components/startcard";
+import axios from "axios";
+import { LostReport } from "@/types/interface";
 
 export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [stats, setStats] = useState<UiStats | null>(null);
     const [error, setError] = useState<string | null>(null);
-
+    const [lost, setLost] = useState<LostReport[]>([]);
 
 const load = async () => {
-    setError(null);
-    try {
-        const raw = await AdminService.getStats();
-        setStats(toUiStats(raw));
-} catch (e: any) {
-    setError(e.message);
-} finally {
-    setLoading(false);
-    setRefreshing(false);
-}
-};
+    const res = await axios.get("http://localhost:3001/api/lostreport", {
+      withCredentials: true
+    })
+    setLost(res.data.data)
+    };
 
 useEffect(() => { load(); }, []);
 
