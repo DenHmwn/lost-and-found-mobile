@@ -40,9 +40,10 @@ export default function LostItemPage() {
   };
 
   const handleDelete = async (id: number) => {
-      const deleted = await axios.delete(`http://localhost:3001/api/lostreport/${id}`, {
+       const deleted = await axios.delete(`http://localhost:3001/api/lostreport/${id}`, {
           withCredentials: true
       })
+      console.log(deleted.data.message);
   }
 
   const renderHeader = () => (
