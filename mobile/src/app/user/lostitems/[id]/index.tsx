@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
-import { router }from "expo-router";
+import { router, useLocalSearchParams }from "expo-router";
 import { Appbar } from "react-native-paper";
 import { styles } from "@/style/styles";
 
 export default function LostDetailPage() {
+  const { id } = useLocalSearchParams<{ id: string }>();
   
   return (
     <View style={styles.container}>
