@@ -13,29 +13,20 @@ export default function AdminDashboard() {
     const [stats, setStats] = useState<UiStats | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [lost, setLost] = useState<LostReport[]>([]);
+    const [totalDone, setTotalDone] = useState(0);
 
 const load = async () => {
     const res = await axios.get("http://localhost:3001/api/lostreport", {
       withCredentials: true
     })
     setLost(res.data.data)
-    console.log(res.data.data);
-    setError(null);
-    try {
-        const raw = await AdminService.getStats();
-        setStats(toUiStats(raw));
-    } catch (e: any) {
-        setError(e.message);
-    } finally {
-        setLoading(false);
-        setRefreshing(false);
-    }
-    };
     const totalDone = lost.filter(
     (item) => item.statusReport === "Done"
     ).length;
-    console.log(totalDone);
+    setTotalDone(totalDone);
+    };
     
+
 useEffect(() => { load(); }, []);
 
 if (loading) {
