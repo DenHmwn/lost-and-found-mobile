@@ -1,62 +1,68 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
-import { AdminService } from "@/services/admin.service";
-import { toUiStats } from "@/adapters/admin.adapter";
-import { UiStats } from "@/types/admin.ui";
+import {  ScrollView, StyleSheet, Text, View } from "react-native";
 import { StatCard } from "@/components/startcard";
+import axios from "axios";
+import { LostReport } from "@/types/interface";
 
 export default function AdminDashboard() {
-    const [loading, setLoading] = useState(true);
-    const [refreshing, setRefreshing] = useState(false);
-    const [stats, setStats] = useState<UiStats | null>(null);
-    const [error, setError] = useState<string | null>(null);
-
+    const [lost, setLost] = useState<LostReport[]>([]);
+    const [totalDone, setTotalDone] = useState(0);
+    const [totalWait, setTotalWait] = useState(0);
+    const [totalConfirm, setTotalConfirm] = useState(0);
+    const [totalUser, setTotalUser] = useState(0);
+    const [totalReject, setTotalReject] = useState(0);
 
 const load = async () => {
-    setError(null);
-    try {
-        const raw = await AdminService.getStats();
-        setStats(toUiStats(raw));
-} catch (e: any) {
-    setError(e.message);
-} finally {
-    setLoading(false);
-    setRefreshing(false);
-}
-};
+    const res = await axios.get("http://localhost:3001/api/lostreport", {
+      withCredentials: true
+    })
+    setLost(res.data.data)
+    
+    const totalDone = lost.filter(
+    (item) => item.statusReport === "Done" || item.statusReport === "Closed"
+    ).length;
+    setTotalDone(totalDone);
 
-useEffect(() => { load(); }, []);
+    const wait = lost.filter(
+    (item) => item.status === "PENDING"
+    ).length;
+    setTotalWait(wait);
 
-if (loading) {
-  return (
-    <View style={styles.center}>
-        <ActivityIndicator size="large" />
-    </View>
-  );
-}
+    const confirm = lost.filter(
+    (item) => item.status === "APPROVED"
+    ).length;
+    setTotalConfirm(confirm);
+
+    const reject = lost.filter(
+    (item) => item.status === "REJECTED"
+    ).length;
+    setTotalReject(reject);
+    };
+
+    useEffect(() => { 
+      load(); 
+      console.log(totalConfirm);
+    }, []);
 
 return (
   <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}
   contentContainerStyle={{ padding: 16, gap: 12 }}
-  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true); load(); }} />}
 >
     <Text style={styles.title}>Dashboard</Text>
     <Text style={styles.sub}>Ringkasan laporan & user</Text>
-    {error && <Text style={{ color: "tomato" }}>{error}</Text>}
 
     <View style={styles.row}>
-      <StatCard label="Total Hilang" value={stats?.totalLost ?? 0} />
-      <StatCard label="Total Ditemukan" value={stats?.totalFound ?? 0} />
+      <StatCard label="Total Hilang" value={lost?.length - totalDone} />
+      <StatCard label="Total Ditemukan" value={totalDone} />
     </View>
 
     <View style={styles.row}>
-      <StatCard label="Menunggu" value={stats?.pendingApproval ?? 0} />
-      <StatCard label="Dalam Proses" value={stats?.inProcess ?? 0} />
+      <StatCard label="Menunggu" value={totalWait} />
+      <StatCard label="DiSetujui" value={totalConfirm} />
     </View>
 
     <View style={styles.row}>
-      <StatCard label="Disetujui" value={stats?.approved ?? 0} />
-      <StatCard label="Total Users" value={stats?.totalUsers ?? 0} />
+      <StatCard label="DiTolak" value={totalReject} />
     </View>
   </ScrollView>
 );
